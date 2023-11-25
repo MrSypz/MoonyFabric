@@ -8,13 +8,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import sypztep.mamy.client.MamyModClient;
-import sypztep.mamy.common.Item.DeathScytheItem;
 import sypztep.mamy.common.Item.HollowmaskItem;
+import sypztep.mamy.common.Item.MamySwordItem;
 import sypztep.mamy.common.init.ModItems;
 import sypztep.mamy.common.init.ModParticles;
 import sypztep.mamy.common.init.ModSoundEvents;
@@ -33,14 +34,27 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
         this.obj = obj;
     }
 
+    private boolean hasAnyMask(PlayerEntity player) {
+        for (ItemStack stack : player.getInventory().armor) {
+            for (HollowmaskItem mask : ModItems.ALL_MASK) {
+                if (stack.getItem() == mask) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     @Override
     public void tick() {
-        ItemStack itemStack = obj.getEquippedStack(EquipmentSlot.HEAD);
-        hasMask = itemStack.isOf(ModItems.HOLLOW_MASK);
-        if (hasMask && !HollowmaskItem.HalfMask(itemStack))
+        ItemStack stack = obj.getEquippedStack(EquipmentSlot.HEAD);
+//        hasMask = stack.isOf((Item) ModItems.ALL_MASK);
+        hasMask = hasAnyMask(obj);
+        if (hasMask && !HollowmaskItem.HalfMask(stack))
             obj.getWorld().addParticle(ParticleTypes.CLOUD, obj.getParticleX(2), obj.getEyeY(), obj.getParticleZ(2), 0, 0.1, 0);
         if (hasMask) {
-            itemStack.damage(1, obj, (consumer) -> consumer.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+            if (obj.age % 20 == 0) {
+                stack.damage(1, obj, (consumer) -> consumer.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+            }
             if (sonidoCooldown > 0) {
                 sonidoCooldown--;
             }

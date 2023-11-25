@@ -20,9 +20,10 @@
   "mamy.midnightconfig.knockbackCancelThreshold": "Knockback Cancel Threshold",
   "mamy.midnightconfig.knockbackCancelThreshold.tooltip": "How weak a player's attack can be before the knockback gets nullified, from 0 (0%, cancels multiple attacks on the same tick) to 1 (100%, no knockback), or -0.1 (disables this feature)",
 
-  "item.mamy.death_scythe" : "Death Scythe",
-  "item.mamy.hollow_mask" : "Hollow Mask",
+  "itemGroup.mamymask": "Mask Item",
 
+  "item.mamy.death_scythe" : "Death Scythe",
+  "item.mamy.hollow_mask3" : "Hollow Mask Tier 3",
   "text.mamy.gui.title": "%s Info",
 
   "effect.mamy.mark": "Mark",

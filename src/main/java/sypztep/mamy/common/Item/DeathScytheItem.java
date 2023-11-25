@@ -52,7 +52,7 @@ public class DeathScytheItem extends MamySwordItem {
     }
     private static void EquipMask(PlayerEntity user) {
         Item item = ModItems.DEATH_SCYTHE;
-        ItemStack Hollowmask = new ItemStack(ModItems.HOLLOW_MASK);
+        ItemStack Hollowmask = new ItemStack(ModItems.HOLLOW_MASK_TIER3);
         Hollowmask.addEnchantment(Enchantments.BINDING_CURSE, 1);
         Hollowmask.addEnchantment(Enchantments.VANISHING_CURSE, 1);
         Hollowmask.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);

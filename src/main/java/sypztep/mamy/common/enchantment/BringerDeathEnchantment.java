@@ -35,7 +35,6 @@ public class BringerDeathEnchantment extends EmptyEnchantment {
                 user.heal((DamageDeal + damageamount) * 0.8f); //Heal 80% of damage deal
                 enemy.addStatusEffect(new StatusEffectInstance(ModStatusEffects.GRIEVOUSWOUNDS, 180, 0, true, true, true));
                 target.playSound(ModSoundEvents.ENTITY_GENERIC_BLOODHIT, 1, 1.0f);
-                MamyMod.LOGGER.info(String.valueOf((DamageDeal + damageamount) * 0.8f));
                 addParticles(enemy);
             }
         }

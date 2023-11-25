@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "mamy:item/hollow_mask"
+    "layer0": "mamy:item/hollow_mask3"
   },
   "overrides": [
     {

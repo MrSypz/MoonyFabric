@@ -20,10 +20,14 @@ public class ModItemGroup {
         Registry.register(Registries.ITEM_GROUP, new Identifier(MamyMod.MODID, "mask"), MASK_GROUP);
     }
     private static final ItemGroup MASK_GROUP = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(ModItems.HOLLOW_MASK))
-            .displayName(Text.translatable(MamyMod.MODID+"mask"))
+            .icon(() -> new ItemStack(ModItems.HOLLOW_MASK_TIER3))
+            .displayName(Text.translatable("itemGroup." + MamyMod.MODID + "mask"))
             .entries((context, entries) -> {
-                entries.add(ModItems.HOLLOW_MASK);
+                entries.add(ModItems.HALF_HOLLOW_MASK);
+                entries.add(ModItems.HOLLOW_MASK_TIER1);
+                entries.add(ModItems.HOLLOW_MASK_TIER2);
+                entries.add(ModItems.HOLLOW_MASK_TIER3);
+                entries.add(ModItems.HOLLOW_MASK_TIER4);
             })
             .build();
 }

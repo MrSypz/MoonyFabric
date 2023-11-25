@@ -42,7 +42,7 @@ public class MamyModClient implements ClientModInitializer {
 
         Itemregistry.init();
 
-        ModelPredicateProviderRegistry.register(ModItems.HOLLOW_MASK, new Identifier("breaking"), ((stack, world, entity, seed) -> HollowmaskItem.HalfMask(stack) ? 0.0f : 1.0f));
+        ModelPredicateProviderRegistry.register(ModItems.HOLLOW_MASK_TIER3, new Identifier("breaking"), ((stack, world, entity, seed) -> HollowmaskItem.HalfMask(stack) ? 0.0f : 1.0f));
 
     }
 }

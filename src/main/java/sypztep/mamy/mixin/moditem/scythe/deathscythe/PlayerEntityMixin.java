@@ -13,13 +13,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sypztep.mamy.common.Item.HollowmaskItem;
 import sypztep.mamy.common.init.ModItems;
 import sypztep.mamy.common.init.ModParticles;
-import sypztep.mamy.common.init.ModStatusEffects;
 
 import static sypztep.pickyourpoison.common.init.ModStatusEffects.STIMULATION;
 import static sypztep.pickyourpoison.common.init.ModStatusEffects.VULNERABILITY;
@@ -36,19 +37,5 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @ModifyArg(method = "spawnSweepAttackParticles",at = @At(value = "INVOKE",target = "Lnet/minecraft/server/world/ServerWorld;spawnParticles(Lnet/minecraft/particle/ParticleEffect;DDDIDDDD)I"))
     private <T extends ParticleEffect> T mamy$disableSweepingattack(T value) {
         return this.getStackInHand(Hand.MAIN_HAND).getItem() == ModItems.DEATH_SCYTHE ? (T) ModParticles.RED_SWEEP_ATTACK_PARTICLE : value;
-    }
-    @Inject(method = "tick", at = @At("TAIL"))
-    public void tick(CallbackInfo ci) {
-        if (this.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.HOLLOW_MASK)) {
-            this.heal(0.05f);
-            boolean haseffect = this.hasStatusEffect(VULNERABILITY);
-            if (!haseffect) {
-                this.addStatusEffect(new StatusEffectInstance(VULNERABILITY, 100, 2, false, false));
-                this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, 1, false, false, false));
-                if (this.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.HOLLOW_MASK) && this.getHungerManager().getFoodLevel() <= 0) {
-                    this.addStatusEffect(new StatusEffectInstance(STIMULATION, 100, 0, false, false));
-                }
-            }
-        }
     }
 }
