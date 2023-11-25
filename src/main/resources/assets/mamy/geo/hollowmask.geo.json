@@ -21,10 +21,10 @@
 					"pivot": [0, 24, 0],
 					"cubes": [
 						{
-							"origin": [-4, 25, -4],
-							"size": [8, 8, 0],
+							"origin": [-4, 22, -4],
+							"size": [8, 11, 0],
 							"uv": {
-								"north": {"uv": [8, 8], "uv_size": [8, 8]},
+								"north": {"uv": [8, 8], "uv_size": [8, 11]},
 								"east": {"uv": [8, 8], "uv_size": [0, 8]},
 								"south": {"uv": [56, 56], "uv_size": [8, 8]},
 								"west": {"uv": [16, 8], "uv_size": [0, 8]},
@@ -73,14 +73,6 @@
 					]
 				}
 			]
-		}
-	],
-	"overrides": [
-		{
-			"predicate": {
-				"breaking": 1
-			},
-			"model": "mamy:item/breaking_hollow_mask"
 		}
 	]
 }

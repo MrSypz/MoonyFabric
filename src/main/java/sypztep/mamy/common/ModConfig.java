@@ -25,11 +25,17 @@ public class ModConfig extends MidnightConfig{
     public static String[] dmgReceiveExcludedEntities = new String[] {};
 
     public static String[] damageSrcWhitelist = new String[] {"inFire", "lava", "sweetBerryBush", "cactus", "lightningBolt", "inWall", "hotFloor"};
+    @Comment(centered = true)
+    public static Comment VanillaChange;
+    @Entry
+    public static boolean weakerPotions;
+
 
     @Comment(centered = true)
     public static Comment FeatureCosmetic;
     @Entry
     public static CosmeticsOptions cosmetics = CosmeticsOptions.ENABLE;
+
     public static boolean shouldDisplayCosmetics() {
         return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
     }

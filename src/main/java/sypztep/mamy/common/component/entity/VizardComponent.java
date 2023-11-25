@@ -8,14 +8,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import sypztep.mamy.client.MamyModClient;
 import sypztep.mamy.common.Item.HollowmaskItem;
-import sypztep.mamy.common.Item.MamySwordItem;
 import sypztep.mamy.common.init.ModItems;
 import sypztep.mamy.common.init.ModParticles;
 import sypztep.mamy.common.init.ModSoundEvents;
@@ -47,7 +45,6 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
     @Override
     public void tick() {
         ItemStack stack = obj.getEquippedStack(EquipmentSlot.HEAD);
-//        hasMask = stack.isOf((Item) ModItems.ALL_MASK);
         hasMask = hasAnyMask(obj);
         if (hasMask && !HollowmaskItem.HalfMask(stack))
             obj.getWorld().addParticle(ParticleTypes.CLOUD, obj.getParticleX(2), obj.getEyeY(), obj.getParticleZ(2), 0, 0.1, 0);
@@ -70,9 +67,8 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
         if (hasMask && sonidoCooldown == 0 && !obj.isSpectator() && obj == MinecraftClient.getInstance().player) {
             GameOptions options = MinecraftClient.getInstance().options;
             boolean pressingActivationKey = MamyModClient.SONIDO_KEYBINDING.isUnbound() ? options.sprintKey.isPressed() : MamyModClient.SONIDO_KEYBINDING.isPressed();
-            if (ticksLefthasPress > 0) {
+            if (ticksLefthasPress > 0)
                 ticksLefthasPress--;
-            }
             if (invisDuration > 0) {
                 invisDuration--;
                 if (invisDuration <= 0) {
@@ -87,23 +83,19 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
                     handle(obj, this, velocity.getX(), velocity.getZ());
                     addSonidoParticles(obj);
                     SonidoPacket.send(velocity);
-                } else {
+                } else
                     ticksLefthasPress = 7;
-                }
             }
             wasPressing = pressingActivationKey;
         }
     }
     private Vec3d getVelocityFromInput(GameOptions options) {
-        if (options.backKey.isPressed()) {
+        if (options.backKey.isPressed())
             return new Vec3d(-2, 0, 0);
-        }
-        if (options.leftKey.isPressed()) {
+        if (options.leftKey.isPressed())
             return new Vec3d(0, 0, -2);
-        }
-        if (options.rightKey.isPressed()) {
+        if (options.rightKey.isPressed())
             return new Vec3d(0, 0, 2);
-        }
         return new Vec3d(2, 0, 0);
     }
     public static void handle(Entity user, VizardComponent vizardComponent, double velocityX, double velocityZ) {//Server Packet
@@ -114,15 +106,8 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
     public static void addSonidoParticles(LivingEntity entity) { //Client Packet
         entity.setInvisible(true);
         invisDuration = 8;
-        if (MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || entity != MinecraftClient.getInstance().cameraEntity) {
-            for (int i = 0; i < 8; i++) {
-                if (i == 0) {
-                    entity.getWorld().addParticle(ModParticles.BLOODWAVE, entity.getParticleX(2), entity.getY(), entity.getParticleZ(2), 0, 0, 0);
-                    continue;
-                }
-                entity.getWorld().addParticle(ParticleTypes.FLASH, entity.getParticleX(2), entity.getRandomBodyY(), entity.getParticleZ(2), 0, 0, 0);
-            }
-        }
+        if (MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || entity != MinecraftClient.getInstance().cameraEntity)
+            entity.getWorld().addParticle(ParticleTypes.FLASH, entity.getParticleX(2), entity.getRandomBodyY(), entity.getParticleZ(2), 0, 0, 0);
     }
     public static void resetInv(LivingEntity entity) {
         entity.setInvisible(false);

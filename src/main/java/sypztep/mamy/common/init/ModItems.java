@@ -21,6 +21,7 @@ public class ModItems {
     public static HollowmaskItem HOLLOW_MASK_TIER2;
     public static HollowmaskItem HOLLOW_MASK_TIER3;
     public static HollowmaskItem HOLLOW_MASK_TIER4;
+    public static VastomaskItem VASTO_MASK;
 
     public static void init(){
         DEATH_SCYTHE = registerSworditem("death_scythe", new DeathScytheItem());
@@ -30,6 +31,7 @@ public class ModItems {
         HOLLOW_MASK_TIER2 = registerMaskItem("hollow_mask_2", new HollowmaskItem(new FabricItemSettings().maxDamage(180))); //3 Minute
         HOLLOW_MASK_TIER3 = registerMaskItem("hollow_mask_3", new HollowmaskItem(new FabricItemSettings().maxDamage(300))); // 5 Minute
         HOLLOW_MASK_TIER4 = registerMaskItem("hollow_mask_4", new HollowmaskItem(new FabricItemSettings().maxDamage(900))); // 15 Minute
+        VASTO_MASK = registerMaskItem("vasto_mask", new VastomaskItem(new FabricItemSettings().maxDamage(1800))); // 30 Minute
     }
     public static <T extends MamySwordItem> T registerSworditem(String name, T item) {
         Registry.register(Registries.ITEM, MamyMod.id(name), item);
