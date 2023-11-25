@@ -15,9 +15,8 @@ public class Itemregistry {
     public static void init(){
         for (MamySwordItem item : ModItems.ALL_SCYTHE) {
             Identifier scytheId = Registries.ITEM.getId(item);
-            Identifier texture = new Identifier(scytheId.getNamespace(), "textures/item/" + scytheId.getPath() + ".png");
 
-            MamyItemRenderer mamyItemRenderer = new MamyItemRenderer(scytheId, texture);
+            MamyItemRenderer mamyItemRenderer = new MamyItemRenderer(scytheId);
             ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(mamyItemRenderer);
             BuiltinItemRendererRegistry.INSTANCE.register(item, mamyItemRenderer);
             ModelLoadingRegistry.INSTANCE.registerModelProvider(((manager, out) -> {

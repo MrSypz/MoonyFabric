@@ -10,7 +10,7 @@ import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import sypztep.mamy.common.component.entity.VizardComponent;
+import sypztep.mamy.common.init.ModDamageTypes;
 import sypztep.mamy.common.init.ModItems;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class DeathScytheItem extends MamySwordItem {
         }
         return super.use(world, user, hand);
     }
-    public static void onUseEffect(PlayerEntity user) {
+    public static void ShockWaveDamage(PlayerEntity user) {
         double damageRadiusSquared = 5.0d;
         List<LivingEntity> entities = user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox().expand(damageRadiusSquared));
 
@@ -45,12 +45,8 @@ public class DeathScytheItem extends MamySwordItem {
             if (target != user) {
                 double distanceToEntity = target.squaredDistanceTo(user.getX(), user.getY(), user.getZ());
                 double normalizedDistance = Math.sqrt(distanceToEntity) / damageRadiusSquared; // Adjust as needed for your range
-                float damage = 5.0f - (float) (normalizedDistance * (5.0f - 0.1f));
-                if (VizardComponent.hasMasknScythe) {
-                    target.damage(target.getWorld().getDamageSources().playerAttack(user), 1f);
-                } else {
-                    target.damage(target.getWorld().getDamageSources().playerAttack(user), damage);
-                }
+                float damage = 5.0f - (float) (normalizedDistance * (5.0f - 1.0f));
+                target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BRINGER,user), damage);
             }
         }
     }
@@ -62,7 +58,7 @@ public class DeathScytheItem extends MamySwordItem {
         Hollowmask.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
         user.equipStack(EquipmentSlot.HEAD, Hollowmask);
         HollowmaskItem.useMaskParticle(user);
-        onUseEffect(user);
+        ShockWaveDamage(user);
         user.getItemCooldownManager().set(item, 1200); // 3 min
     }
 }

@@ -14,16 +14,12 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 
 public class MamyItemRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer, SimpleSynchronousResourceReloadListener {
-    private final Identifier id;
     private final Identifier scytheId;
-    private final Identifier texture;
     private ItemRenderer itemRenderer;
     private BakedModel inventoryScytheModel;
     private BakedModel worldScytheModel;
-    public MamyItemRenderer (Identifier scytheId, Identifier texture) {
-        this.id = new Identifier(scytheId.getNamespace(), scytheId.getPath() + "_renderer");
+    public MamyItemRenderer (Identifier scytheId) {
         this.scytheId = scytheId;
-        this.texture = texture;
     }
     @Override
     public void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {

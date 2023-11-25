@@ -23,7 +23,6 @@ import sypztep.mamy.common.packet.SonidoPacket;
 
 public class VizardComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final short DEFAULT_SONIDO_COOLDOWN = 8;
-    public static boolean hasMasknScythe = false;
     public static boolean hasMask = false;
     private static short sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0;
     public static short invisDuration = 0;
@@ -37,9 +36,7 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
     @Override
     public void tick() {
         ItemStack itemStack = obj.getEquippedStack(EquipmentSlot.HEAD);
-        boolean hasScythe = obj.getMainHandStack().isOf(ModItems.DEATH_SCYTHE);
         hasMask = itemStack.isOf(ModItems.HOLLOW_MASK);
-        hasMasknScythe = hasMask && hasScythe;
         if (hasMask && !HollowmaskItem.HalfMask(itemStack))
             obj.getWorld().addParticle(ParticleTypes.CLOUD, obj.getParticleX(2), obj.getEyeY(), obj.getParticleZ(2), 0, 0.1, 0);
         if (hasMask) {
@@ -99,7 +96,6 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
         user.addVelocity(velocityX, 0, velocityZ);
         user.playSound(ModSoundEvents.ENTITY_GENERIC_SONIDO, 1.0f, 1.0f);
         sonidoCooldown = DEFAULT_SONIDO_COOLDOWN;
-        DeathScytheItem.onUseEffect(vizardComponent.obj);
     }
     public static void addSonidoParticles(LivingEntity entity) { //Client Packet
         entity.setInvisible(true);

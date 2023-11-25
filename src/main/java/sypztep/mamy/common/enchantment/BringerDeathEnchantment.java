@@ -30,7 +30,7 @@ public class BringerDeathEnchantment extends EmptyEnchantment {
         if (!target.getWorld().isClient && target instanceof LivingEntity enemy) {
             if (BringerComponent.getDeathCooldown() == 0 && target.distanceTo(user) <= 6) {
                 float DamageDeal = enemy.getMaxHealth() * (0.04f + (0.12f - 0.04f) / 4 * (level - 1));
-                target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BRINGER,user), DamageDeal);// 4-12% + 50% of damage deal of max health
+                target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BRINGER,user), DamageDeal + damageamount);// 4-12% + 50% of damage deal of max health
                 setDeathCooldown(DEFAULT_COOLDOWN - (DEFAULT_COOLDOWN - 60) / (5 - 1) * (level - 1));
                 user.heal((DamageDeal + damageamount) * 0.8f); //Heal 80% of damage deal
                 enemy.addStatusEffect(new StatusEffectInstance(ModStatusEffects.GRIEVOUSWOUNDS, 180, 0, true, true, true));
