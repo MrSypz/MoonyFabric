@@ -2,25 +2,41 @@
   "schemaVersion": 1,
   "id": "mamy",
   "version": "${version}",
-
   "name": "Ghost",
   "description": "",
-  "authors": [],
-  "contact": {},
-
+  "authors": [
+    "Sypztep"
+  ],
+  "contact": {
+    "repo": "https://github.com/MrGhostypz/Mamy-Fabric2"
+  },
   "license": "GPL-3.0",
   "icon": "assets/mamy/icon.png",
-
   "environment": "*",
-  "entrypoints": {},
-
-      "mixins": [
-        "mamy.mixins.json"
-      ],
-
+  "entrypoints": {
+    "client": [
+      "sypztep.mamy.client.MamyModClient",
+      "sypztep.mamy.feature.MamyFeature"
+    ],
+    "main": [
+      "sypztep.mamy.common.MamyMod"
+    ],
+    "cardinal-components-entity": [
+      "sypztep.mamy.common.init.ModEntityComponents"
+    ]
+  },
+  "mixins": [
+    "mamy.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-        "fabric": "*",
+    "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "cardinal-components": [
+      "mamy:bringer",
+      "mamy:vizard"
+    ]
   }
 }

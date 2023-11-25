@@ -1,4 +1,4 @@
-package sypztep.mamy.mixin.statuseffect.grievous;
+package sypztep.mamy.mixin.statuseffect.grievouswounds;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

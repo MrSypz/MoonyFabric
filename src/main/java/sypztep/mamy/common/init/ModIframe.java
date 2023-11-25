@@ -74,7 +74,7 @@ public class ModIframe {
             if (str <= ModConfig.knockbackCancelThreshold) {
                 // Don't worry, it's only magic
                 PlayerEntityAccessor playerAccessor = (PlayerEntityAccessor) player;
-                playerAccessor.setSwinging(true);
+                playerAccessor.mamy$setSwinging(true);
             }
 
             return ActionResult.PASS;
@@ -87,8 +87,8 @@ public class ModIframe {
             if (source != null) {
                 if (source instanceof PlayerEntity player) {
                     PlayerEntityAccessor playerAccessor = (PlayerEntityAccessor) player;
-                    if (playerAccessor.isSwinging()) {
-                        playerAccessor.setSwinging(false);
+                    if (playerAccessor.mamy$isSwinging()) {
+                        playerAccessor.mamy$setSwinging(false);
                         return ActionResult.FAIL;
                     }
                 }

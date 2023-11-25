@@ -15,8 +15,6 @@ public class ModDamageTypes {
     public static final RegistryKey<DamageType> BRINGER = createType("bringer");
     public static final RegistryKey<DamageType> ELECTRO = createType("electro");
     public static final RegistryKey<DamageType> BATRACHOTOXIN = createType("batrachotoxin");
-    public static final RegistryKey<DamageType> STIMULATION = createType("stimulation");
-    public static final RegistryKey<DamageType> BACKLASH = createType("backlash");
     public static RegistryKey<DamageType> createType(String id) {
         return RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(MamyMod.MODID, id));
     }

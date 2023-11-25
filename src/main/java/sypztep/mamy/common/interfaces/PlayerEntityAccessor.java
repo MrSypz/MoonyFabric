@@ -1,7 +1,7 @@
 package sypztep.mamy.common.interfaces;
 
 public interface PlayerEntityAccessor {
-    void setSwinging(boolean swinging);
+    void mamy$setSwinging(boolean swinging);
 
-    boolean isSwinging();
+    boolean mamy$isSwinging();
 }

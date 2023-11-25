@@ -15,25 +15,7 @@ import sypztep.mamy.common.MamyMod;
 public class ModItemGroup {
     public static void init(){
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(content -> {
-            content.add(ModItems.THROWING_DART);
-            content.add(ModItems.PASSOUT_POISON_DART);
-            content.add(ModItems.BATRACHOTOXIN_POISON_DART);
-            content.add(ModItems.NUMBNESS_POISON_DART);
-            content.add(ModItems.VULNERABILITY_POISON_DART);
-            content.add(ModItems.TORPOR_POISON_DART);
-            content.add(ModItems.STIMULATION_POISON_DART);
-            content.add(ModItems.BLINDNESS_POISON_DART);
             content.add(ModItems.DEATH_SCYTHE);
-        });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(content -> {
-            content.add(ModItems.BLUE_POISON_DART_FROG_BOWL);
-            content.add(ModItems.GOLDEN_POISON_DART_FROG_BOWL);
-            content.add(ModItems.GREEN_POISON_DART_FROG_BOWL);
-            content.add(ModItems.ORANGE_POISON_DART_FROG_BOWL);
-            content.add(ModItems.CRIMSON_POISON_DART_FROG_BOWL);
-            content.add(ModItems.RED_POISON_DART_FROG_BOWL);
-            content.add(ModItems.LUXALAMANDER_BOWL);
-            content.add(ModItems.RANA_BOWL);
         });
         Registry.register(Registries.ITEM_GROUP, new Identifier(MamyMod.MODID, "mask"), MASK_GROUP);
     }

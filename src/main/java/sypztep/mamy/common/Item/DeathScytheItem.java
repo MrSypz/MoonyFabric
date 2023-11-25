@@ -17,7 +17,7 @@ import java.util.List;
 
 public class DeathScytheItem extends MamySwordItem {
     public DeathScytheItem() {
-        super(ToolMaterials.NETHERITE,6, -2.8f, new Item.Settings().fireproof());
+        super(ToolMaterials.NETHERITE,6, -2.8f, new Settings().fireproof());
     }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {

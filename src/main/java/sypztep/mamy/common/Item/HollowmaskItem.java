@@ -2,9 +2,7 @@ package sypztep.mamy.common.Item;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterials;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -16,7 +14,7 @@ import sypztep.mamy.common.init.ModParticles;
 
 public class HollowmaskItem extends MamyMaskItem{
     public HollowmaskItem() {
-        super(ArmorMaterials.NETHERITE, ArmorItem.Type.HELMET, new Item.Settings().maxDamage(500));
+        super(ArmorMaterials.NETHERITE, Type.HELMET, new Settings().maxDamage(500));
     }
 
     @Override

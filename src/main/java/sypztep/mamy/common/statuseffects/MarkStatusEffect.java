@@ -1,4 +1,4 @@
-package sypztep.mamy.common;
+package sypztep.mamy.common.statuseffects;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectCategory;

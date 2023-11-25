@@ -21,6 +21,9 @@ import sypztep.mamy.common.init.ModItems;
 import sypztep.mamy.common.init.ModParticles;
 import sypztep.mamy.common.init.ModStatusEffects;
 
+import static sypztep.pickyourpoison.common.init.ModStatusEffects.STIMULATION;
+import static sypztep.pickyourpoison.common.init.ModStatusEffects.VULNERABILITY;
+
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
     @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot slot);
@@ -38,12 +41,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     public void tick(CallbackInfo ci) {
         if (this.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.HOLLOW_MASK)) {
             this.heal(0.05f);
-            boolean haseffect = this.hasStatusEffect(ModStatusEffects.VULNERABILITY);
+            boolean haseffect = this.hasStatusEffect(VULNERABILITY);
             if (!haseffect) {
-                this.addStatusEffect(new StatusEffectInstance(ModStatusEffects.VULNERABILITY, 100, 2, false, false));
+                this.addStatusEffect(new StatusEffectInstance(VULNERABILITY, 100, 2, false, false));
                 this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, 1, false, false, false));
                 if (this.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.HOLLOW_MASK) && this.getHungerManager().getFoodLevel() <= 0) {
-                    this.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STIMULATION, 100, 0, false, false));
+                    this.addStatusEffect(new StatusEffectInstance(STIMULATION, 100, 0, false, false));
                 }
             }
         }

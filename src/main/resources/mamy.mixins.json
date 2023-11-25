@@ -1,11 +1,25 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "sypztep.mamy.mamy.mixin",
+  "package": "sypztep.mamy.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "enchantment.bringerdeath.LivingEntityMixin",
+    "enchantment.missilehomming.FireworkRocketEntityMixin",
+    "enchantment.missilehomming.ProjectileEntityAccessor",
+    "moditem.scythe.deathscythe.PlayerEntityMixin",
+    "statuseffect.electrodecree.PlayerEntityMixin",
+    "statuseffect.fervorofbattle.LivingEntityMixin",
+    "statuseffect.grievouswounds.LivingEntityMixin",
+    "statuseffect.lethaltempo.LivingEntityMixin",
+    "statuseffect.lethaltempo.PlayerEntityMixin",
+    "util.LivingEntityMixin",
+    "vanilla.iframebypass.LivingEntityMixin",
+    "vanilla.iframebypass.PlayerEntityMixin"
   ],
   "client": [
+    "moditem.hollowmask.client.PlayerEntityRendererMixin",
+    "statuseffect.grievouswounds.client.InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

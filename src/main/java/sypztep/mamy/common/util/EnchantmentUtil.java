@@ -47,7 +47,7 @@ public class EnchantmentUtil {
         }
         return null;
     }
-    private static void forEachMamyEnchantment(EnchantmentUtil.Consumer consumer, ItemStack stack) {
+    private static void forEachMamyEnchantment(Consumer consumer, ItemStack stack) {
         if (stack != null && !stack.isEmpty()) {
             NbtList NbtList = stack.getEnchantments();
 
@@ -62,7 +62,7 @@ public class EnchantmentUtil {
             }
         }
     }
-    private static void forEachMamyEnchantment(EnchantmentUtil.Consumer consumer, Iterable<ItemStack> stacks) {
+    private static void forEachMamyEnchantment(Consumer consumer, Iterable<ItemStack> stacks) {
         for (ItemStack itemStack : stacks) {
             forEachMamyEnchantment(consumer, itemStack);
         }

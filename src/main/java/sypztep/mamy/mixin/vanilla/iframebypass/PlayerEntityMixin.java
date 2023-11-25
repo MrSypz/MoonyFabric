@@ -37,12 +37,12 @@ public class PlayerEntityMixin implements PlayerEntityAccessor {
 	private boolean swinging = false;
 
 	@Override
-	public void setSwinging(boolean swinging) {
+	public void mamy$setSwinging(boolean swinging) {
 		this.swinging = swinging;
 	}
 
 	@Override
-	public boolean isSwinging() {
+	public boolean mamy$isSwinging() {
 		return this.swinging;
 	}
 }

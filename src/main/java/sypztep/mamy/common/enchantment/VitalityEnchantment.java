@@ -1,6 +1,5 @@
 package sypztep.mamy.common.enchantment;
 
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +16,7 @@ import java.util.UUID;
 public class VitalityEnchantment extends EmptyEnchantment {
     private static final UUID VITALITY_ID = UUID.fromString("94e1b6fd-beb6-4163-9beb-904374c69857");
 
-    public VitalityEnchantment(Enchantment.Rarity weight, EnchantmentTarget target) {
+    public VitalityEnchantment(Rarity weight, EnchantmentTarget target) {
         super(weight, target, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET);
     }
 
