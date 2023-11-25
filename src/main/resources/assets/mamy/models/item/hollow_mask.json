@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mamy:item/hollow_mask"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "breaking": 1
+      },
+      "model": "mamy:item/breaking_hollow_mask"
+    }
+  ]
+}
