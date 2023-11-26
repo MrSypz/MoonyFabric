@@ -6,7 +6,8 @@
     {
       "name": "mamy:barreldistortion",
       "intarget": "minecraft:main",
-      "outtarget": "swap"
+      "outtarget": "swap",
+      "uniforms": []
     },
     {
       "name": "blit",
