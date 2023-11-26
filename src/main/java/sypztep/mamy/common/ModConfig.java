@@ -28,7 +28,7 @@ public class ModConfig extends MidnightConfig{
     @Comment(centered = true)
     public static Comment VanillaChange;
     @Entry
-    public static boolean weakerPotions;
+    public static boolean weakerPotions = true;
 
 
     @Comment(centered = true)

@@ -2,6 +2,7 @@ package sypztep.mamy.common.component.entity;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
+import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.entity.Entity;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import sypztep.mamy.client.MamyModClient;
 import sypztep.mamy.common.Item.HollowmaskItem;
 import sypztep.mamy.common.init.ModItems;
@@ -19,14 +21,15 @@ import sypztep.mamy.common.init.ModParticles;
 import sypztep.mamy.common.init.ModSoundEvents;
 import sypztep.mamy.common.packet.SonidoClearPacket;
 import sypztep.mamy.common.packet.SonidoPacket;
+import sypztep.pickyourpoison.common.init.ModStatusEffects;
 
 public class VizardComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final short DEFAULT_SONIDO_COOLDOWN = 8;
-    public static boolean hasMask = false;
+    public static boolean hasMask = false , dodash = false;
     private static short sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0;
     public static short invisDuration = 0;
     private final PlayerEntity obj;
-    private boolean wasPressing = false;
+    private boolean wasPressing = false ;
 
     public VizardComponent(PlayerEntity obj) {
         this.obj = obj;
@@ -74,6 +77,7 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
                 if (invisDuration <= 0) {
                     SonidoClearPacket.send();
                     resetInv(obj);
+                    dodash = false;
                 }
             }
             if (pressingActivationKey && !wasPressing) {
@@ -83,10 +87,17 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
                     handle(obj, this, velocity.getX(), velocity.getZ());
                     addSonidoParticles(obj);
                     SonidoPacket.send(velocity);
-                } else
+                    dodash = true;
+                } else {
                     ticksLefthasPress = 7;
+                }
             }
             wasPressing = pressingActivationKey;
+            if (dodash) {
+                MamyModClient.setDistortAmount( (float) ((invisDuration) * 0.1) * -1);
+            } else {
+                MamyModClient.setDistortAmount(0f);
+            }
         }
     }
     private Vec3d getVelocityFromInput(GameOptions options) {

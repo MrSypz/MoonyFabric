@@ -28,6 +28,7 @@ public class ModItemGroup {
                 entries.add(ModItems.HOLLOW_MASK_TIER2);
                 entries.add(ModItems.HOLLOW_MASK_TIER3);
                 entries.add(ModItems.HOLLOW_MASK_TIER4);
+                entries.add(ModItems.VASTO_MASK);
             })
             .build();
 }

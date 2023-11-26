@@ -37,9 +37,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         for (HollowmaskItem mask : ModItems.ALL_MASK) {
             if (headSlot.isOf(mask)) {
                 if (!hasVulnerabilityEffect) {
-                    int vulnerabilityLevel = headSlot.isOf(ModItems.HOLLOW_MASK_TIER1) || headSlot.isOf(ModItems.HOLLOW_MASK_TIER2) || headSlot.isOf(ModItems.HOLLOW_MASK_TIER3) || headSlot.isOf(ModItems.HOLLOW_MASK_TIER4)? 0 : 1; // take more damage 25 or 50%
-                    this.addStatusEffect(new StatusEffectInstance(VULNERABILITY, 100, vulnerabilityLevel, false, false));
+                    this.addStatusEffect(new StatusEffectInstance(VULNERABILITY, 100, 0, false, false));
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 100, 0, false, false, false));
+                    this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, 0, false, false, false));
+                    this.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 100, 1, false, false, false));
 
                     if (headSlot.isOf(ModItems.HOLLOW_MASK_TIER3) && this.getHungerManager().getFoodLevel() <= 0) {
                         this.addStatusEffect(new StatusEffectInstance(STIMULATION, 100, 0, false, false));
