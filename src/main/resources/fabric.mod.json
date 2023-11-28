@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "mamy",
   "version": "${version}",
-  "name": "Ghost",
+  "name": "Ghost of Heaven",
   "description": "",
   "authors": [
     "Sypztep"
@@ -26,7 +26,8 @@
     ]
   },
   "mixins": [
-    "mamy.mixins.json"
+    "mamy.mixins.json",
+    "mamyfeature.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

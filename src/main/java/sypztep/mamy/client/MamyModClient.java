@@ -11,7 +11,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -23,18 +22,20 @@ import sypztep.mamy.client.particle.*;
 import sypztep.mamy.client.registry.Itemregistry;
 import sypztep.mamy.common.Item.HollowmaskItem;
 import sypztep.mamy.common.MamyMod;
+import sypztep.mamy.common.ModConfig;
 import sypztep.mamy.common.component.entity.VizardComponent;
 import sypztep.mamy.common.init.ModItems;
 import sypztep.mamy.common.init.ModParticles;
-import sypztep.pickyourpoison.common.PickyourpoisonMod;
 
 public class MamyModClient implements ClientModInitializer {
     public static final KeyBinding SONIDO_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
     private static final ManagedShaderEffect NIG = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
     public static float distortAmount = 0.0f;
+    public static float distortMultiply = 0.0f;
 
     public static void setDistortAmount(float value) {
-        distortAmount = value * 0.4f;
+        distortMultiply = ModConfig.distorsion;
+        distortAmount = value * 0.4f * distortMultiply;
         NIG.setUniformValue("DistortAmount", distortAmount);
     }
     private boolean hasAnyMask(PlayerEntity player) {

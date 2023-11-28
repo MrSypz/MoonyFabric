@@ -1,4 +1,4 @@
-package sypztep.mamy.feature.mixin;
+package sypztep.mamy.feature.mixin.client;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;

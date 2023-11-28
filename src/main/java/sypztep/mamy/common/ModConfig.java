@@ -26,9 +26,9 @@ public class ModConfig extends MidnightConfig{
 
     public static String[] damageSrcWhitelist = new String[] {"inFire", "lava", "sweetBerryBush", "cactus", "lightningBolt", "inWall", "hotFloor"};
     @Comment(centered = true)
-    public static Comment VanillaChange;
+    public static Comment MaskDashEffect;
     @Entry
-    public static boolean weakerPotions = true;
+    public static float distorsion = 1.0f;
 
 
     @Comment(centered = true)

@@ -16,8 +16,7 @@
     "statuseffect.lethaltempo.PlayerEntityMixin",
     "util.LivingEntityMixin",
     "vanilla.iframebypass.LivingEntityMixin",
-    "vanilla.iframebypass.PlayerEntityMixin",
-    "vanilla.weakerstatuseffect.DamageModifierStatusEffectMixin"
+    "vanilla.iframebypass.PlayerEntityMixin"
   ],
   "client": [
     "moditem.hollowmask.client.PlayerEntityRendererMixin",
