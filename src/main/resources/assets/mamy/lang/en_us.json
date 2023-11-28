@@ -23,7 +23,12 @@
   "itemGroup.mamymask": "Mask Item",
 
   "item.mamy.death_scythe" : "Death Scythe",
-  "item.mamy.hollow_mask3" : "Hollow Mask Tier 3",
+  "item.mamy.half_hollow_mask" : "Half Hollow Mask",
+  "item.mamy.hollow_mask_1" : "Hollow Mask Tier 1",
+  "item.mamy.hollow_mask_2" : "Hollow Mask Tier 2",
+  "item.mamy.hollow_mask_3" : "Hollow Mask Tier 3",
+  "item.mamy.hollow_mask_4" : "Hollow Mask Tier 4",
+  "item.mamy.vasto_mask" : "Vastolord Mask",
   "text.mamy.gui.title": "%s Info",
 
   "effect.mamy.mark": "Mark",

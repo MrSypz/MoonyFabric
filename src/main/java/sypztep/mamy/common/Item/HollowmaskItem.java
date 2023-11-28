@@ -18,7 +18,7 @@ import sypztep.mamy.common.init.ModParticles;
 public class HollowmaskItem extends MamyMaskItem{
 
     public HollowmaskItem(Settings settings) {
-        super(ArmorMaterials.LEATHER,Type.HELMET, settings);
+        super(ArmorMaterials.NETHERITE,Type.HELMET, settings);
     }
 
     @Override

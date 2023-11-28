@@ -29,14 +29,20 @@ import sypztep.mamy.common.init.ModParticles;
 
 public class MamyModClient implements ClientModInitializer {
     public static final KeyBinding SONIDO_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
-    private static final ManagedShaderEffect NIG = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
-    public static float distortAmount = 0.0f;
+    private static final ManagedShaderEffect DASHWARP = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
+    private static final ManagedShaderEffect HOLLOW_VISION = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/hollowvision.json"));
+    private static float distortAmount = 0.0f;
+    private static float SaturationAmount = 0.0f;
     public static float distortMultiply = 0.0f;
 
     public static void setDistortAmount(float value) {
         distortMultiply = ModConfig.distorsion;
         distortAmount = value * 0.4f * distortMultiply;
-        NIG.setUniformValue("DistortAmount", distortAmount);
+        DASHWARP.setUniformValue("DistortAmount", distortAmount);
+    }
+    public static void setSatuation(float value) {
+        SaturationAmount = value;
+        HOLLOW_VISION.setUniformValue("Saturation", SaturationAmount);
     }
     private boolean hasAnyMask(PlayerEntity player) {
         for (ItemStack stack : player.getInventory().armor) {
@@ -71,12 +77,14 @@ public class MamyModClient implements ClientModInitializer {
         ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
             if (MinecraftClient.getInstance().player != null && hasAnyMask(MinecraftClient.getInstance().player) && !MinecraftClient.getInstance().player.isSubmergedInWater()) {
                 if (VizardComponent.dodash)
-                    MamyModClient.NIG.render(tickDelta);
+                    MamyModClient.DASHWARP.render(tickDelta);
             }
         });
-
-
-        ModelPredicateProviderRegistry.register(ModItems.HOLLOW_MASK_TIER3, new Identifier("breaking"), ((stack, world, entity, seed) -> HollowmaskItem.HalfMask(stack) ? 0.0f : 1.0f));
-
+        ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
+            if (MinecraftClient.getInstance().player != null && hasAnyMask(MinecraftClient.getInstance().player)) {
+                if (VizardComponent.hasMask)
+                    MamyModClient.HOLLOW_VISION.render(tickDelta);
+            }
+        });
     }
 }

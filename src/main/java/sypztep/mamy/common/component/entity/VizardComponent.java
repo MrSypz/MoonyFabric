@@ -26,7 +26,7 @@ import sypztep.pickyourpoison.common.init.ModStatusEffects;
 public class VizardComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final short DEFAULT_SONIDO_COOLDOWN = 8;
     public static boolean hasMask = false , dodash = false;
-    private static short sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0;
+    private short sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0 ,smoothvision = 40;
     public static short invisDuration = 0;
     private final PlayerEntity obj;
     private boolean wasPressing = false ;
@@ -67,6 +67,13 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
     @Override
     public void clientTick() {
         tick();
+        if (hasMask && smoothvision > 0) {
+            smoothvision--;
+            MamyModClient.setSatuation((smoothvision * 0.1f)/2.0f);
+        } else if (!hasMask && smoothvision < 40) {
+            smoothvision++;
+            MamyModClient.setSatuation((smoothvision * 0.1f)/2.0f);
+        }
         if (hasMask && sonidoCooldown == 0 && !obj.isSpectator() && obj == MinecraftClient.getInstance().player) {
             GameOptions options = MinecraftClient.getInstance().options;
             boolean pressingActivationKey = MamyModClient.SONIDO_KEYBINDING.isUnbound() ? options.sprintKey.isPressed() : MamyModClient.SONIDO_KEYBINDING.isPressed();
@@ -112,7 +119,7 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
     public static void handle(Entity user, VizardComponent vizardComponent, double velocityX, double velocityZ) {//Server Packet
         user.addVelocity(velocityX, 0, velocityZ);
         user.playSound(ModSoundEvents.ENTITY_GENERIC_SONIDO, 1.0f, 1.0f);
-        sonidoCooldown = DEFAULT_SONIDO_COOLDOWN;
+        vizardComponent.sonidoCooldown = DEFAULT_SONIDO_COOLDOWN;
     }
     public static void addSonidoParticles(LivingEntity entity) { //Client Packet
         entity.setInvisible(true);

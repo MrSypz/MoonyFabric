@@ -23,9 +23,10 @@ public abstract class PlayerEntityRendererMixin<T extends PlayerEntity, M extend
         super(ctx);
     }
 
+    /** Disable player When Dash**/
     @Inject(method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("HEAD"), cancellable = true)
     private void render(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if ((EnchantmentUtil.hasCloakEquipped(abstractClientPlayerEntity) && abstractClientPlayerEntity.isInvisible())) {
+        if ((EnchantmentUtil.hasMaskEquipped(abstractClientPlayerEntity) && abstractClientPlayerEntity.isInvisible())) {
             ci.cancel();
         }
     }
