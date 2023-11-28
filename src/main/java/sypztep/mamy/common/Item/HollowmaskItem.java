@@ -1,9 +1,6 @@
 package sypztep.mamy.common.Item;
 
-import com.google.common.collect.Multimap;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.ItemStack;
@@ -15,7 +12,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import sypztep.mamy.common.init.ModParticles;
 
-public class HollowmaskItem extends MamyMaskItem{
+public class HollowmaskItem extends MamyMaskFuncItem {
 
     public HollowmaskItem(Settings settings) {
         super(ArmorMaterials.NETHERITE,Type.HELMET, settings);

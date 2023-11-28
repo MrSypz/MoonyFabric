@@ -22,9 +22,15 @@ public class ModItems {
     public static HollowmaskItem HOLLOW_MASK_TIER3;
     public static HollowmaskItem HOLLOW_MASK_TIER4;
     public static VastomaskItem VASTO_MASK;
+    public static MamyMaskCosmItem KITSUNE;
+    public static MamyMaskCosmItem FURINA_HAT;
 
     public static void init(){
         DEATH_SCYTHE = registerSworditem("death_scythe", new DeathScytheItem());
+        //COSMETIC
+        KITSUNE = registerCosmeticitem("kitsune_mask_white",new MamyMaskCosmItem(new Item.Settings()));
+        FURINA_HAT = registerCosmeticitem("furina_hat",new MamyMaskCosmItem(new Item.Settings()));
+
 
         HALF_HOLLOW_MASK = registerMaskItem("half_hollow_mask", new HollowmaskItem(new FabricItemSettings().maxDamage(10))); // 10 Second
         HOLLOW_MASK_TIER1 = registerMaskItem("hollow_mask_1", new HollowmaskItem(new FabricItemSettings().maxDamage(60))); // 1 Minute
@@ -41,6 +47,10 @@ public class ModItems {
     public static <T extends Item> T registerMaskItem(String name, T item) {
         Registry.register(Registries.ITEM, MamyMod.id(name), item);
         ALL_MASK.add((HollowmaskItem) item);
+        return item;
+    }
+    public static <T extends Item> T registerCosmeticitem(String name, T item) {
+        Registry.register(Registries.ITEM, MamyMod.id(name), item);
         return item;
     }
 }
