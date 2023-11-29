@@ -29,19 +29,13 @@ import sypztep.mamy.common.init.ModParticles;
 public class MamyModClient implements ClientModInitializer {
     public static final KeyBinding SONIDO_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
     private static final ManagedShaderEffect DASHWARP = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
-    private static final ManagedShaderEffect HOLLOW_VISION = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/hollowvision.json"));
     private static float distortAmount = 0.0f;
-    private static float SaturationAmount = 0.0f;
     public static float distortMultiply = 0.0f;
 
     public static void setDistortAmount(float value) {
         distortMultiply = ModConfig.distorsion;
         distortAmount = value * 0.4f * distortMultiply;
         DASHWARP.setUniformValue("DistortAmount", distortAmount);
-    }
-    public static void setSatuation(float value) {
-        SaturationAmount = value;
-        HOLLOW_VISION.setUniformValue("Saturation", SaturationAmount);
     }
     private boolean hasAnyMask(PlayerEntity player) {
         for (ItemStack stack : player.getInventory().armor) {
@@ -68,6 +62,7 @@ public class MamyModClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.DRAGON_FIRE, DragonFireParticle.DefaultFactory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.DRAGON_FIRE_SPLATTER, DragonFireSplatterParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.EMPTY_PARTICLE, EmptyParticle.Factory::new);
 
 
         HudRenderCallback.EVENT.register(new BringerRenderEvent());
@@ -78,12 +73,6 @@ public class MamyModClient implements ClientModInitializer {
             if (MinecraftClient.getInstance().player != null && hasAnyMask(MinecraftClient.getInstance().player) && !MinecraftClient.getInstance().player.isSubmergedInWater()) {
                 if (VizardComponent.dodash)
                     MamyModClient.DASHWARP.render(tickDelta);
-            }
-        });
-        ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
-            if (MinecraftClient.getInstance().player != null && hasAnyMask(MinecraftClient.getInstance().player)) {
-                if (VizardComponent.hasMask)
-                    MamyModClient.HOLLOW_VISION.render(tickDelta);
             }
         });
     }

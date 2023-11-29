@@ -3,19 +3,30 @@ package sypztep.mamy.common.init;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import sypztep.mamy.common.MamyMod;
 
-public class ModSoundEvents {
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public interface ModSoundEvents {
+	Map<SoundEvent, Identifier> SOUND_EVENTS = new LinkedHashMap();
 	//Sound
-	public static final SoundEvent ENTITY_GENERIC_BLOODHIT = SoundEvent.of(MamyMod.id("entity.generic.bloodhit"));
-	public static final SoundEvent ENTITY_GENERIC_SONIDO = SoundEvent.of(MamyMod.id("entity.generic.sonido"));
+    SoundEvent ENTITY_GENERIC_BLOODHIT = createSoundEvent("entity.generic.bloodhit");
+	SoundEvent ENTITY_GENERIC_SONIDO = createSoundEvent("entity.generic.sonido");
+	SoundEvent ENTITY_PLAYER_ATTACK_SCYTHE = createSoundEvent("entity.player.attack.scythe");
 
-	public static final SoundEvent ITEM_SPEWING = SoundEvent.of(MamyMod.id("item.spewing"));
+	SoundEvent ITEM_SPEWING =createSoundEvent("item.spewing");
 
-	public static void init() {
-		Registry.register(Registries.SOUND_EVENT, ENTITY_GENERIC_BLOODHIT.getId(), ENTITY_GENERIC_BLOODHIT);
-		Registry.register(Registries.SOUND_EVENT, ENTITY_GENERIC_SONIDO.getId(), ENTITY_GENERIC_SONIDO);
-
-		Registry.register(Registries.SOUND_EVENT, ITEM_SPEWING.getId(), ITEM_SPEWING);
+	static void init() {
+		SOUND_EVENTS.keySet().forEach((soundEvent) -> {
+			Registry.register(Registries.SOUND_EVENT, SOUND_EVENTS.get(soundEvent), soundEvent);
+		});
+	}
+	private static SoundEvent createSoundEvent(String path) {
+		SoundEvent soundEvent = SoundEvent.of(MamyMod.id(path));
+		SOUND_EVENTS.put(soundEvent, MamyMod.id(path));
+		return soundEvent;
 	}
 }

@@ -21,6 +21,7 @@
   "mamy.midnightconfig.knockbackCancelThreshold.tooltip": "How weak a player's attack can be before the knockback gets nullified, from 0 (0%, cancels multiple attacks on the same tick) to 1 (100%, no knockback), or -0.1 (disables this feature)",
 
   "itemGroup.mamymask": "Mask Item",
+  "itemGroup.mamycosmetic": "Cosmetic Item",
 
   "item.mamy.death_scythe" : "Death Scythe",
   "item.mamy.half_hollow_mask" : "Half Hollow Mask",
@@ -29,7 +30,9 @@
   "item.mamy.hollow_mask_3" : "Hollow Mask Tier 3",
   "item.mamy.hollow_mask_4" : "Hollow Mask Tier 4",
   "item.mamy.vasto_mask" : "Vastolord Mask",
-  "text.mamy.gui.title": "%s Info",
+
+  "item.mamy.furina_hat" : "Furina Hat",
+  "item.mamy.kitsune_mask_white" : "Kitsune Mask",
 
   "effect.mamy.mark": "Mark",
   "effect.mamy.markimmune": "Mark Immune",

@@ -25,8 +25,8 @@ import sypztep.pickyourpoison.common.init.ModStatusEffects;
 
 public class VizardComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final short DEFAULT_SONIDO_COOLDOWN = 8;
-    public static boolean hasMask = false , dodash = false;
-    private short sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0 ,smoothvision = 40;
+    public static boolean hasMask = false , dodash = false , wearingmask = false;
+    private short sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0;
     public static short invisDuration = 0;
     private final PlayerEntity obj;
     private boolean wasPressing = false ;
@@ -35,7 +35,7 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
         this.obj = obj;
     }
 
-    private boolean hasAnyMask(PlayerEntity player) {
+    public static boolean hasAnyMask(PlayerEntity player) {
         for (ItemStack stack : player.getInventory().armor) {
             for (HollowmaskItem mask : ModItems.ALL_MASK) {
                 if (stack.getItem() == mask) {
@@ -52,13 +52,13 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
         if (hasMask && !HollowmaskItem.HalfMask(stack))
             obj.getWorld().addParticle(ParticleTypes.CLOUD, obj.getParticleX(2), obj.getEyeY(), obj.getParticleZ(2), 0, 0.1, 0);
         if (hasMask) {
-            if (obj.age % 20 == 0) {
+            wearingmask = true;
+            if (obj.age % 20 == 0)
                 stack.damage(1, obj, (consumer) -> consumer.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
-            }
-            if (sonidoCooldown > 0) {
+            if (sonidoCooldown > 0)
                 sonidoCooldown--;
-            }
         } else {
+            wearingmask = false;
             resetInv(obj);
             sonidoCooldown = DEFAULT_SONIDO_COOLDOWN;
         }
@@ -67,13 +67,6 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
     @Override
     public void clientTick() {
         tick();
-        if (hasMask && smoothvision > 0) {
-            smoothvision--;
-            MamyModClient.setSatuation((smoothvision * 0.1f)/2.0f);
-        } else if (!hasMask && smoothvision < 40) {
-            smoothvision++;
-            MamyModClient.setSatuation((smoothvision * 0.1f)/2.0f);
-        }
         if (hasMask && sonidoCooldown == 0 && !obj.isSpectator() && obj == MinecraftClient.getInstance().player) {
             GameOptions options = MinecraftClient.getInstance().options;
             boolean pressingActivationKey = MamyModClient.SONIDO_KEYBINDING.isUnbound() ? options.sprintKey.isPressed() : MamyModClient.SONIDO_KEYBINDING.isPressed();
@@ -95,16 +88,14 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
                     addSonidoParticles(obj);
                     SonidoPacket.send(velocity);
                     dodash = true;
-                } else {
+                } else
                     ticksLefthasPress = 7;
-                }
             }
             wasPressing = pressingActivationKey;
-            if (dodash) {
+            if (dodash)
                 MamyModClient.setDistortAmount( (float) ((invisDuration) * 0.1) * -1);
-            } else {
+             else
                 MamyModClient.setDistortAmount(0f);
-            }
         }
     }
     private Vec3d getVelocityFromInput(GameOptions options) {

@@ -5,7 +5,7 @@
         "dstrgb": "zero"
     },
     "vertex": "sobel",
-    "fragment": "mamy:barreldistortion",
+    "fragment": "mamy:fisheye",
     "attributes": [ "Position" ],
     "samplers": [
         { "name": "DiffuseSampler" }

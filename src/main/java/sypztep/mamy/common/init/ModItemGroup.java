@@ -18,6 +18,7 @@ public class ModItemGroup {
             content.add(ModItems.DEATH_SCYTHE);
         });
         Registry.register(Registries.ITEM_GROUP, new Identifier(MamyMod.MODID, "mask"), MASK_GROUP);
+        Registry.register(Registries.ITEM_GROUP, new Identifier(MamyMod.MODID, "cosmetic"), COSMETIC_GROUP);
     }
     private static final ItemGroup MASK_GROUP = FabricItemGroup.builder()
             .icon(() -> new ItemStack(ModItems.HOLLOW_MASK_TIER3))
@@ -29,6 +30,14 @@ public class ModItemGroup {
                 entries.add(ModItems.HOLLOW_MASK_TIER3);
                 entries.add(ModItems.HOLLOW_MASK_TIER4);
                 entries.add(ModItems.VASTO_MASK);
+            })
+            .build();
+    private static final ItemGroup COSMETIC_GROUP = FabricItemGroup.builder()
+            .icon(() -> new ItemStack(ModItems.FURINA_HAT))
+            .displayName(Text.translatable("itemGroup." + MamyMod.MODID + "cosmetic"))
+            .entries((context, entries) -> {
+                entries.add(ModItems.FURINA_HAT);
+                entries.add(ModItems.KITSUNE);
             })
             .build();
 }

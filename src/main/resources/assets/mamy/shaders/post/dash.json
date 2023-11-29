@@ -4,7 +4,7 @@
   ],
   "passes": [
     {
-      "name": "mamy:barreldistortion",
+      "name": "mamy:fisheye",
       "intarget": "minecraft:main",
       "outtarget": "swap",
       "uniforms": []
