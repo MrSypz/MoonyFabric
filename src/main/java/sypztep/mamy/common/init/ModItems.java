@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.util.Rarity;
 import sypztep.mamy.common.Item.*;
 import sypztep.mamy.common.MamyMod;
 
@@ -24,12 +25,14 @@ public class ModItems {
     public static VastomaskItem VASTO_MASK;
     public static MamyMaskCosmItem KITSUNE;
     public static MamyMaskCosmItem FURINA_HAT;
+    public static Item EYE_OF_DARKIN;
 
     public static void init(){
         DEATH_SCYTHE = registerSworditem("death_scythe", new DeathScytheItem());
         //COSMETIC
-        KITSUNE = registerCosmeticitem("kitsune_mask_white",new MamyMaskCosmItem(new Item.Settings()));
-        FURINA_HAT = registerCosmeticitem("furina_hat",new MamyMaskCosmItem(new Item.Settings()));
+        KITSUNE = registeritem("kitsune_mask_white",new MamyMaskCosmItem(new Item.Settings()));
+        FURINA_HAT = registeritem("furina_hat",new MamyMaskCosmItem(new Item.Settings()));
+        EYE_OF_DARKIN = registeritem("eye_of_darkin",new Item(new Item.Settings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
 
 
         HALF_HOLLOW_MASK = registerMaskItem("half_hollow_mask", new HollowmaskItem(new FabricItemSettings().maxDamage(10))); // 10 Second
@@ -49,7 +52,7 @@ public class ModItems {
         ALL_MASK.add((HollowmaskItem) item);
         return item;
     }
-    public static <T extends Item> T registerCosmeticitem(String name, T item) {
+    public static <T extends Item> T registeritem(String name, T item) {
         Registry.register(Registries.ITEM, MamyMod.id(name), item);
         return item;
     }
