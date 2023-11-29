@@ -26,8 +26,8 @@ import sypztep.pickyourpoison.common.init.ModStatusEffects;
 public class VizardComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final short DEFAULT_SONIDO_COOLDOWN = 8;
     public static boolean hasMask = false , dodash = false , wearingmask = false;
-    private short sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0;
-    public static short invisDuration = 0;
+    private int sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0;
+    public static int invisDuration = 0;
     private final PlayerEntity obj;
     private boolean wasPressing = false ;
 
@@ -107,14 +107,15 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
             return new Vec3d(0, 0, 2);
         return new Vec3d(2, 0, 0);
     }
-    public static void handle(Entity user, VizardComponent vizardComponent, double velocityX, double velocityZ) {//Server Packet
+    public static void handle(LivingEntity user, VizardComponent vizardComponent, double velocityX, double velocityZ) {//Server Packet
         user.addVelocity(velocityX, 0, velocityZ);
         user.playSound(ModSoundEvents.ENTITY_GENERIC_SONIDO, 1.0f, 1.0f);
         vizardComponent.sonidoCooldown = DEFAULT_SONIDO_COOLDOWN;
+        user.setInvisible(true);
     }
     public static void addSonidoParticles(LivingEntity entity) { //Client Packet
         entity.setInvisible(true);
-        invisDuration = 8;
+        invisDuration = DEFAULT_SONIDO_COOLDOWN;
         if (MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || entity != MinecraftClient.getInstance().cameraEntity)
             entity.getWorld().addParticle(ParticleTypes.FLASH, entity.getParticleX(2), entity.getRandomBodyY(), entity.getParticleZ(2), 0, 0, 0);
     }
@@ -123,11 +124,11 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
     }
     @Override
     public void readFromNbt(NbtCompound tag) {
-
+        sonidoCooldown = tag.getInt("SonidoCooldown");
     }
 
     @Override
     public void writeToNbt(NbtCompound tag) {
-
+        sonidoCooldown = tag.getInt("SonidoCooldown");
     }
 }

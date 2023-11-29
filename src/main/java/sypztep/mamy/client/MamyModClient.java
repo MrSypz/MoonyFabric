@@ -4,6 +4,7 @@ import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -11,8 +12,10 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import org.lwjgl.glfw.GLFW;
 import sypztep.mamy.client.event.BringerRenderEvent;
 import sypztep.mamy.client.packet.AddSonidoParticlePacket;
@@ -26,26 +29,23 @@ import sypztep.mamy.common.component.entity.VizardComponent;
 import sypztep.mamy.common.init.ModItems;
 import sypztep.mamy.common.init.ModParticles;
 
+import static sypztep.mamy.common.component.entity.VizardComponent.dodash;
+import static sypztep.mamy.common.component.entity.VizardComponent.invisDuration;
+
 public class MamyModClient implements ClientModInitializer {
     public static final KeyBinding SONIDO_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
     private static final ManagedShaderEffect DASHWARP = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
-    private static float distortAmount = 0.0f;
+    private static final ManagedShaderEffect HOLLOW_VISION = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/hollowvision.json"));
     public static float distortMultiply = 0.0f;
+    private static float smoothshade = 40;
 
     public static void setDistortAmount(float value) {
         distortMultiply = ModConfig.distorsion;
-        distortAmount = value * 0.4f * distortMultiply;
+        float distortAmount = value * 0.4f * distortMultiply;
         DASHWARP.setUniformValue("DistortAmount", distortAmount);
     }
-    private boolean hasAnyMask(PlayerEntity player) {
-        for (ItemStack stack : player.getInventory().armor) {
-            for (HollowmaskItem mask : ModItems.ALL_MASK) {
-                if (stack.getItem() == mask) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    private static void setSaturation(float value) {
+        HOLLOW_VISION.setUniformValue("Saturation", 1f-(1f-value));
     }
     @Override
     public void onInitializeClient() {
@@ -70,9 +70,26 @@ public class MamyModClient implements ClientModInitializer {
         Itemregistry.init();
 
         ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
-            if (MinecraftClient.getInstance().player != null && hasAnyMask(MinecraftClient.getInstance().player) && !MinecraftClient.getInstance().player.isSubmergedInWater()) {
-                if (VizardComponent.dodash)
+            if (MinecraftClient.getInstance().player != null && VizardComponent.hasAnyMask(MinecraftClient.getInstance().player) && !MinecraftClient.getInstance().player.isSubmergedInWater()) {
+                if (dodash)
                     MamyModClient.DASHWARP.render(tickDelta);
+
+            }
+            if (MinecraftClient.getInstance().player != null && VizardComponent.hasAnyMask(MinecraftClient.getInstance().player))
+                MamyModClient.HOLLOW_VISION.render(tickDelta);
+        });
+
+
+        ClientTickEvents.START_CLIENT_TICK.register( client -> {
+            PlayerEntity player = client.getCameraEntity() instanceof PlayerEntity ? (PlayerEntity) client.getCameraEntity() : null;
+            if (player == null || !(player instanceof LivingEntity) || !VizardComponent.hasAnyMask(player)) {
+                    smoothshade = 40;
+                return;
+            }
+            System.out.println(smoothshade);
+            if (smoothshade > 0) {
+                smoothshade--;
+                setSaturation(smoothshade * 0.01f);
             }
         });
     }
