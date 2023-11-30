@@ -16,7 +16,7 @@ public class ModItemGroup {
             content.add(ModItems.DEATH_SCYTHE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(content -> {
-            content.addBefore(Items.GOLDEN_CARROT,ModItems.EYE_OF_DARKIN);
+            content.addBefore(Items.GOLDEN_CARROT,ModItems.ARCHAIC_EYE);
         });
         Registry.register(Registries.ITEM_GROUP, new Identifier(MamyMod.MODID, "mask"), MASK_GROUP);
         Registry.register(Registries.ITEM_GROUP, new Identifier(MamyMod.MODID, "cosmetic"), COSMETIC_GROUP);
@@ -38,7 +38,6 @@ public class ModItemGroup {
             .displayName(Text.translatable("itemGroup." + MamyMod.MODID + "cosmetic"))
             .entries((context, entries) -> {
                 entries.add(ModItems.FURINA_HAT);
-                entries.add(ModItems.KITSUNE);
             })
             .build();
 }

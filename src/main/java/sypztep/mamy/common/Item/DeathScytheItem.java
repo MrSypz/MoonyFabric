@@ -22,7 +22,7 @@ import sypztep.mamy.common.init.ModSoundEvents;
 
 import java.util.List;
 
-public class DeathScytheItem extends MamySwordItem implements CustomHitSoundItem, CustomHitParticleItem{
+public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundItem, CustomHitParticleItem{
     public DeathScytheItem() {
         super(ToolMaterials.NETHERITE,6, -3f, new Settings().fireproof());
     }

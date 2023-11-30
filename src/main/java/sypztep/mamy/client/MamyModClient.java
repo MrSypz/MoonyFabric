@@ -73,7 +73,6 @@ public class MamyModClient implements ClientModInitializer {
             if (MinecraftClient.getInstance().player != null && VizardComponent.hasAnyMask(MinecraftClient.getInstance().player) && !MinecraftClient.getInstance().player.isSubmergedInWater()) {
                 if (dodash)
                     MamyModClient.DASHWARP.render(tickDelta);
-
             }
             if (MinecraftClient.getInstance().player != null && VizardComponent.hasAnyMask(MinecraftClient.getInstance().player))
                 MamyModClient.HOLLOW_VISION.render(tickDelta);
@@ -83,10 +82,9 @@ public class MamyModClient implements ClientModInitializer {
         ClientTickEvents.START_CLIENT_TICK.register( client -> {
             PlayerEntity player = client.getCameraEntity() instanceof PlayerEntity ? (PlayerEntity) client.getCameraEntity() : null;
             if (player == null || !(player instanceof LivingEntity) || !VizardComponent.hasAnyMask(player)) {
-                    smoothshade = 40;
+                smoothshade = 40;
                 return;
             }
-            System.out.println(smoothshade);
             if (smoothshade > 0) {
                 smoothshade--;
                 setSaturation(smoothshade * 0.01f);

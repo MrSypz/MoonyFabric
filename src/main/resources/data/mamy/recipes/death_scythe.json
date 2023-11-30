@@ -2,15 +2,15 @@
     "type": "minecraft:crafting_shaped",
     "pattern": [
         "nnn",
-        " E/",
+        " a/",
         " / "
     ],
     "key": {
         "n": {
             "item": "minecraft:netherite_ingot"
         },
-        "E": {
-            "item": "mamy:eye_of_darkin"
+        "a": {
+            "item": "mamy:archaic_eye"
         },
         "/": {
             "item": "minecraft:stick"
