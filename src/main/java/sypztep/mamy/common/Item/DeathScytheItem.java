@@ -2,7 +2,6 @@ package sypztep.mamy.common.Item;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,13 +28,14 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
     }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack itemStack = user.getStackInHand(hand);
         MinecraftClient client = MinecraftClient.getInstance();
         if (user != null && user.isSneaking()) {
             boolean itemToCheck = VizardComponent.hasAnyMask(user);
             ItemStack getHeadSlot = user.getEquippedStack(EquipmentSlot.HEAD);
             if (getHeadSlot.isEmpty())
                 equipMask(user);
-             else {
+            else {
                 if (!itemToCheck) {
                     int emptySlot = user.getInventory().getEmptySlot();
                     if (emptySlot >= 0)
@@ -43,11 +43,13 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
                     else
                         user.dropItem(getHeadSlot, false);
                     equipMask(user);
-                } else client.player.sendMessage(Text.of("Your head slot is already occupied with the mod item!"), false);
+                } else
+                    client.player.sendMessage(Text.of("Your head slot is already occupied with the mod item!"), false);
             }
         }
-        return super.use(world, user, hand);
+        return TypedActionResult.pass(itemStack);
     }
+
     public static void ShockWaveDamage(PlayerEntity user) {
         double damageRadiusSquared = 5.0d;
         List<LivingEntity> entities = user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox().expand(damageRadiusSquared));
@@ -56,7 +58,7 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
             if (target != user) {
                 double distanceToEntity = target.squaredDistanceTo(user.getX(), user.getY(), user.getZ());
                 double normalizedDistance = Math.sqrt(distanceToEntity) / damageRadiusSquared; // Adjust as needed for your range
-                float damage = 5.0f - (float) (normalizedDistance * (5.0f - 1.0f));
+                float damage = (float) (damageRadiusSquared - (float) (normalizedDistance * (damageRadiusSquared - 1.0f)));
                 target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BRINGER,user), damage);
             }
         }
@@ -70,12 +72,8 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         user.equipStack(EquipmentSlot.HEAD, Hollowmask);
         HollowmaskItem.useMaskParticle(user);
         ShockWaveDamage(user);
+        user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.BRINGER,user), user.getHealth() * 0.5f);
         user.getItemCooldownManager().set(item, 1200); // 3 min
-    }
-
-    @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
     }
 
     @Override
