@@ -1,6 +1,10 @@
 package sypztep.mamy.common.Item;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.ItemStack;
@@ -10,7 +14,10 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import sypztep.mamy.common.init.ModItems;
 import sypztep.mamy.common.init.ModParticles;
+
+import static sypztep.mamy.common.init.ModStatusEffects.HOLLOW_POWER;
 
 public class HollowmaskItem extends MamyMaskFuncItem {
 
@@ -24,7 +31,12 @@ public class HollowmaskItem extends MamyMaskFuncItem {
     }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-            useMaskParticle(user);
+        ItemStack headSlot = user.getEquippedStack(EquipmentSlot.HEAD);
+        for (HollowmaskItem mask : ModItems.ALL_MASK) {
+            if (!headSlot.isOf(mask)) {
+                useMaskParticle(user);
+            }
+        }
         return super.use(world, user, hand);
     }
     //User Mask method use by DeathScythe and Hollowmask item
@@ -40,5 +52,23 @@ public class HollowmaskItem extends MamyMaskFuncItem {
     @Override
     public EquipmentSlot getSlotType() {
         return EquipmentSlot.HEAD;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if (entity instanceof LivingEntity living) {
+            ItemStack headSlot = living.getEquippedStack(EquipmentSlot.HEAD);
+            boolean hasPowerHollow = living.hasStatusEffect(HOLLOW_POWER);
+            if (headSlot.isOf(this)) {
+                if (!hasPowerHollow) {
+                    int amp = headSlot.isOf(ModItems.VASTO_MASK) ? 4 : headSlot.isOf(ModItems.HOLLOW_MASK_TIER4) ? 3 : headSlot.isOf(ModItems.HOLLOW_MASK_TIER3) ? 2 : headSlot.isOf(ModItems.HOLLOW_MASK_TIER2) ? 1 : 0;
+                    int amp2 = headSlot.isOf(ModItems.VASTO_MASK) ? 4 : headSlot.isOf(ModItems.HOLLOW_MASK_TIER4) ? 3 : headSlot.isOf(ModItems.HOLLOW_MASK_TIER3) ? 2 : headSlot.isOf(ModItems.HOLLOW_MASK_TIER2) ? 1 : 0;
+                    living.addStatusEffect(new StatusEffectInstance(HOLLOW_POWER, 100, amp2, false, false, false));
+                    if (!headSlot.isOf(ModItems.HALF_HOLLOW_MASK))
+                        living.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, amp, false, false, false));
+                }
+            }
+        }
+        super.inventoryTick(stack, world, entity, slot, selected);
     }
 }

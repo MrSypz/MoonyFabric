@@ -2,6 +2,7 @@ package sypztep.mamy.common.Item;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,21 +29,6 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
     }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-//        if (!user.getWorld().isClient) {
-//            if (user.isSneaking()) {
-//                ItemStack getHeadSlot = user.getEquippedStack(EquipmentSlot.HEAD);
-//                EquipMask(user);
-//                    if (!getHeadSlot.isEmpty()) {
-//                        int emptySlot = user.getInventory().getEmptySlot();
-//                        if (emptySlot >= 0)
-//                            user.getInventory().setStack(emptySlot, getHeadSlot);
-//                         else
-//                            user.dropItem(getHeadSlot, false);
-//                        EquipMask(user);
-//                    }
-//            }
-//        }
-//        return super.use(world, user, hand);
         MinecraftClient client = MinecraftClient.getInstance();
         if (user != null && user.isSneaking()) {
             boolean itemToCheck = VizardComponent.hasAnyMask(user);
@@ -85,6 +71,11 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         HollowmaskItem.useMaskParticle(user);
         ShockWaveDamage(user);
         user.getItemCooldownManager().set(item, 1200); // 3 min
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        super.inventoryTick(stack, world, entity, slot, selected);
     }
 
     @Override
