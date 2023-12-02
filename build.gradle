@@ -32,6 +32,12 @@ repositories {
         name = "jitpack"
         url = "https://jitpack.io"
     }
+    maven {
+        url "https://maven.jamieswhiteshirt.com/libs-release"
+        content {
+            includeGroup "com.jamieswhiteshirt"
+        }
+    }
 }
 
 dependencies {
@@ -56,6 +62,8 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     modImplementation "com.github.MrSypz:Pickyourpoison-Fabric:${project.pickyourpoison_version}"
+
+    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$VERSION")
 }
 
 processResources {

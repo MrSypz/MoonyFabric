@@ -1,10 +1,15 @@
 package sypztep.mamy.common.Item;
 
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
+import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,11 +28,23 @@ import sypztep.mamy.common.init.ModParticles;
 import sypztep.mamy.common.init.ModSoundEvents;
 
 import java.util.List;
+import java.util.UUID;
 
 public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundItem, CustomHitParticleItem{
     public DeathScytheItem() {
-        super(ToolMaterials.NETHERITE,6, -3f, new Settings().fireproof());
+        super(ToolMaterials.NETHERITE,5, -3f, new Settings().fireproof());
     }
+    private static final EntityAttributeModifier REACH_MODIFIER;
+
+    @Override
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        Multimap<EntityAttribute, EntityAttributeModifier> map = LinkedHashMultimap.create(super.getAttributeModifiers(slot));
+        if (slot == EquipmentSlot.MAINHAND) {
+            map.put(ReachEntityAttributes.ATTACK_RANGE, REACH_MODIFIER);
+        }
+        return map;
+    }
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
@@ -97,5 +114,8 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         if (var7 instanceof ServerWorld serverWorld) {
             serverWorld.spawnParticles(ModParticles.RED_SWEEP_ATTACK_PARTICLE, user.getX() + d0, user.getBodyY(0.5), user.getZ() + d1, 0, d0, 0.0, d1, 0.0);
         }
+    }
+    static {
+        REACH_MODIFIER = new EntityAttributeModifier(UUID.fromString("911af262-067d-4da2-854c-20f03cc2dd8b"), "Weapon modifier", 0.5, EntityAttributeModifier.Operation.ADDITION);
     }
 }

@@ -30,6 +30,7 @@ public class ModItems {
         DEATH_SCYTHE = registerSworditem("death_scythe", new DeathScytheItem());
         //COSMETIC
         FURINA_HAT = registeritem("furina_hat",new MamyMaskCosmItem(new Item.Settings()));
+
         ARCHAIC_EYE = registeritem("archaic_eye",new Item(new Item.Settings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
 
         //HOLLOW MASK
