@@ -1,6 +1,7 @@
 package sypztep.mamy.common.Item;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -14,6 +15,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import sypztep.mamy.common.component.entity.VizardComponent;
 import sypztep.mamy.common.init.ModDamageTypes;
 import sypztep.mamy.common.init.ModItems;
@@ -59,7 +61,7 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
                 double distanceToEntity = target.squaredDistanceTo(user.getX(), user.getY(), user.getZ());
                 double normalizedDistance = Math.sqrt(distanceToEntity) / damageRadiusSquared; // Adjust as needed for your range
                 float damage = (float) (damageRadiusSquared - (float) (normalizedDistance * (damageRadiusSquared - 1.0f)));
-                target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BRINGER,user), damage);
+                target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.MASKIMPACT,user), damage);
             }
         }
     }
@@ -72,8 +74,14 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         user.equipStack(EquipmentSlot.HEAD, Hollowmask);
         HollowmaskItem.useMaskParticle(user);
         ShockWaveDamage(user);
-        user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.BRINGER,user), user.getHealth() * 0.5f);
-        user.getItemCooldownManager().set(item, 1200); // 3 min
+        user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.MASKIMPACT,user), user.getHealth() * 0.5f);
+        user.getItemCooldownManager().set(item, 60); // 3 min
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override

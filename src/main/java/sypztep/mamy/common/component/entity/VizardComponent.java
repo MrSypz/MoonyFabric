@@ -2,10 +2,8 @@ package sypztep.mamy.common.component.entity;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
-import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,15 +11,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import sypztep.mamy.client.MamyModClient;
 import sypztep.mamy.common.Item.HollowmaskItem;
 import sypztep.mamy.common.init.ModItems;
-import sypztep.mamy.common.init.ModParticles;
 import sypztep.mamy.common.init.ModSoundEvents;
 import sypztep.mamy.common.packet.SonidoClearPacket;
 import sypztep.mamy.common.packet.SonidoPacket;
-import sypztep.pickyourpoison.common.init.ModStatusEffects;
 
 public class VizardComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final short DEFAULT_SONIDO_COOLDOWN = 8;
@@ -76,7 +71,6 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
                 invisDuration--;
                 if (invisDuration <= 0) {
                     SonidoClearPacket.send();
-                    resetInv(obj);
                     dodash = false;
                 }
             }
@@ -93,9 +87,11 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
             }
             wasPressing = pressingActivationKey;
             if (dodash)
-                MamyModClient.setDistortAmount( (float) ((invisDuration) * 0.1) * -1);
-             else
+                MamyModClient.setDistortAmount((float) ((invisDuration) * 0.1) * -1);
+             else {
                 MamyModClient.setDistortAmount(0f);
+                resetInv(obj);
+            }
         }
     }
     private Vec3d getVelocityFromInput(GameOptions options) {
@@ -111,7 +107,6 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
         user.addVelocity(velocityX, 0, velocityZ);
         user.playSound(ModSoundEvents.ENTITY_GENERIC_SONIDO, 1.0f, 1.0f);
         vizardComponent.sonidoCooldown = DEFAULT_SONIDO_COOLDOWN;
-        user.setInvisible(true);
     }
     public static void addSonidoParticles(LivingEntity entity) { //Client Packet
         entity.setInvisible(true);

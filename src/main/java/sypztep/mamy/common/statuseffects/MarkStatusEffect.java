@@ -2,8 +2,6 @@ package sypztep.mamy.common.statuseffects;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import sypztep.mamy.common.init.ModStatusEffects;
 
 public class MarkStatusEffect extends EmptyStatusEffect {
     public MarkStatusEffect() {
@@ -11,10 +9,6 @@ public class MarkStatusEffect extends EmptyStatusEffect {
     }
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-
-        entity.removeStatusEffect(ModStatusEffects.ELECTRO_MARK);
-        entity.addStatusEffect(new StatusEffectInstance(ModStatusEffects.ELECTRO_MARK, amplifier * 20, 0));
-
         super.applyUpdateEffect(entity, amplifier);
     }
 

@@ -27,6 +27,7 @@ public class SonidoClearPacket {
             server.execute(() -> ModEntityComponents.VIZARD.maybeGet(player).ifPresent(vizardComponent -> {
                 if (VizardComponent.hasMask) {
                     PlayerLookup.tracking(player).forEach(foundPlayer -> ResetSonidoInvPacket.send(foundPlayer, player.getId()));
+                    player.setInvisible(false);
                 }
             }));
         }

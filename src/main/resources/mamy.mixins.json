@@ -7,7 +7,6 @@
     "enchantment.bringerdeath.LivingEntityMixin",
     "enchantment.missilehomming.FireworkRocketEntityMixin",
     "enchantment.missilehomming.ProjectileEntityAccessor",
-    "moditem.hollowmask.PlayerEntityMixin",
     "statuseffect.electrodecree.PlayerEntityMixin",
     "statuseffect.fervorofbattle.LivingEntityMixin",
     "statuseffect.grievouswounds.LivingEntityMixin",
