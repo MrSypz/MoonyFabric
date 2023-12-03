@@ -57,13 +57,11 @@ dependencies {
 
     modImplementation include ("io.github.ladysnake:satin:${satin_version}")
 
-    modImplementation "dev.emi:trinkets:${trinkets_version}"
-
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     modImplementation "com.github.MrSypz:Pickyourpoison-Fabric:${project.pickyourpoison_version}"
 
-    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$VERSION")
+    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_version")
 }
 
 processResources {

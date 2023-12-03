@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SwordItem;
 import net.minecraft.server.world.ServerWorld;
-import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.component.entity.BringerComponent;
 import sypztep.mamy.common.init.ModDamageTypes;
 import sypztep.mamy.common.init.ModParticles;

@@ -24,6 +24,9 @@
   "itemGroup.mamycosmetic": "Cosmetic Item",
 
   "item.mamy.death_scythe" : "Death Scythe",
+  "item.mamy.death_scythe.ablity" : "Ability : Shift + RightClick",
+  "item.mamy.death_scythe.desc" : "Consume %d health to use Hollowmask",
+  "item.mamy.death_scythe.lore" : "Who hold this scythe...You're gay.",
   "item.mamy.half_hollow_mask" : "Half Hollow Mask",
   "item.mamy.hollow_mask_1" : "Hollow Mask Tier 1",
   "item.mamy.hollow_mask_2" : "Hollow Mask Tier 2",

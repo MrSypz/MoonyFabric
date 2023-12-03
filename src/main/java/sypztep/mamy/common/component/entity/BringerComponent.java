@@ -10,6 +10,7 @@ import sypztep.mamy.common.init.ModEntityComponents;
 import sypztep.mamy.common.util.EnchantmentUtil;
 
 public class BringerComponent implements AutoSyncedComponent,CommonTickingComponent {
+    //TODO : Multiplayer Fix
     public static final int DEFAULT_COOLDOWN = 120;
     private final PlayerEntity obj;
     public static boolean hasDeathBringer = false;
@@ -20,21 +21,20 @@ public class BringerComponent implements AutoSyncedComponent,CommonTickingCompon
     @Override
     public void readFromNbt (NbtCompound tag){
         deathCooldown = tag.getInt("DeathCooldown");
-        lastdeathCooldown = tag.getInt("LastDeathCooldown");
+//        lastdeathCooldown = tag.getInt("LastDeathCooldown");
     }
     @Override
     public void writeToNbt (NbtCompound tag){
         tag.putInt("DeathCooldown", deathCooldown);
-        tag.putInt("LastDeathCooldown", lastdeathCooldown);
+//        tag.putInt("LastDeathCooldown", lastdeathCooldown);
     }
     @Override
     public void tick() {
         hasDeathBringer = EnchantmentUtil.hasEnchantment(ModEnchantments.BRINGER_DEATH,obj.getMainHandStack()) || EnchantmentUtil.hasEnchantment(ModEnchantments.BRINGER_DEATH,obj.getOffHandStack());
         if (hasDeathBringer) {
-            if (deathCooldown > 0) {
-                sync();
+            sync();
+            if (deathCooldown > 0)
                 deathCooldown--;
-            }
         }
     }
 

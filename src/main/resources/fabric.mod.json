@@ -15,8 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "sypztep.mamy.client.MamyModClient",
-      "sypztep.mamy.feature.MamyFeature"
+      "sypztep.mamy.client.MamyModClient"
     ],
     "main": [
       "sypztep.mamy.common.MamyMod"
@@ -26,8 +25,7 @@
     ]
   },
   "mixins": [
-    "mamy.mixins.json",
-    "mamyfeature.mixins.json"
+    "mamy.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

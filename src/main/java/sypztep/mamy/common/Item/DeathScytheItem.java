@@ -4,7 +4,9 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -15,7 +17,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.MathHelper;
@@ -32,7 +36,7 @@ import java.util.UUID;
 
 public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundItem, CustomHitParticleItem{
     public DeathScytheItem() {
-        super(ToolMaterials.NETHERITE,5, -3f, new Settings().fireproof());
+        super(ToolMaterials.NETHERITE,6, -3f, new Settings().fireproof());
     }
     private static final EntityAttributeModifier REACH_MODIFIER;
 
@@ -44,26 +48,25 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         }
         return map;
     }
-
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (user != null && user.isSneaking()) {
-            boolean itemToCheck = VizardComponent.hasAnyMask(user);
-            ItemStack getHeadSlot = user.getEquippedStack(EquipmentSlot.HEAD);
-            if (getHeadSlot.isEmpty())
-                equipMask(user);
-            else {
-                if (!itemToCheck) {
-                    int emptySlot = user.getInventory().getEmptySlot();
-                    if (emptySlot >= 0)
-                        user.getInventory().setStack(emptySlot, getHeadSlot);
-                    else
-                        user.dropItem(getHeadSlot, false);
+        if (!user.getWorld().isClient()) {
+            if (user != null && user.isSneaking()) {
+                boolean itemToCheck = VizardComponent.hasAnyMask(user);
+                ItemStack getHeadSlot = user.getEquippedStack(EquipmentSlot.HEAD);
+                if (getHeadSlot.isEmpty())
                     equipMask(user);
-                } else
-                    client.player.sendMessage(Text.of("Your head slot is already occupied with the mod item!"), false);
+                else {
+                    if (!itemToCheck) {
+                        int emptySlot = user.getInventory().getEmptySlot();
+                        if (emptySlot >= 0)
+                            user.getInventory().setStack(emptySlot, getHeadSlot);
+                        else
+                            user.dropItem(getHeadSlot, false);
+                        equipMask(user);
+                    }
+                }
             }
         }
         return TypedActionResult.pass(itemStack);
@@ -97,8 +100,27 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-
+        itemdesc(tooltip);
         super.appendTooltip(stack, world, tooltip, context);
+    }
+    private void itemdesc(List<Text> list) {
+        Item item = this; // Assuming this is the current item
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        float playerHealth = player.getHealth() * 0.5f;
+        String registryName = item.getTranslationKey();
+        MutableText shiftText = Text.literal("\"Shift\"").formatted(Formatting.GRAY);
+        MutableText infoText = Text.literal("Press ").append(shiftText).append(" for more info").formatted(Formatting.DARK_GRAY);
+        MutableText MutableText = (Text.translatable(registryName + ".ablity" ,String.valueOf(playerHealth))).formatted(Formatting.GOLD);
+        MutableText MutableText2 = (Text.translatable(registryName + ".desc" ,String.valueOf(playerHealth))).formatted(Formatting.DARK_GRAY);
+        MutableText lore = (Text.translatable(registryName + ".lore").formatted(Formatting.GRAY));
+        if (Screen.hasShiftDown()) {
+            list.add(Text.literal(" - ").append(MutableText).formatted(Formatting.GRAY));
+            list.add((MutableText2));
+        }
+         else {
+            list.add(lore);
+            list.add(infoText);
+         }
     }
 
     @Override
