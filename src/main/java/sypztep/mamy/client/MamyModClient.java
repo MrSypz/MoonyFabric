@@ -8,13 +8,11 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.lwjgl.glfw.GLFW;
-import sypztep.mamy.client.event.BringerRenderEvent;
 import sypztep.mamy.client.packet.AddSonidoParticlePacket;
 import sypztep.mamy.client.packet.ResetSonidoInvPacket;
 import sypztep.mamy.client.particle.*;
@@ -57,8 +55,6 @@ public class MamyModClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.DRAGON_FIRE, DragonFireParticle.DefaultFactory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.DRAGON_FIRE_SPLATTER, DragonFireSplatterParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.EMPTY_PARTICLE, EmptyParticle.Factory::new);
-
-        HudRenderCallback.EVENT.register(new BringerRenderEvent());
 
         Itemregistry.init();
 

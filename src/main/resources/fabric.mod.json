@@ -34,7 +34,6 @@
   },
   "custom": {
     "cardinal-components": [
-      "mamy:bringer",
       "mamy:vizard"
     ]
   }

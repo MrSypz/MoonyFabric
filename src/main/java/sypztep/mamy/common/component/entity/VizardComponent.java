@@ -124,6 +124,6 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
 
     @Override
     public void writeToNbt(NbtCompound tag) {
-        sonidoCooldown = tag.getInt("SonidoCooldown");
+        tag.putInt("SonidoCooldown",sonidoCooldown);
     }
 }
