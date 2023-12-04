@@ -14,6 +14,11 @@ public class ModItemGroup {
     public static void init(){
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(content -> {
             content.add(ModItems.DEATH_SCYTHE);
+            content.addAfter(Items.NETHERITE_AXE,ModItems.WOODEN_POLEARM);
+            content.addAfter(ModItems.WOODEN_POLEARM,ModItems.STONE_POLEARM);
+            content.addAfter(ModItems.STONE_POLEARM,ModItems.IRON_POLEARM);
+            content.addAfter(ModItems.IRON_POLEARM,ModItems.GOLDEN_POLEARM);
+            content.addAfter(ModItems.GOLDEN_POLEARM,ModItems.DIAMOND_POLEARM);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(content -> {
             content.addBefore(Items.GOLDEN_CARROT,ModItems.ARCHAIC_EYE);

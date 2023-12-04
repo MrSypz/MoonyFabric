@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "mamy:wooden_polearm",
+    "mamy:stone_polearm",
+    "mamy:iron_polearm",
+    "mamy:golden_polearm",
+    "mamy:diamond_polearm",
+    "mamy:netherite_polearm"
+  ]
+}

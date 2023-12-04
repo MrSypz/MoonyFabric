@@ -6,6 +6,7 @@
   "mixins": [
     "enchantment.missilehomming.FireworkRocketEntityMixin",
     "enchantment.missilehomming.ProjectileEntityAccessor",
+    "moditem.deathscythe.PlayerEntityMixin",
     "statuseffect.carve.PlayerEntityMixin",
     "statuseffect.electrodecree.PlayerEntityMixin",
     "statuseffect.fervorofbattle.LivingEntityMixin",
@@ -16,7 +17,9 @@
     "util.LivingEntityMixin",
     "util.PlayerEntityMixin",
     "vanilla.iframebypass.LivingEntityMixin",
-    "vanilla.iframebypass.PlayerEntityMixin"
+    "vanilla.iframebypass.PlayerEntityMixin",
+    "vanilla.swordparry.ItemMixin",
+    "vanilla.swordparry.LivingEntityMixin"
   ],
   "client": [
     "moditem.hollowmask.client.PlayerEntityRendererMixin",
