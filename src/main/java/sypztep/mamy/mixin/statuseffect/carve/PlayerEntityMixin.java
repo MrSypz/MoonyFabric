@@ -13,10 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sypztep.mamy.common.init.ModEnchantments;
-import sypztep.mamy.common.init.ModParticles;
-import sypztep.mamy.common.init.ModSoundEvents;
-import sypztep.mamy.common.init.ModStatusEffects;
+import sypztep.mamy.common.init.*;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity{
@@ -36,9 +33,8 @@ public abstract class PlayerEntityMixin extends LivingEntity{
                         carvecount = markInstance.getAmplifier();
                         if (carvecount < carve) {
                             carvecount++;
-                            if (carvecount == 5) {
+                            if (carvecount == 5)
                                 target.playSound(ModSoundEvents.ITEM_CARVE, 1, (float) (1.0 + ((LivingEntity) target).getRandom().nextGaussian() / 10.0));
-                            }
                         }
                     }
                     ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(ModStatusEffects.CARVE, 20 + carve * 4, carvecount));
@@ -46,6 +42,7 @@ public abstract class PlayerEntityMixin extends LivingEntity{
                 } else {
                     target.playSound(ModSoundEvents.ENTITY_GENERIC_BLOODHIT, 1, (float) (1.0 + ((LivingEntity) target).getRandom().nextGaussian() / 10.0));
                     ((ServerWorld) ((PlayerEntity) (Object) this).getWorld()).spawnParticles(ModParticles.BLOOD_BUBBLE_SPLATTER, target.getX(), target.getBodyY(0.5D), target.getZ(), 18, 0.3, 0.6, 0.3, 0.21D);
+                    ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(sypztep.pickyourpoison.common.init.ModStatusEffects.VULNERABILITY, 20 + carve * 4, 0));
                 }
             }
         }
