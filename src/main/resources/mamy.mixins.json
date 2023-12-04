@@ -6,6 +6,7 @@
   "mixins": [
     "enchantment.missilehomming.FireworkRocketEntityMixin",
     "enchantment.missilehomming.ProjectileEntityAccessor",
+    "statuseffect.carve.PlayerEntityMixin",
     "statuseffect.electrodecree.PlayerEntityMixin",
     "statuseffect.fervorofbattle.LivingEntityMixin",
     "statuseffect.grievouswounds.LivingEntityMixin",

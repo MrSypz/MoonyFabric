@@ -29,17 +29,4 @@ public class ModConfig extends MidnightConfig{
     public static Comment MaskDashEffect;
     @Entry
     public static float distorsion = 1.0f;
-
-
-    @Comment(centered = true)
-    public static Comment FeatureCosmetic;
-    @Entry
-    public static CosmeticsOptions cosmetics = CosmeticsOptions.ENABLE;
-
-    public static boolean shouldDisplayCosmetics() {
-        return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
-    }
-    public enum CosmeticsOptions {
-        ENABLE, FIRST_PERSON, DISABLE
-    }
 }

@@ -23,5 +23,13 @@
       "mamy:item/spewing_2"
     ],
     "subtitle": "subtitles.mamy.item.spewing"
+  },
+  "item.carve": {
+    "sounds": [
+      "mamy:item/carve",
+      "mamy:item/carve_2",
+      "mamy:item/carve_3"
+    ],
+    "subtitle": "subtitles.mamy.player.carve"
   }
 }

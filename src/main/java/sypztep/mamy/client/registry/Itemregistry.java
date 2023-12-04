@@ -3,7 +3,6 @@ package sypztep.mamy.client.registry;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.client.render.model.UnbakedModel;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.registry.Registries;
 import net.minecraft.resource.ResourceType;
@@ -12,12 +11,7 @@ import sypztep.mamy.client.render.entity.MamyItemRenderer;
 import sypztep.mamy.common.Item.EmptySwordItem;
 import sypztep.mamy.common.init.ModItems;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Itemregistry {
-    private final Map<Identifier, UnbakedModel> models = new HashMap<>();
-
     public static void init(){
 
 

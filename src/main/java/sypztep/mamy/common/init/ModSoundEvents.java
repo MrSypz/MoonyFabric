@@ -3,7 +3,6 @@ package sypztep.mamy.common.init;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import sypztep.mamy.common.MamyMod;
 
@@ -16,6 +15,7 @@ public interface ModSoundEvents {
     SoundEvent ENTITY_GENERIC_BLOODHIT = createSoundEvent("entity.generic.bloodhit");
 	SoundEvent ENTITY_GENERIC_SONIDO = createSoundEvent("entity.generic.sonido");
 	SoundEvent ENTITY_PLAYER_ATTACK_SCYTHE = createSoundEvent("entity.player.attack.scythe");
+	SoundEvent ITEM_CARVE = createSoundEvent("item.carve");
 
 	SoundEvent ITEM_SPEWING =createSoundEvent("item.spewing");
 
