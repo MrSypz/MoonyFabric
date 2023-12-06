@@ -17,13 +17,15 @@ public class ModItems {
     public static final Set<HollowmaskItem> ALL_MASK = new ReferenceOpenHashSet<>();
 
     public static EmptySwordItem DEATH_SCYTHE;
-    public static PolearmItem WOODEN_POLEARM = new PolearmItem(ToolMaterials.WOOD,4,-2.6F,new Item.Settings());
-    public static PolearmItem STONE_POLEARM = new PolearmItem(ToolMaterials.STONE,4,-3F,new Item.Settings());
-    public static PolearmItem IRON_POLEARM = new PolearmItem(ToolMaterials.IRON,4,-3.1F,new Item.Settings());
-    public static PolearmItem GOLDEN_POLEARM = new PolearmItem(ToolMaterials.GOLD,4,-3.2F,new Item.Settings());
-    public static PolearmItem DIAMOND_POLEARM = new PolearmItem(ToolMaterials.DIAMOND,4,-3F,new Item.Settings());
-    public static PolearmItem NETHERITE_POLEARM = new PolearmItem(ToolMaterials.NETHERITE,4,-3F,new Item.Settings().fireproof());
 
+    public static Item PITCHFORK;
+
+    public static PolearmItem WOODEN_POLEARM;
+    public static PolearmItem STONE_POLEARM;
+    public static PolearmItem IRON_POLEARM;
+    public static PolearmItem GOLDEN_POLEARM;
+    public static PolearmItem DIAMOND_POLEARM;
+    public static PolearmItem NETHERITE_POLEARM;
 
     public static HollowmaskItem HALF_HOLLOW_MASK;
     public static HollowmaskItem HOLLOW_MASK_TIER1;
@@ -31,23 +33,28 @@ public class ModItems {
     public static HollowmaskItem HOLLOW_MASK_TIER3;
     public static HollowmaskItem HOLLOW_MASK_TIER4;
     public static VastomaskItem VASTO_MASK;
+
     public static MamyMaskCosmItem FURINA_HAT;
+
+
     public static Item ARCHAIC_EYE;
+    public static Item PACKSTICK;
 
     public static void init(){
-//        Registry.register(Registries.ITEM, MamyMod.id("wooden_polearm"),WOODEN_POLEARM);
-        Registry.register(Registries.ITEM, MamyMod.id("stone_polearm"),STONE_POLEARM);
-        Registry.register(Registries.ITEM, MamyMod.id("iron_polearm"),IRON_POLEARM);
-        Registry.register(Registries.ITEM, MamyMod.id("golden_polearm"),GOLDEN_POLEARM);
-        Registry.register(Registries.ITEM, MamyMod.id("diamond_polearm"),DIAMOND_POLEARM);
-        Registry.register(Registries.ITEM, MamyMod.id("netherite_polearm"),NETHERITE_POLEARM);
-        registeritem("wooden_polearm",WOODEN_POLEARM);
+        WOODEN_POLEARM = registerSworditem("wooden_polearm",new PolearmItem(ToolMaterials.WOOD,4,-3F,new Item.Settings()));
+        STONE_POLEARM = registerSworditem("stone_polearm",new PolearmItem(ToolMaterials.STONE,4,-3F,new Item.Settings()));
+        IRON_POLEARM = registerSworditem("iron_polearm",new PolearmItem(ToolMaterials.IRON,4,-3F,new Item.Settings()));
+        GOLDEN_POLEARM = registerSworditem("golden_polearm",new PolearmItem(ToolMaterials.GOLD,4,-3F,new Item.Settings()));
+        DIAMOND_POLEARM = registerSworditem("diamond_polearm",new PolearmItem(ToolMaterials.DIAMOND,4,-3F,new Item.Settings()));
+        NETHERITE_POLEARM= registerSworditem("netherite_polearm",new PolearmItem(ToolMaterials.NETHERITE,4,-3F,new Item.Settings().fireproof()));
 
         DEATH_SCYTHE = registerSworditem("death_scythe", new DeathScytheItem());
+
         //COSMETIC
         FURINA_HAT = registeritem("furina_hat",new MamyMaskCosmItem(new Item.Settings()));
-
+        //MATERIAL
         ARCHAIC_EYE = registeritem("archaic_eye",new Item(new Item.Settings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
+        PACKSTICK = registeritem("packstick",new Item(new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));
 
         //HOLLOW MASK
         HALF_HOLLOW_MASK = registerMaskItem("half_hollow_mask", new HollowmaskItem(new FabricItemSettings().maxDamage(10))); // 10 Second

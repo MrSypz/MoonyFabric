@@ -24,6 +24,13 @@
   "itemGroup.mamycosmetic": "Cosmetic Item",
 
   "item.mamy.death_scythe" : "Death Scythe",
+  "item.mamy.wooden_polearm" : "Wooden Polearm",
+  "item.mamy.stone_polearm" : "Stone Polearm",
+  "item.mamy.iron_polearm" : "Iron Polearm",
+  "item.mamy.golden_polearm" : "Golden Polearm",
+  "item.mamy.diamond_polearm" : "Diamond Polearm",
+  "item.mamy.netherite_polearm" : "Netherite Polearm",
+
   "item.mamy.death_scythe.ablity" : "Ability : Shift + RightClick",
   "item.mamy.death_scythe.desc" : "Consume %d health to use Hollowmask",
   "item.mamy.death_scythe.lore" : "Who hold this scythe...You're gay.",
@@ -35,7 +42,7 @@
   "item.mamy.vasto_mask" : "Vastolord Mask",
 
   "item.mamy.archaic_eye" : "Archaic Eye",
-  "item.mamy.pale_archaic_eye" : "Pale Archaic Eye",
+  "item.mamy.packstick" : "Pack Sticks",
 
   "item.mamy.furina_hat" : "Furina Hat",
 

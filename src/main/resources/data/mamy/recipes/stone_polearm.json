@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "M"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "M": {
+      "item": "mamy:packstick"
+    }
+  },
+  "result": {
+    "item": "mamy:stone_polearm",
+    "count": 1
+  }
+}

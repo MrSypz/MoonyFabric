@@ -13,20 +13,15 @@ import sypztep.mamy.common.init.ModItems;
 
 public class Itemregistry {
     public static void init(){
-
-
         for (EmptySwordItem item : ModItems.ALL_SCYTHE) {
-            Identifier scytheId = Registries.ITEM.getId(item);
+            Identifier id = Registries.ITEM.getId(item);
 
-            MamyItemRenderer mamyItemRenderer = new MamyItemRenderer(scytheId);
+            MamyItemRenderer mamyItemRenderer = new MamyItemRenderer(id);
             ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(mamyItemRenderer);
             BuiltinItemRendererRegistry.INSTANCE.register(item, mamyItemRenderer);
-//            ModelLoadingPlugin.register(pluginContext -> {
-//
-//            });
             ModelLoadingRegistry.INSTANCE.registerModelProvider(((manager, out) -> {
-                out.accept(new ModelIdentifier(scytheId.getNamespace(),scytheId.getPath() + "_gui","inventory"));
-                out.accept(new ModelIdentifier(scytheId.getNamespace(),scytheId.getPath() + "_handheld","inventory"));
+                out.accept(new ModelIdentifier(id.getNamespace(),id.getPath() + "_gui","inventory"));
+                out.accept(new ModelIdentifier(id.getNamespace(),id.getPath() + "_handheld","inventory"));
             }));
         }
     }

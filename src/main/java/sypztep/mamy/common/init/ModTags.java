@@ -7,6 +7,6 @@ import sypztep.mamy.common.MamyMod;
 
 public class ModTags {
     public static class Items {
-        public static final TagKey<Item> CAN_PARRY = TagKey.of(Registries.ITEM.getKey(), MamyMod.id("can_parry"));
+        public static final TagKey<Item> CAN_BLOCK = TagKey.of(Registries.ITEM.getKey(), MamyMod.id("can_block"));
     }
 }

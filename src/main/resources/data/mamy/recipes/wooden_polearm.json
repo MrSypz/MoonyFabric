@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "M"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "M": {
+      "item": "mamy:packstick"
+    }
+  },
+  "result": {
+    "item": "mamy:wooden_polearm",
+    "count": 1
+  }
+}

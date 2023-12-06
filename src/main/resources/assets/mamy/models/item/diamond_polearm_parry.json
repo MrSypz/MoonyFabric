@@ -1,6 +1,6 @@
 {
 	"parent": "mamy:item/polearm_handheld_parry",
 	"textures": {
-		"layer0": "mamy:item/diamond_polearm"
+		"layer0": "mamy:item/diamond_polearm_handheld"
 	}
 }

@@ -1,21 +1,6 @@
 {
-	"parent": "item/handheld",
-	"textures": {
-		"layer0": "mamy:item/golden_polearm"
-	},
+	"parent": "builtin/entity",
 	"gui_light": "front",
-	"display": {
-		"thirdperson_righthand": {
-			"rotation": [0, 65, 34],
-			"translation": [0, 4.75, 1.75],
-			"scale": [1.2, 1.78, 0.84]
-		},
-		"thirdperson_lefthand": {
-			"rotation": [0, -115, -34],
-			"translation": [0, 4.75, 1.75],
-			"scale": [1.2, 1.78, 0.84]
-		}
-	},
 	"overrides": [
 		{
 			"predicate": {

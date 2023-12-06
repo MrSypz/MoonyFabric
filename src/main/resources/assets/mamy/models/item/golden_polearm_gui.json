@@ -1,0 +1,13 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "mamy:item/golden_polearm"
+	},
+	"display": {
+		"head": {
+			"rotation": [ 0, 0, 0 ],
+			"translation": [ 0, 3.5, 0.05],
+			"scale":[ 1.05, 1.05, 1.0 ]
+		}
+	}
+}

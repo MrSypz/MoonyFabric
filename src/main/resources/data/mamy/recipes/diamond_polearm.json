@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "M"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "M": {
+      "item": "mamy:packstick"
+    }
+  },
+  "result": {
+    "item": "mamy:diamond_polearm",
+    "count": 1
+  }
+}

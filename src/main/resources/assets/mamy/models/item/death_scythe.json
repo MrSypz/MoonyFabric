@@ -1,7 +1,4 @@
 {
   "parent": "builtin/entity",
-  "gui_light": "front",
-  "textures": {
-    "layer0": "mamy:item/death_scythe"
-  }
+  "gui_light": "front"
 }
