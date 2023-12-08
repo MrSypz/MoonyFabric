@@ -18,14 +18,13 @@ public class ModItems {
 
     public static EmptySwordItem DEATH_SCYTHE;
 
-    public static Item PITCHFORK;
-
     public static PolearmItem WOODEN_POLEARM;
     public static PolearmItem STONE_POLEARM;
     public static PolearmItem IRON_POLEARM;
     public static PolearmItem GOLDEN_POLEARM;
     public static PolearmItem DIAMOND_POLEARM;
     public static PolearmItem NETHERITE_POLEARM;
+
 
     public static HollowmaskItem HALF_HOLLOW_MASK;
     public static HollowmaskItem HOLLOW_MASK_TIER1;
@@ -39,6 +38,7 @@ public class ModItems {
 
     public static Item ARCHAIC_EYE;
     public static Item PACKSTICK;
+    public static Item HOGYOKU;
 
     public static void init(){
         WOODEN_POLEARM = registerSworditem("wooden_polearm",new PolearmItem(ToolMaterials.WOOD,4,-3F,new Item.Settings()));
@@ -50,8 +50,11 @@ public class ModItems {
 
         DEATH_SCYTHE = registerSworditem("death_scythe", new DeathScytheItem());
 
+        //CONSUME
+        HOGYOKU = registeritem("hogyoku",new HogyokuItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)));
+
         //COSMETIC
-        FURINA_HAT = registeritem("furina_hat",new MamyMaskCosmItem(new Item.Settings()));
+        FURINA_HAT = registeritem("furina_hat",new MamyMaskCosmItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
         //MATERIAL
         ARCHAIC_EYE = registeritem("archaic_eye",new Item(new Item.Settings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
         PACKSTICK = registeritem("packstick",new Item(new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));

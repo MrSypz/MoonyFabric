@@ -31,8 +31,8 @@
   "item.mamy.diamond_polearm" : "Diamond Polearm",
   "item.mamy.netherite_polearm" : "Netherite Polearm",
 
-  "item.mamy.death_scythe.ablity" : "Ability : Shift + RightClick",
-  "item.mamy.death_scythe.desc" : "Consume %d health to use Hollowmask",
+  "item.mamy.death_scythe.desc" : "Consume %s health to use Hollowmask",
+  "item.mamy.death_scythe.desc2" : "Swirl enemy around,When use 5 times \nConsume %s health",
   "item.mamy.death_scythe.lore" : "Who hold this scythe...You're gay.",
   "item.mamy.half_hollow_mask" : "Half Hollow Mask",
   "item.mamy.hollow_mask_1" : "Hollow Mask Tier 1",
@@ -45,6 +45,8 @@
   "item.mamy.packstick" : "Pack Sticks",
 
   "item.mamy.furina_hat" : "Furina Hat",
+
+  "hogyoku.limit_reached": "Hogyoku has reached the limit.",
 
   "effect.mamy.mark": "Mark",
   "effect.mamy.grievous_wounds" : "Grievous Wounds",

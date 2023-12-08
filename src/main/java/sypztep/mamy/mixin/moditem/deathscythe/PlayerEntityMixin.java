@@ -3,6 +3,7 @@ package sypztep.mamy.mixin.moditem.deathscythe;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -17,12 +18,21 @@ import sypztep.mamy.common.Item.DeathScytheItem;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
+    private Entity target;
+    private CallbackInfo ci;
+
     @Shadow public abstract SoundCategory getSoundCategory();
 
+
+    @Shadow public abstract boolean damage(DamageSource source, float amount);
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
+
+    /*
+    Pull player if crit
+     */
     @Inject(method = "attack",at = @At(value = "INVOKE",target = "Lnet/minecraft/entity/player/PlayerEntity;addCritParticles(Lnet/minecraft/entity/Entity;)V"))
     private void attack(Entity target, CallbackInfo ci) {
         if (this.getStackInHand(Hand.MAIN_HAND).getItem() instanceof DeathScytheItem) {

@@ -4,13 +4,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.HungerManager;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,9 +16,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sypztep.mamy.common.Item.CustomHitParticleItem;
 import sypztep.mamy.common.Item.CustomHitSoundItem;
-import sypztep.mamy.common.init.ModItems;
+import sypztep.mamy.common.init.ModEntityAttributes;
 import sypztep.mamy.common.init.ModParticles;
 
 @Mixin(PlayerEntity.class)
@@ -56,6 +55,11 @@ public abstract class PlayerEntityMixin extends LivingEntity{
             return (T) ModParticles.EMPTY_PARTICLE;
         }
         return value;
-//        return this.getStackInHand(Hand.MAIN_HAND).getItem() == ModItems.DEATH_SCYTHE ? (T) ModParticles.RED_SWEEP_ATTACK_PARTICLE : value;
+    }
+    @Inject(method = "createPlayerAttributes", at = @At("RETURN"), cancellable = true)
+    private static void mamy$createplayerAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
+        DefaultAttributeContainer.Builder builder = cir.getReturnValue();
+        builder.add(ModEntityAttributes.GENERIC_HOGYOKU,0);
+        cir.setReturnValue(builder);
     }
 }

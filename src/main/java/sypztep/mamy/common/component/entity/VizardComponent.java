@@ -20,14 +20,25 @@ import sypztep.mamy.common.packet.SonidoPacket;
 
 public class VizardComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final short DEFAULT_SONIDO_COOLDOWN = 8;
+    private final PlayerEntity obj;
     public static boolean hasMask = false , dodash = false , wearingmask = false;
     private int sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0;
+    private static int vizardlvl = 0;
     public static int invisDuration = 0;
-    private final PlayerEntity obj;
+
     private boolean wasPressing = false ;
 
     public VizardComponent(PlayerEntity obj) {
         this.obj = obj;
+    }
+    @Override
+    public void readFromNbt(NbtCompound tag) {
+        sonidoCooldown = tag.getInt("SonidoCooldown");
+    }
+
+    @Override
+    public void writeToNbt(NbtCompound tag) {
+        tag.putInt("SonidoCooldown",sonidoCooldown);
     }
 
     public static boolean hasAnyMask(PlayerEntity player) {
@@ -117,13 +128,5 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
     public static void resetInv(LivingEntity entity) {
         entity.setInvisible(false);
     }
-    @Override
-    public void readFromNbt(NbtCompound tag) {
-        sonidoCooldown = tag.getInt("SonidoCooldown");
-    }
 
-    @Override
-    public void writeToNbt(NbtCompound tag) {
-        tag.putInt("SonidoCooldown",sonidoCooldown);
-    }
 }

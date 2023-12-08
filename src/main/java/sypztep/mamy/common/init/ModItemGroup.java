@@ -20,11 +20,13 @@ public class ModItemGroup {
             content.addAfter(ModItems.IRON_POLEARM,ModItems.GOLDEN_POLEARM);
             content.addAfter(ModItems.GOLDEN_POLEARM,ModItems.DIAMOND_POLEARM);
             content.addAfter(ModItems.DIAMOND_POLEARM,ModItems.NETHERITE_POLEARM);
-//            content.addAfter(Items.TRIDENT,ModItems.PITCHFORK);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(content -> {
             content.addBefore(Items.GOLDEN_CARROT,ModItems.ARCHAIC_EYE);
             content.addAfter(Items.STICK,ModItems.PACKSTICK);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(content -> {
+            content.addBefore(Items.APPLE,ModItems.HOGYOKU);
         });
         Registry.register(Registries.ITEM_GROUP, new Identifier(MamyMod.MODID, "mask"), MASK_GROUP);
         Registry.register(Registries.ITEM_GROUP, new Identifier(MamyMod.MODID, "cosmetic"), COSMETIC_GROUP);
