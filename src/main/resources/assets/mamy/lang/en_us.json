@@ -31,9 +31,7 @@
   "item.mamy.diamond_polearm" : "Diamond Polearm",
   "item.mamy.netherite_polearm" : "Netherite Polearm",
 
-  "item.mamy.death_scythe.desc" : "Consume %s health to use Hollowmask",
-  "item.mamy.death_scythe.desc2" : "Swirl enemy around,When use 5 times \nConsume %s health",
-  "item.mamy.death_scythe.lore" : "Who hold this scythe...You're gay.",
+  "item.mamy.death_scythe.desc" : "Swirl enemy around, When using 5 times \n - Consume ",
   "item.mamy.half_hollow_mask" : "Half Hollow Mask",
   "item.mamy.hollow_mask_1" : "Hollow Mask Tier 1",
   "item.mamy.hollow_mask_2" : "Hollow Mask Tier 2",
@@ -47,6 +45,7 @@
   "item.mamy.furina_hat" : "Furina Hat",
 
   "hogyoku.limit_reached": "Hogyoku has reached the limit.",
+  "vizard.checked": "You don't have Visored.",
 
   "effect.mamy.mark": "Mark",
   "effect.mamy.grievous_wounds" : "Grievous Wounds",
@@ -58,8 +57,6 @@
   "subtitles.mamy.entity.generic.bloodhit": "Bloodhit",
   "subtitles.mamy.item.spewing": "Spewing",
 
-  "enchantment.mamy.bringerdeath" : "Death Bringer",
-  "enchantment.mamy.bringerdeath.desc" : "Deal more of target maxhealth and heal player 10%-50% of player missinghealth.",
   "enchantment.mamy.vitality" : "Vitality",
   "enchantment.mamy.vitality.desc" : "Increase player maxhealth.",
   "enchantment.mamy.electrodecree" : "Electo Decree",
@@ -67,5 +64,12 @@
   "enchantment.mamy.lethaltempo" : "Lethal Tempo",
   "enchantment.mamy.lethaltempo.desc" : "Swing weapon faster when attack over time",
   "enchantment.mamy.fervorofbattle" : "Fervor of Battle",
-  "enchantment.mamy.fervorofbattle.desc" : "Deal 1 damage / stacks up to level(maximun 8 stacks)."
+  "enchantment.mamy.fervorofbattle.desc" : "Deal 1 damage / stacks up to level(maximun 8 stacks).",
+
+  "death.attack.maskimpact": "%1$s How?!",
+  "death.attack.maskimpact.player": "%1$s Impact by strange wave.",
+  "death.attack.electro": "%1$s Electrocuted by accident.",
+  "death.attack.electro.player": "%1$s Electrocuted from %2$s.",
+  "death.attack.bleedout": "%1$s Lack of blood because own sadistic.",
+  "death.attack.bleedout.player": "%1$s Get exsanguinated by %2$s."
 }

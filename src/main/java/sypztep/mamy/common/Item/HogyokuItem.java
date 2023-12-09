@@ -36,7 +36,7 @@ public class HogyokuItem extends Item {
             state.markDirty();
             Objects.requireNonNull(user.getAttributeInstance(ModEntityAttributes.GENERIC_HOGYOKU)).setBaseValue(Math.max(1, v));
             stack.decrement(1);
-            user.playSound(SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, SoundCategory.PLAYERS, 0.8f, 2f);
+            user.playSound(SoundEvents.BLOCK_END_PORTAL_SPAWN, SoundCategory.PLAYERS, 0.8f, 1.45f);
             return TypedActionResult.success(stack);
         }
         user.sendMessage(Text.translatable("hogyoku.limit_reached").formatted(Formatting.DARK_RED), true);

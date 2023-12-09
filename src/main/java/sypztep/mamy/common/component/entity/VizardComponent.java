@@ -13,17 +13,16 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import sypztep.mamy.client.MamyModClient;
 import sypztep.mamy.common.Item.HollowmaskItem;
-import sypztep.mamy.common.init.ModItems;
 import sypztep.mamy.common.init.ModSoundEvents;
 import sypztep.mamy.common.packet.SonidoClearPacket;
 import sypztep.mamy.common.packet.SonidoPacket;
+import sypztep.mamy.common.util.AbilityUtil;
 
 public class VizardComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final short DEFAULT_SONIDO_COOLDOWN = 8;
     private final PlayerEntity obj;
     public static boolean hasMask = false , dodash = false , wearingmask = false;
     private int sonidoCooldown = DEFAULT_SONIDO_COOLDOWN, ticksLefthasPress = 0;
-    private static int vizardlvl = 0;
     public static int invisDuration = 0;
 
     private boolean wasPressing = false ;
@@ -41,20 +40,10 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
         tag.putInt("SonidoCooldown",sonidoCooldown);
     }
 
-    public static boolean hasAnyMask(PlayerEntity player) {
-        for (ItemStack stack : player.getInventory().armor) {
-            for (HollowmaskItem mask : ModItems.ALL_MASK) {
-                if (stack.getItem() == mask) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
     @Override
     public void tick() {
         ItemStack stack = obj.getEquippedStack(EquipmentSlot.HEAD);
-        hasMask = hasAnyMask(obj);
+        hasMask = AbilityUtil.hasAnyMask(obj);
         if (hasMask && !HollowmaskItem.HalfMask(stack))
             obj.getWorld().addParticle(ParticleTypes.CLOUD, obj.getParticleX(2), obj.getEyeY(), obj.getParticleZ(2), 0, 0.1, 0);
         if (hasMask) {

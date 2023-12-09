@@ -15,6 +15,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.SwordItem;
 import net.minecraft.registry.Registries;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import sypztep.mamy.client.packet.AddSonidoParticlePacket;
@@ -24,16 +27,20 @@ import sypztep.mamy.client.particle.*;
 import sypztep.mamy.client.registry.Itemregistry;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.ModConfig;
-import sypztep.mamy.common.component.entity.VizardComponent;
 import sypztep.mamy.common.init.ModParticles;
+import sypztep.mamy.common.packet.MaskPackets;
+import sypztep.mamy.common.util.AbilityUtil;
 
 import static sypztep.mamy.common.component.entity.VizardComponent.dodash;
 
 public class MamyModClient implements ClientModInitializer {
     public static final KeyBinding SONIDO_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
+    public static final KeyBinding SPECIAL_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special2", GLFW.GLFW_KEY_V, "key.categories." + MamyMod.MODID));
     private static final ManagedShaderEffect DASHWARP = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
     private static final ManagedShaderEffect HOLLOW_VISION = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/hollowvision.json"));
     public static float distortMultiply = 0.0f;
+    static final int DEFAULT_COOLDOWN = 20;
+    static int cooldown = DEFAULT_COOLDOWN;
     private static float smoothshade = 40;
 
     public static void setDistortAmount(float value) {
@@ -65,24 +72,38 @@ public class MamyModClient implements ClientModInitializer {
         Itemregistry.init();
 
         ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
-            if (MinecraftClient.getInstance().player != null && VizardComponent.hasAnyMask(MinecraftClient.getInstance().player) && !MinecraftClient.getInstance().player.isSubmergedInWater()) {
+            if (MinecraftClient.getInstance().player != null && AbilityUtil.hasAnyMask(MinecraftClient.getInstance().player) && !MinecraftClient.getInstance().player.isSubmergedInWater()) {
                 if (dodash)
                     MamyModClient.DASHWARP.render(tickDelta);
             }
-            if (MinecraftClient.getInstance().player != null && VizardComponent.hasAnyMask(MinecraftClient.getInstance().player))
+            if (MinecraftClient.getInstance().player != null && AbilityUtil.hasAnyMask(MinecraftClient.getInstance().player))
                 MamyModClient.HOLLOW_VISION.render(tickDelta);
         });
 
 
         ClientTickEvents.START_CLIENT_TICK.register( client -> {
             PlayerEntity player = client.getCameraEntity() instanceof PlayerEntity ? (PlayerEntity) client.getCameraEntity() : null;
-            if (player == null || !(player instanceof LivingEntity) || !VizardComponent.hasAnyMask(player)) {
+            if (player == null || !(player instanceof LivingEntity) || !AbilityUtil.hasAnyMask(player)) {
                 smoothshade = 40;
                 return;
             }
             if (smoothshade > 0) {
                 smoothshade--;
                 setSaturation(smoothshade * 0.01f);
+            }
+        });
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (cooldown > 0)
+                cooldown--;
+            if (SPECIAL_KEYBINDING.isPressed() && cooldown == 0) {
+                if (client.player != null && AbilityUtil.hasvizard(client.player)) {
+                    MaskPackets.send();
+                    cooldown = DEFAULT_COOLDOWN;
+                } else {
+                    client.player.sendMessage(Text.translatable("vizard.checked").formatted(Formatting.GRAY), true);
+                    client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO,1,1.0f);
+                    cooldown = DEFAULT_COOLDOWN;
+                }
             }
         });
         Registries.ITEM.forEach((item) -> {

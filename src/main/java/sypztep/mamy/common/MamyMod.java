@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sypztep.mamy.common.init.*;
+import sypztep.mamy.common.packet.MaskPackets;
 import sypztep.mamy.common.packet.SonidoClearPacket;
 import sypztep.mamy.common.packet.SonidoPacket;
 import sypztep.mamy.common.util.HogyokuState;
@@ -31,6 +32,7 @@ public class MamyMod implements ModInitializer {
         //C2S Packet
         ServerPlayNetworking.registerGlobalReceiver(SonidoClearPacket.ID, new SonidoClearPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(SonidoPacket.ID, new SonidoPacket.Receiver());
+        ServerPlayNetworking.registerGlobalReceiver(MaskPackets.ID, new MaskPackets.Receiver());
 
         ModEnchantments.init();
         ModSoundEvents.init();
