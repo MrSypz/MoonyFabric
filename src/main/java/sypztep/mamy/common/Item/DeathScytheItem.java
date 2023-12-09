@@ -29,10 +29,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import sypztep.mamy.client.packet.AddSwirlingParticlePacket;
-import sypztep.mamy.common.init.ModDamageTypes;
-import sypztep.mamy.common.init.ModParticles;
-import sypztep.mamy.common.init.ModSoundEvents;
-import sypztep.mamy.common.init.ModStatusEffects;
+import sypztep.mamy.common.init.*;
 import sypztep.mamy.common.util.SkillUtil;
 
 import java.util.List;
@@ -47,13 +44,14 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
     private static final EntityAttributeModifier REACH_MODIFIER;
     private int count = 0;
     @Override
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         Multimap<EntityAttribute, EntityAttributeModifier> map = LinkedHashMultimap.create(super.getAttributeModifiers(slot));
         if (slot == EquipmentSlot.MAINHAND) {
             map.put(ReachEntityAttributes.ATTACK_RANGE, REACH_MODIFIER);
         }
         return map;
     }
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
@@ -100,12 +98,10 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
             ServerPlayNetworking.send(pl, AddSwirlingParticlePacket.ID, buf);
         }
     }
-
     @Override
     public void playHitSound(PlayerEntity user) {
         user.playSound(ModSoundEvents.ENTITY_PLAYER_ATTACK_SCYTHE, 1.0F, (float)(1.0 + user.getRandom().nextGaussian() / 10.0));
     }
-
     @Override
     public void spawnHitParticles(PlayerEntity user) {
         double d0 = -MathHelper.sin(user.getYaw() * 0.017453292F);

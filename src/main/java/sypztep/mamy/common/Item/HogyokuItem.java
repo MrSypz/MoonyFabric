@@ -10,6 +10,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import sypztep.mamy.common.init.ModDamageTypes;
 import sypztep.mamy.common.init.ModEntityAttributes;
 import sypztep.mamy.common.util.HogyokuState;
 
@@ -37,6 +38,8 @@ public class HogyokuItem extends Item {
             Objects.requireNonNull(user.getAttributeInstance(ModEntityAttributes.GENERIC_HOGYOKU)).setBaseValue(Math.max(1, v));
             stack.decrement(1);
             user.playSound(SoundEvents.BLOCK_END_PORTAL_SPAWN, SoundCategory.PLAYERS, 0.8f, 1.45f);
+            user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.HOGYOKU), + user.getHealth() * 0.99f); // consume 99% of player current health
+            user.sendMessage(Text.translatable("hogyoku.success").formatted(Formatting.GOLD), true);
             return TypedActionResult.success(stack);
         }
         user.sendMessage(Text.translatable("hogyoku.limit_reached").formatted(Formatting.DARK_RED), true);
