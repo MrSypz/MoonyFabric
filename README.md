@@ -1,14 +1,27 @@
-# Change Log
-### Ghost 1.0.0 - 1.20.1
-Seperate project to standalone
 
-### Ghost 1.0.1 - 1.20.1
-Add more virant of mask
-balance take more damage from 50% to 25%
-### Ghost 1.0.2 - 1.20.1
-Add Vasto mask and add visual effect when dash 
-### Ghost  1.0.3 - 1.20.1
-fix bug
-- multiplayer player cannot dash when wearing a mask
-Rename the mod
-- Now mod name 'Ghost of Heaven'
+# Moony
+
+Moony mod is Fabric mod enviroment focus on weapon and ability in the future maybe have other plan but rightnow it focus on combat
+is mod was my first mod I coded and it heavy inspire from other mods,anime and game.
+
+
+## FAQ
+
+#### Forge port?
+
+Maybe if I want to play forge mod.
+
+#### Port to version x.x.x
+
+No. but I'm only update mod that version I have made and I'm gonna update it to new version **(not snapshot version!.)
+
+
+## Wiki
+### ITEM (version 1.0.0)
+
+## Crafting
+## Changelog
+## Authors
+
+- [@Sypztep](https://github.com/MrSypz)
+
