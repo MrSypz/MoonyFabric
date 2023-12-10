@@ -14,8 +14,8 @@ import net.minecraft.util.math.Vec3d;
 import sypztep.mamy.client.MamyModClient;
 import sypztep.mamy.common.Item.HollowmaskItem;
 import sypztep.mamy.common.init.ModSoundEvents;
-import sypztep.mamy.common.packet.SonidoClearPacket;
-import sypztep.mamy.common.packet.SonidoPacket;
+import sypztep.mamy.common.packetC2S.SonidoClearPacket;
+import sypztep.mamy.common.packetC2S.SonidoPacket;
 import sypztep.mamy.common.util.AbilityUtil;
 
 public class VizardComponent implements AutoSyncedComponent, CommonTickingComponent {

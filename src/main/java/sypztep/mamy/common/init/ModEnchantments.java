@@ -21,6 +21,7 @@ public class ModEnchantments {
     public static EmptyEnchantment MISSILE_HOMMING = new EmptyEnchantment(Enchantment.Rarity.COMMON, EnchantmentTarget.CROSSBOW, EquipmentSlot.MAINHAND);
     //WEARABLE
     public static EmptyEnchantment VITALITY = new VitalityEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR);
+    public static EmptyEnchantment HOLLOW_CURSE = new HollowCurseEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR);
 
 
     public static void init() {
@@ -30,6 +31,7 @@ public class ModEnchantments {
         init("fervorofbattle", FERVOR_OF_BATTLE);
         init("carve", CARVE);
         init("missilehomming", MISSILE_HOMMING);
+        init("hollowcurse",HOLLOW_CURSE);
     }
     public static void init(String name, EmptyEnchantment enchantment){
         Registry.register(Registries.ENCHANTMENT,MamyMod.id(name), enchantment);

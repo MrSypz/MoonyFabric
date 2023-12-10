@@ -1,4 +1,4 @@
-package sypztep.mamy.client.packet;
+package sypztep.mamy.client.packetS2C;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
@@ -15,8 +15,8 @@ import net.minecraft.util.Identifier;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.component.entity.VizardComponent;
 
-public class ResetSonidoInvPacket {
-    public static final Identifier ID = MamyMod.id("reset_sonido_inv");
+public class AddSonidoParticlePacket {
+    public static final Identifier ID = MamyMod.id("add_sonido_particle");
 
     public static void send(ServerPlayerEntity player, int id) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
@@ -32,7 +32,7 @@ public class ResetSonidoInvPacket {
             client.execute(() -> {
                 LivingEntity entity = (LivingEntity) handler.getWorld().getEntityById(id);
                 if (entity != null) {
-                    VizardComponent.resetInv(entity);
+                    VizardComponent.addSonidoParticles(entity);
                 }
             });
         }

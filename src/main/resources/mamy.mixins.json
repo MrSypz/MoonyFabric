@@ -4,6 +4,7 @@
   "package": "sypztep.mamy.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "enchantment.hollowcurse.EnchantmentHelperMixin",
     "enchantment.missilehomming.FireworkRocketEntityMixin",
     "enchantment.missilehomming.ProjectileEntityAccessor",
     "moditem.deathscythe.PlayerEntityMixin",

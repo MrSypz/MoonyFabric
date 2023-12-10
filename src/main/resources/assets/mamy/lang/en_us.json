@@ -31,13 +31,18 @@
   "item.mamy.diamond_polearm" : "Diamond Polearm",
   "item.mamy.netherite_polearm" : "Netherite Polearm",
 
-  "item.mamy.death_scythe.desc" : "Swirl enemy around, When using 5 times \n - Consume ",
+  "item.mamy.death_scythe.desc" : "Swirl enemy around, When using 5 times it gonna apply Grievouswounds. \n - Consume ",
+  "item.mamy.death_scythe.desc.passive" : "When attack on crit target'll move toward you.",
   "item.mamy.half_hollow_mask" : "Half Hollow Mask",
   "item.mamy.hollow_mask_1" : "Hollow Mask Tier 1",
   "item.mamy.hollow_mask_2" : "Hollow Mask Tier 2",
   "item.mamy.hollow_mask_3" : "Hollow Mask Tier 3",
   "item.mamy.hollow_mask_4" : "Hollow Mask Tier 4",
   "item.mamy.vasto_mask" : "Vastolord Mask",
+
+  "item.mamy.hogyoku" : "Hogyoku",
+  "item.mamy.hogyoku.desc" : "unidentify item that from nowhere, but your soul are calling it. \n - Consume ",
+  "item.mamy.hogyoku.desc.passive" : "When already consume you'll grain perma Critical Damage 20% and Take 15% more damage \n Able to wearing a mask",
 
   "item.mamy.archaic_eye" : "Archaic Eye",
   "item.mamy.packstick" : "Pack Sticks",
@@ -47,9 +52,11 @@
   "hogyoku.limit_reached": "Hogyoku has reached the limit.",
   "hogyoku.success": "Vizored level increase",
   "vizard.checked": "You don't have Visored.",
+  "vizard.already": "You already wearing a mask rightnow.",
+
 
   "effect.mamy.mark": "Mark",
-  "effect.mamy.grievous_wounds" : "Grievous Wounds",
+  "effect.mamy.grievouswounds" : "Grievous Wounds",
   "effect.mamy.lethaltempo": "Lethal Tempo",
   "effect.mamy.fervorofbattle": "Fervor of Battle",
   "effect.mamy.hollowpower": "Hollow Power",
@@ -66,7 +73,10 @@
   "enchantment.mamy.lethaltempo.desc" : "Swing weapon faster when attack over time",
   "enchantment.mamy.fervorofbattle" : "Fervor of Battle",
   "enchantment.mamy.fervorofbattle.desc" : "Deal 1 damage / stacks up to level(maximun 8 stacks).",
+  "enchantment.mamy.hollowcurse" : "Hollow Curse",
+  "enchantment.mamy.hollowcurse.desc" : "Can't unequiped and disappear when dead.",
 
+  "death.attack.hogyoku": "%1$s Your soul are now starting kindle.",
   "death.attack.maskimpact": "%1$s How?!",
   "death.attack.maskimpact.player": "%1$s Impact by strange wave.",
   "death.attack.electro": "%1$s Electrocuted by accident.",

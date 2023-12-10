@@ -1,4 +1,4 @@
-package sypztep.mamy.common.packet;
+package sypztep.mamy.common.packetC2S;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -10,7 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import sypztep.mamy.client.packet.ResetSonidoInvPacket;
+import sypztep.mamy.client.packetS2C.ResetSonidoInvPacket;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.component.entity.VizardComponent;
 import sypztep.mamy.common.init.ModEntityComponents;

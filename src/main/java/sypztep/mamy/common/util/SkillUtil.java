@@ -9,9 +9,9 @@ import sypztep.mamy.common.init.ModParticles;
 import java.util.List;
 
 public class SkillUtil {
-    static int counts = 0;
-    public static void ShockWaveDamage(PlayerEntity user, float amount, boolean useCustomDamage,boolean doEffect) {
-        double damageRadiusSquared = 5.0d;
+    static int counts;
+    public static void ShockWaveDamage(PlayerEntity user,double range, float amount, boolean useCustomDamage,boolean doEffect) {
+        double damageRadiusSquared = range;
         List<LivingEntity> entities = user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox().expand(damageRadiusSquared,1,damageRadiusSquared));
         counts = 0;
         for (LivingEntity target : entities) {
