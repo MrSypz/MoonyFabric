@@ -42,7 +42,7 @@ public class ItemMixin {
 
     @Inject(at = @At(value = "HEAD"), method = "getUseAction", cancellable = true)
     public void parry$returnBlockUseAction(ItemStack stack, CallbackInfoReturnable<UseAction> cir) {
-        if(stack.getItem() instanceof SwordItem && stack.isIn(ModTags.Items.CAN_BLOCK)) {
+        if(stack.getItem() instanceof SwordItem || stack.isIn(ModTags.Items.CAN_BLOCK)) {
             cir.setReturnValue(UseAction.BLOCK);
         }
     }
