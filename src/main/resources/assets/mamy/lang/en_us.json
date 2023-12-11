@@ -82,5 +82,7 @@
   "death.attack.electro": "%1$s Electrocuted by accident.",
   "death.attack.electro.player": "%1$s Electrocuted from %2$s.",
   "death.attack.bleedout": "%1$s Lack of blood because own sadistic.",
-  "death.attack.bleedout.player": "%1$s Get exsanguinated by %2$s."
+  "death.attack.bleedout.player": "%1$s Get exsanguinated by %2$s.",
+
+  "attribute.generic.crit_chance": "Crit Chance"
 }

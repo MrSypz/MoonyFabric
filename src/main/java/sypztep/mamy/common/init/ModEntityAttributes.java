@@ -8,9 +8,9 @@ import sypztep.mamy.common.MamyMod;
 
 public class ModEntityAttributes {
 
-    public static EntityAttribute GENERIC_HOGYOKU = new ClampedEntityAttribute("attribute.name.generic.hogyoku",0.0,0.0,6.0d).setTracked(true);
-    public static EntityAttribute GENERIC_CRIT_CHANCE = new ClampedEntityAttribute("attribute.name.generic.crit_chance",0.0,0.0,1.0d).setTracked(true);
-    public static EntityAttribute GENERIC_CRIT_DAMAGE = new ClampedEntityAttribute("attribute.name.generic.crit_damage",0.0,0.0,1.0d).setTracked(true);
+    public static EntityAttribute GENERIC_HOGYOKU = new ClampedEntityAttribute("attribute.generic.hogyoku",0.0,0.0,6.0d).setTracked(true);
+    public static EntityAttribute GENERIC_CRIT_CHANCE = new ClampedEntityAttribute("attribute.generic.crit_chance",0.0,0.0,1024).setTracked(true);
+    public static EntityAttribute GENERIC_CRIT_DAMAGE = new ClampedEntityAttribute("attribute.generic.crit_damage",0.0,0.0,512).setTracked(true);
 
     public static void init() {
         init("generic.hogyoku", GENERIC_HOGYOKU);

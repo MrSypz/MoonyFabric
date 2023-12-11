@@ -26,7 +26,9 @@ import sypztep.mamy.client.registry.Itemregistry;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.ModConfig;
 import sypztep.mamy.common.init.ModParticles;
-import sypztep.mamy.common.packetC2S.MaskPackets;
+import sypztep.mamy.common.interfaces.LivingEntityInvoker;
+import sypztep.mamy.common.packetC2S.MaskPacket;
+import sypztep.mamy.common.packetC2S.SyncCritFlagPacket;
 import sypztep.mamy.common.util.AbilityUtil;
 
 import static sypztep.mamy.common.component.entity.VizardComponent.dodash;
@@ -59,6 +61,8 @@ public class MamyModClient implements ClientModInitializer {
 
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
+
+        ParticleFactoryRegistry.getInstance().register(ModParticles.BACKATTACK, BackAttackParticle.Factory::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.BLOODWAVE, BloodwaveParticle.Factory::new);
@@ -99,7 +103,7 @@ public class MamyModClient implements ClientModInitializer {
             if (SPECIAL_KEYBINDING.isPressed() && cooldown == 0) {
                 if (client.player != null) {
                      if (AbilityUtil.hasvizard(client.player) && !AbilityUtil.hasAnyMask(client.player)) {
-                         MaskPackets.send();
+                         MaskPacket.send();
                          cooldown = DEFAULT_COOLDOWN;
                      } else if ((AbilityUtil.hasvizard(client.player)) && AbilityUtil.hasAnyMask(client.player)) {
                          client.player.sendMessage(Text.translatable("vizard.already").formatted(Formatting.GRAY), true);
@@ -116,6 +120,13 @@ public class MamyModClient implements ClientModInitializer {
         Registries.ITEM.forEach((item) -> {
             if(item instanceof SwordItem) {
                 FabricModelPredicateProviderRegistry.register(item, new Identifier("parrying"), (stack, world, entity, i) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F);
+            }
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(SyncCritFlagPacket.PACKET, (client, handler, buf, responseSender) -> {
+            SyncCritFlagPacket packet = new SyncCritFlagPacket(buf);
+            if (client.world != null && client.world.getEntityById(packet.getEntityId()) instanceof LivingEntityInvoker invoker) {
+                invoker.mamy$setCritical(packet.getFlag());
             }
         });
     }

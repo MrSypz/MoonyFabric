@@ -70,7 +70,6 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
             if (invisDuration > 0) {
                 invisDuration--;
                 if (invisDuration <= 0) {
-                    SonidoClearPacket.send();
                     dodash = false;
                 }
             }
@@ -90,6 +89,7 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
                 MamyModClient.setDistortAmount((float) ((invisDuration) * 0.1) * -1);
              else {
                 MamyModClient.setDistortAmount(0f);
+                SonidoClearPacket.send();
                 resetInv(obj);
             }
         }

@@ -44,7 +44,7 @@ public class HogyokuItem extends Item {
         int v;
         if (state.map.containsKey(name))
             v = state.map.get(user.getEntityName()) + 1;
-        else v = 1;
+        else v = 0;
         if (v < 6) {
             state.map.put(name, v);
             state.markDirty();

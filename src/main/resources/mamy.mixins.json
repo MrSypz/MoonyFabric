@@ -17,12 +17,18 @@
     "statuseffect.lethaltempo.PlayerEntityMixin",
     "util.LivingEntityMixin",
     "util.PlayerEntityMixin",
+    "util.storecrit.LivingEntityMixin",
+    "util.storecrit.PlayerEntityMixin",
     "vanilla.iframebypass.LivingEntityMixin",
     "vanilla.iframebypass.PlayerEntityMixin",
+    "vanilla.newdamagesystem.backattack.LivingEntityMixin",
+    "vanilla.newdamagesystem.critdamage.LivingEntityMixin",
+    "vanilla.newdamagesystem.critdamage.PlayerEntityMixin",
     "vanilla.swordparry.ItemMixin",
     "vanilla.swordparry.LivingEntityMixin"
   ],
   "client": [
+    "moditem.hollowmask.client.ArmorFeatureRendererMixin",
     "moditem.hollowmask.client.PlayerEntityRendererMixin",
     "statuseffect.grievouswounds.client.InGameHudMixin"
   ],

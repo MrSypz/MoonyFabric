@@ -30,10 +30,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import sypztep.mamy.client.packetS2C.AddSwirlingParticlePacket;
-import sypztep.mamy.common.init.ModDamageTypes;
-import sypztep.mamy.common.init.ModParticles;
-import sypztep.mamy.common.init.ModSoundEvents;
-import sypztep.mamy.common.init.ModStatusEffects;
+import sypztep.mamy.common.init.*;
 import sypztep.mamy.common.util.SkillUtil;
 
 import java.util.List;
@@ -46,12 +43,15 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         super(ToolMaterials.NETHERITE,6, -3f, new Settings().fireproof());
     }
     private static final EntityAttributeModifier REACH_MODIFIER;
+    private static final EntityAttributeModifier CRIT_CHANCE;
     private int count = 0;
     @Override
         public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         Multimap<EntityAttribute, EntityAttributeModifier> map = LinkedHashMultimap.create(super.getAttributeModifiers(slot));
-        if (slot == EquipmentSlot.MAINHAND)
+        if (slot == EquipmentSlot.MAINHAND) {
             map.put(ReachEntityAttributes.ATTACK_RANGE, REACH_MODIFIER);
+            map.put(ModEntityAttributes.GENERIC_CRIT_CHANCE, CRIT_CHANCE);
+        }
         return map;
     }
 
@@ -96,7 +96,7 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         list.add(Text.literal(" - ").append((Text.literal("Ability : RightClick").formatted(Formatting.GOLD))).formatted(Formatting.GRAY));
         list.add((info).append((Text.literal(String.valueOf(String.format("%.2f",player.getHealth() * 0.25f)))).formatted(Formatting.RED).append(Text.literal(" ♥"))));
     }
-    public static void addSwirlingParticles(PlayerEntity player) { //Client Packet
+    private void addSwirlingParticles(PlayerEntity player) { //Client Packet
         ServerPlayerEntity dys = ((ServerPlayerEntity) player);
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeDouble(dys.getX());
@@ -121,5 +121,6 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
     }
     static {
         REACH_MODIFIER = new EntityAttributeModifier(UUID.fromString("911af262-067d-4da2-854c-20f03cc2dd8b"), "Weapon modifier", 0.5, EntityAttributeModifier.Operation.ADDITION);
+        CRIT_CHANCE = new EntityAttributeModifier(UUID.fromString("896f49ba-06be-4b3c-afdd-f26f90d11378"),"Weapon modifier",10.0d, EntityAttributeModifier.Operation.ADDITION);
     }
 }

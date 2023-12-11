@@ -52,9 +52,8 @@ public class HollowmaskItem extends MamyMaskFuncItem {
                     player.addStatusEffect(new StatusEffectInstance(HOLLOW_POWER, 100, amp2, false, false, false));
                     if (!headSlot.isOf(ModItems.HALF_HOLLOW_MASK))
                         player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 100, amp, false, false, false));
-                    if (player.getHungerManager().getFoodLevel() <= 0) {
+                    if (player.getHungerManager().getFoodLevel() <= 0)
                         player.addStatusEffect(new StatusEffectInstance(STIMULATION, 100, 0, false, false,false));
-                    }
                 }
             }
             if (player.getAttributes().getBaseValue(ModEntityAttributes.GENERIC_HOGYOKU) < 1 && headSlot.isOf(this)) {

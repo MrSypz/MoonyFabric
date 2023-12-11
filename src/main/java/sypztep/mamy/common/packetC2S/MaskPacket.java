@@ -14,7 +14,7 @@ import sypztep.mamy.client.packetS2C.AddMaskParticlePacket;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.util.AbilityUtil;
 
-public class MaskPackets {
+public class MaskPacket {
     public static final Identifier ID = MamyMod.id("mask");
     public static void send() {
         ClientPlayNetworking.send(ID, new PacketByteBuf(Unpooled.buffer()));

@@ -61,7 +61,9 @@ dependencies {
 
     modImplementation "com.github.MrSypz:Pickyourpoison-Fabric:${project.pickyourpoison_version}"
 
-    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_version")
+    modImplementation include ("dev.emi:trinkets:${trinkets_version}")
+
+    modImplementation include("com.jamieswhiteshirt:reach-entity-attributes:$reach_version")
 }
 
 processResources {
