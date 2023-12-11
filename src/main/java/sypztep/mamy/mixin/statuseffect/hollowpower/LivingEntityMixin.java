@@ -21,7 +21,7 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
     @ModifyVariable(method = "modifyAppliedDamage", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getProtectionAmount(Ljava/lang/Iterable;Lnet/minecraft/entity/damage/DamageSource;)I"), argsOnly = true)
-    private float mamy$dragonspine(float value, DamageSource source) {
+    private float mamy$hollowpower(float value, DamageSource source) {
         if (source.isIn(DamageTypeTags.BYPASSES_EFFECTS))
             return value;
         if (source.getSource() != null && this.hasStatusEffect(ModStatusEffects.HOLLOW_POWER)) {

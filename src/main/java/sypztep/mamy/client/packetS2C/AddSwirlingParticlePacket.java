@@ -1,4 +1,4 @@
-package sypztep.mamy.client.packet;
+package sypztep.mamy.client.packetS2C;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

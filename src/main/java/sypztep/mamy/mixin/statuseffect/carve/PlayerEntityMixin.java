@@ -39,7 +39,7 @@ public abstract class PlayerEntityMixin extends LivingEntity{
                     }
                     ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(ModStatusEffects.CARVE, 20 + carve * 4, carvecount));
                     ((ServerWorld) ((PlayerEntity) (Object) this).getWorld()).spawnParticles(ParticleTypes.SCULK_SOUL, target.getX(), target.getBodyY(0.5D), target.getZ(), 18, 0.3, 0.6, 0.3, 0.01D);
-                } else {
+                }else {
                     target.playSound(ModSoundEvents.ENTITY_GENERIC_BLOODHIT, 1, (float) (1.0 + ((LivingEntity) target).getRandom().nextGaussian() / 10.0));
                     ((ServerWorld) ((PlayerEntity) (Object) this).getWorld()).spawnParticles(ModParticles.BLOOD_BUBBLE_SPLATTER, target.getX(), target.getBodyY(0.5D), target.getZ(), 18, 0.3, 0.6, 0.3, 0.21D);
                     ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(sypztep.pickyourpoison.common.init.ModStatusEffects.VULNERABILITY, 20 + carve * 4, 0));

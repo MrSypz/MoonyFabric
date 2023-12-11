@@ -4,6 +4,7 @@
   "package": "sypztep.mamy.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "enchantment.hollowcurse.EnchantmentHelperMixin",
     "enchantment.missilehomming.FireworkRocketEntityMixin",
     "enchantment.missilehomming.ProjectileEntityAccessor",
     "moditem.deathscythe.PlayerEntityMixin",
@@ -16,12 +17,18 @@
     "statuseffect.lethaltempo.PlayerEntityMixin",
     "util.LivingEntityMixin",
     "util.PlayerEntityMixin",
+    "util.storecrit.LivingEntityMixin",
+    "util.storecrit.PlayerEntityMixin",
     "vanilla.iframebypass.LivingEntityMixin",
     "vanilla.iframebypass.PlayerEntityMixin",
+    "vanilla.newdamagesystem.backattack.LivingEntityMixin",
+    "vanilla.newdamagesystem.critdamage.LivingEntityMixin",
+    "vanilla.newdamagesystem.critdamage.PlayerEntityMixin",
     "vanilla.swordparry.ItemMixin",
     "vanilla.swordparry.LivingEntityMixin"
   ],
   "client": [
+    "moditem.hollowmask.client.ArmorFeatureRendererMixin",
     "moditem.hollowmask.client.PlayerEntityRendererMixin",
     "statuseffect.grievouswounds.client.InGameHudMixin"
   ],

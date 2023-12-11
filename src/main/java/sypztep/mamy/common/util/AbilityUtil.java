@@ -1,16 +1,13 @@
 package sypztep.mamy.common.util;
 
-import net.minecraft.enchantment.Enchantments;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.particle.ParticleTypes;
 import org.jetbrains.annotations.NotNull;
 import sypztep.mamy.common.Item.HollowmaskItem;
-import sypztep.mamy.common.init.ModDamageTypes;
-import sypztep.mamy.common.init.ModEntityAttributes;
-import sypztep.mamy.common.init.ModItems;
+import sypztep.mamy.common.init.*;
 
 public class AbilityUtil {
     public static boolean hasvizard(PlayerEntity user) {
@@ -45,17 +42,28 @@ public class AbilityUtil {
         return false;
     }
     public static void equipMask(PlayerEntity user) {
+        if (user.getWorld().isClient()) {
+            addUseMaskParticle(user);
+            return;
+        }
         int baseValue = (int) user.getAttributes().getBaseValue(ModEntityAttributes.GENERIC_HOGYOKU);
         ItemStack Hollowmask = getItemStack(baseValue);
-
-        Hollowmask.addEnchantment(Enchantments.BINDING_CURSE, 1);
-        Hollowmask.addEnchantment(Enchantments.VANISHING_CURSE, 1);
-        Hollowmask.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
+        Hollowmask.addEnchantment(ModEnchantments.HOLLOW_CURSE, 1);
         user.equipStack(EquipmentSlot.HEAD, Hollowmask);
-        HollowmaskItem.useMaskParticle(user);
-        SkillUtil.ShockWaveDamage(user, 0, false,false);
+        SkillUtil.ShockWaveDamage(user, 5,0, false,false);
         user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.MASKIMPACT, user), user.getHealth() * 0.5f);
-        user.playSound(SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, SoundCategory.PLAYERS, 1.0f, 2f);
+
+    }
+
+    public static void addUseMaskParticle(PlayerEntity player) { //Client Packet
+        if (MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || player != MinecraftClient.getInstance().cameraEntity) {
+            for (int i = 0; i < 10; ++i)
+                player.getWorld().addParticle(ParticleTypes.FLASH, player.getParticleX(2), player.getRandomBodyY(), player.getParticleZ(2), 0, 0, 0);
+            for (int i = 0; i < 22; ++i)
+                player.getWorld().addParticle(ModParticles.BLOOD_BUBBLE_SPLATTER, player.getParticleX(2), player.getRandomBodyY(), player.getParticleZ(2), 0.1, 0.1, 0.1);
+            player.getWorld().addParticle(ModParticles.BLOODWAVE, player.getParticleX(2), player.getBodyY(0.2f), player.getParticleZ(2), 0.0, 0.0, 0.0);
+
+        }
     }
 
     @NotNull

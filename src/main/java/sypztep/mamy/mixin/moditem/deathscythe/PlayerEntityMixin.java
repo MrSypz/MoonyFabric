@@ -18,9 +18,6 @@ import sypztep.mamy.common.Item.DeathScytheItem;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-    private Entity target;
-    private CallbackInfo ci;
-
     @Shadow public abstract SoundCategory getSoundCategory();
 
 

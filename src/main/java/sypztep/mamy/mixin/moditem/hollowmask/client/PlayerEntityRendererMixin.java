@@ -1,5 +1,6 @@
 package sypztep.mamy.mixin.moditem.hollowmask.client;
 
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -23,11 +24,19 @@ public abstract class PlayerEntityRendererMixin<T extends PlayerEntity, M extend
         super(ctx);
     }
 
+    @Inject(method = "renderArm(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/client/model/ModelPart;Lnet/minecraft/client/model/ModelPart;)V", at = @At("HEAD"), cancellable = true)
+    private void simplyskills$renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
+        if (player != null) {
+            if ((EnchantmentUtil.hasMaskEquipped(player) && player.isInvisible()))
+                ci.cancel();
+        }
+    }
     /** Disable player When Dash**/
     @Inject(method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("HEAD"), cancellable = true)
     private void render(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if ((EnchantmentUtil.hasMaskEquipped(abstractClientPlayerEntity) && abstractClientPlayerEntity.isInvisible())) {
-            ci.cancel();
+        if (abstractClientPlayerEntity != null) {
+            if ((EnchantmentUtil.hasMaskEquipped(abstractClientPlayerEntity) && abstractClientPlayerEntity.isInvisible()))
+                ci.cancel();
         }
     }
 }

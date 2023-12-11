@@ -20,15 +20,15 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
-import sypztep.mamy.client.packet.AddSonidoParticlePacket;
-import sypztep.mamy.client.packet.AddSwirlingParticlePacket;
-import sypztep.mamy.client.packet.ResetSonidoInvPacket;
+import sypztep.mamy.client.packetS2C.*;
 import sypztep.mamy.client.particle.*;
 import sypztep.mamy.client.registry.Itemregistry;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.ModConfig;
 import sypztep.mamy.common.init.ModParticles;
-import sypztep.mamy.common.packet.MaskPackets;
+import sypztep.mamy.common.interfaces.LivingEntityInvoker;
+import sypztep.mamy.common.packetC2S.MaskPacket;
+import sypztep.mamy.common.packetC2S.SyncCritFlagPacket;
 import sypztep.mamy.common.util.AbilityUtil;
 
 import static sypztep.mamy.common.component.entity.VizardComponent.dodash;
@@ -56,8 +56,13 @@ public class MamyModClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(AddSonidoParticlePacket.ID, new AddSonidoParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(AddSwirlingParticlePacket.ID, new AddSwirlingParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(ResetSonidoInvPacket.ID, new ResetSonidoInvPacket.Receiver());
+        ClientPlayNetworking.registerGlobalReceiver(AddMaskParticlePacket.ID, new AddMaskParticlePacket.Receiver());
+        ClientPlayNetworking.registerGlobalReceiver(AddHogyokuParticlePacket.ID, new AddHogyokuParticlePacket.Receiver());
+
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
+
+        ParticleFactoryRegistry.getInstance().register(ModParticles.BACKATTACK, BackAttackParticle.Factory::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.BLOODWAVE, BloodwaveParticle.Factory::new);
@@ -96,19 +101,32 @@ public class MamyModClient implements ClientModInitializer {
             if (cooldown > 0)
                 cooldown--;
             if (SPECIAL_KEYBINDING.isPressed() && cooldown == 0) {
-                if (client.player != null && AbilityUtil.hasvizard(client.player)) {
-                    MaskPackets.send();
-                    cooldown = DEFAULT_COOLDOWN;
-                } else {
-                    client.player.sendMessage(Text.translatable("vizard.checked").formatted(Formatting.GRAY), true);
-                    client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO,1,1.0f);
-                    cooldown = DEFAULT_COOLDOWN;
+                if (client.player != null) {
+                     if (AbilityUtil.hasvizard(client.player) && !AbilityUtil.hasAnyMask(client.player)) {
+                         MaskPacket.send();
+                         cooldown = DEFAULT_COOLDOWN;
+                     } else if ((AbilityUtil.hasvizard(client.player)) && AbilityUtil.hasAnyMask(client.player)) {
+                         client.player.sendMessage(Text.translatable("vizard.already").formatted(Formatting.GRAY), true);
+                         cooldown = DEFAULT_COOLDOWN;
+                         client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1, 1.0f);
+                     } else {
+                         client.player.sendMessage(Text.translatable("vizard.checked").formatted(Formatting.GRAY), true);
+                         client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1, 1.0f);
+                         cooldown = DEFAULT_COOLDOWN;
+                     }
                 }
             }
         });
         Registries.ITEM.forEach((item) -> {
             if(item instanceof SwordItem) {
                 FabricModelPredicateProviderRegistry.register(item, new Identifier("parrying"), (stack, world, entity, i) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F);
+            }
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(SyncCritFlagPacket.PACKET, (client, handler, buf, responseSender) -> {
+            SyncCritFlagPacket packet = new SyncCritFlagPacket(buf);
+            if (client.world != null && client.world.getEntityById(packet.getEntityId()) instanceof LivingEntityInvoker invoker) {
+                invoker.mamy$setCritical(packet.getFlag());
             }
         });
     }

@@ -9,6 +9,7 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ToolMaterial;
+import sypztep.mamy.common.init.ModEntityAttributes;
 
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ public class PolearmItem extends EmptySwordItem{
     private final ToolMaterial material;
     private final float attackDamage;
     private static final EntityAttributeModifier REACH_MODIFIER;
+    private static final EntityAttributeModifier CRIT_CHANCE;
     public PolearmItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
         this.material = toolMaterial;
@@ -29,6 +31,7 @@ public class PolearmItem extends EmptySwordItem{
         Multimap<EntityAttribute, EntityAttributeModifier> map = LinkedHashMultimap.create(super.getAttributeModifiers(slot));
         if (slot == EquipmentSlot.MAINHAND) {
             map.put(ReachEntityAttributes.ATTACK_RANGE, REACH_MODIFIER);
+            map.put(ModEntityAttributes.GENERIC_CRIT_CHANCE, CRIT_CHANCE);
         }
         return map;
     }
@@ -39,5 +42,6 @@ public class PolearmItem extends EmptySwordItem{
 
     static {
         REACH_MODIFIER = new EntityAttributeModifier(UUID.fromString("3ad3431a-2ceb-4501-b66b-2487064263c7"), "Weapon modifier", 1.5D, EntityAttributeModifier.Operation.ADDITION);
+        CRIT_CHANCE = new EntityAttributeModifier(UUID.fromString("02bf8ce0-866d-4747-bbf7-4a360aba58ec"),"Weapon modifier",5.0d, EntityAttributeModifier.Operation.ADDITION);
     }
 }

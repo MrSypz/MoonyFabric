@@ -1,4 +1,4 @@
-package sypztep.mamy.client.packet;
+package sypztep.mamy.client.packetS2C;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
@@ -9,21 +9,20 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import sypztep.mamy.common.MamyMod;
-import sypztep.mamy.common.component.entity.VizardComponent;
+import sypztep.mamy.common.util.AbilityUtil;
 
-public class AddSonidoParticlePacket {
-    public static final Identifier ID = MamyMod.id("add_sonido_particle");
-
+public class AddMaskParticlePacket {
+    public static final Identifier ID = MamyMod.id("mask_particle");
     public static void send(ServerPlayerEntity player, int id) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeInt(id);
         ServerPlayNetworking.send(player, ID, buf);
     }
-
     @Environment(EnvType.CLIENT)
     public static class Receiver implements ClientPlayNetworking.PlayChannelHandler {
         @Override
@@ -32,7 +31,7 @@ public class AddSonidoParticlePacket {
             client.execute(() -> {
                 LivingEntity entity = (LivingEntity) handler.getWorld().getEntityById(id);
                 if (entity != null) {
-                    VizardComponent.addSonidoParticles(entity);
+                    AbilityUtil.addUseMaskParticle((PlayerEntity) entity);
                 }
             });
         }

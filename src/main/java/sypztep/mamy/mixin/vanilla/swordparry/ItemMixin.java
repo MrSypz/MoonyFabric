@@ -19,7 +19,7 @@ import sypztep.mamy.common.init.ModTags;
 @Mixin(Item.class)
 public class ItemMixin {
     @Inject(at = @At(value = "HEAD"), method = "use", cancellable = true)
-    public void parry$allowSwordUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+    private void mamy$allowSwordUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         if(user.getStackInHand(hand).getItem() instanceof SwordItem || user.getStackInHand(hand).isIn(ModTags.Items.CAN_BLOCK)) {
             var stack = user.getStackInHand(hand);
             if(ModConfig.prioritize_shield && user.getStackInHand(Hand.OFF_HAND).getItem() instanceof ShieldItem) {
@@ -34,15 +34,15 @@ public class ItemMixin {
     }
 
     @Inject(at = @At(value = "HEAD"), method = "getMaxUseTime", cancellable = true)
-    public void parry$applySwordUseTime(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+    private void mamy$applySwordUseTime(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         if(stack.getItem() instanceof SwordItem || stack.isIn(ModTags.Items.CAN_BLOCK)) {
             cir.setReturnValue(72000);
         }
     }
 
     @Inject(at = @At(value = "HEAD"), method = "getUseAction", cancellable = true)
-    public void parry$returnBlockUseAction(ItemStack stack, CallbackInfoReturnable<UseAction> cir) {
-        if(stack.getItem() instanceof SwordItem && stack.isIn(ModTags.Items.CAN_BLOCK)) {
+    private void mamy$returnBlockUseAction(ItemStack stack, CallbackInfoReturnable<UseAction> cir) {
+        if(stack.getItem() instanceof SwordItem || stack.isIn(ModTags.Items.CAN_BLOCK)) {
             cir.setReturnValue(UseAction.BLOCK);
         }
     }

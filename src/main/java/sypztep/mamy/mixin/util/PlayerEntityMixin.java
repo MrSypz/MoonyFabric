@@ -30,6 +30,8 @@ public abstract class PlayerEntityMixin extends LivingEntity{
 
     @Shadow public abstract float getAttackCooldownProgress(float baseTime);
 
+    @Shadow public abstract boolean isPlayer();
+
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -59,6 +61,10 @@ public abstract class PlayerEntityMixin extends LivingEntity{
         }
         return value;
     }
+
+    /**
+     * Is add player entity this attribute
+     */
     @Inject(method = "createPlayerAttributes",at = @At("RETURN"))
     private static void initAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> ci) {
         ci.getReturnValue().add(ModEntityAttributes.GENERIC_HOGYOKU);
@@ -66,30 +72,14 @@ public abstract class PlayerEntityMixin extends LivingEntity{
         ci.getReturnValue().add(ModEntityAttributes.GENERIC_CRIT_DAMAGE);
     }
 
+    /**
+     * Player Take Damage more 15% from any source
+     */
     @ModifyVariable(method = "damage", at = @At("HEAD"), argsOnly = true)
     private float mamy$HollowCurse(float amount) {
-        if (this.getAttributes().getBaseValue(ModEntityAttributes.GENERIC_HOGYOKU) > 0) { // if player have
+        if (this.getAttributes().getBaseValue(ModEntityAttributes.GENERIC_HOGYOKU ) > 0) { // if player have
             return amount + (amount * (0.15f)); //15% more Damage
         }
         return amount;
-    }
-//    @ModifyVariable(method = "attack",at = @At(value = "INVOKE",ordinal = 2),slice = @Slice(from = @At(value = "INVOKE",target = "Lnet/minecraft/entity/player/PlayerEntity;isSprinting()Z", ordinal = 1)),index = 8) //Crit Chance
-//    private boolean modifyAttack(boolean bl3) {
-//        float customChance = 0.0f;
-//        EntityAttributeInstance instance = this.getAttributeInstance(ModEntityAttributes.GENERIC_CRIT_CHANCE);
-//        if (instance != null) {
-//            for (EntityAttributeModifier modifier : instance.getModifiers()) {
-//                float amount = (float) modifier.getValue();
-//                customChance += amount;
-//            }
-//        }
-//        return bl3 || getWorld().random.nextDouble() < customChance;
-//    }
-    @ModifyConstant(method = "attack", constant = @Constant(floatValue = 1.5f)) // Crit Damage
-    private float mamy$modifyCritDamage(float originalValue) {
-        if (this.getAttributes().getBaseValue(ModEntityAttributes.GENERIC_HOGYOKU) > 0) {
-            return originalValue + 0.2f;
-        }
-        return originalValue;
     }
 }
