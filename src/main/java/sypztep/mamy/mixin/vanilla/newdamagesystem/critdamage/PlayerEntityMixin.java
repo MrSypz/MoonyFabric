@@ -53,12 +53,10 @@ public abstract class PlayerEntityMixin extends LivingEntityMixin {
         MutableFloat additionalDamage = new MutableFloat();
         this.forEachItemExceptOffHand((itemStack) -> {
             additionalDamage.add(this.getAttributeValue(ModEntityAttributes.GENERIC_CRIT_DAMAGE));
-        });
-        this.forEachItemExceptOffHand((itemStack) -> {
 //            additionalDamage.add(Critical.CRIT_DAMAGE.getPercent(EnchantmentHelper.getLevel(Critical.CRIT_DAMAGE, itemStack)));
         });
-//        if (this.getAttributeValue(ModEntityAttributes.GENERIC_HOGYOKU) > 0 && this.isPlayer()) // IF PLAYER HAS CONSUME HOGYOKU ONLY IF PLAYER
-//            return additionalDamage.floatValue() + 20f; // Add 20% Crit damage
+        if (this.getAttributeValue(ModEntityAttributes.GENERIC_HOGYOKU) > 0) // IF PLAYER HAS CONSUME HOGYOKU ONLY IF PLAYER
+            return additionalDamage.floatValue() + 20f; // Add 20% Crit damage
         return additionalDamage.floatValue();
     }
 
