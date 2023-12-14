@@ -1,6 +1,5 @@
 package sypztep.mamy.common.init;
 
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
@@ -37,8 +36,5 @@ public class ModStatusEffects {
     }
     private static void init(String name,StatusEffect statusEffect){
         Registry.register(Registries.STATUS_EFFECT,MamyMod.id(name), statusEffect);
-    }
-    private static void attinit(String name, EntityAttribute attribute) {
-        Registry.register(Registries.ATTRIBUTE,MamyMod.id(name) ,attribute);
     }
 }

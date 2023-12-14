@@ -77,8 +77,8 @@
   "enchantment.mamy.hollowcurse.desc" : "Can't unequiped and disappear when dead.",
   "enchantment.mamy.carve" : "Carve",
   "enchantment.mamy.carve.desc" : "Everytime attack target it gonna decrease protection amount.",
-  "enchantment.mamy.hissilehomming" : "Homming Missle",
-  "enchantment.mamy.hissilehomming.desc" : "When use crossbow with firework a firework'll going to direction that you look at.",
+  "enchantment.mamy.missilehomming" : "Homming Missile",
+  "enchantment.mamy.missilehomming.desc" : "When use crossbow with firework a firework'll going to direction that you look at.",
 
   "death.attack.hogyoku": "%1$s Your soul are now starting kindle.",
   "death.attack.maskimpact": "%1$s How?!",
@@ -88,5 +88,6 @@
   "death.attack.bleedout": "%1$s Lack of blood because own sadistic.",
   "death.attack.bleedout.player": "%1$s Get exsanguinated by %2$s.",
 
-  "attribute.generic.crit_chance": "Crit Chance"
+  "attribute.generic.crit_chance": "Crit Chance",
+  "attribute.generic.crit_damage": "Crit Damage"
 }

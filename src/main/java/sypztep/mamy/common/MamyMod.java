@@ -61,7 +61,7 @@ public class MamyMod implements ModInitializer {
             final int v;
             if (!state.map.containsKey(s))
                 setupNewPlayer(s, state, newPlayer);
-            v = Math.max(1, state.map.get(s));
+            v = Math.max(0, state.map.get(s));
             state.map.put(s, v);
 
             Objects.requireNonNull(newPlayer.getAttributeInstance(ModEntityAttributes.GENERIC_HOGYOKU)).setBaseValue(v);

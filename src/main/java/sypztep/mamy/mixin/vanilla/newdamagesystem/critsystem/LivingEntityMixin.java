@@ -1,4 +1,4 @@
-package sypztep.mamy.mixin.vanilla.newdamagesystem.critdamage;
+package sypztep.mamy.mixin.vanilla.newdamagesystem.critsystem;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
