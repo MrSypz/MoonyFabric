@@ -2,6 +2,7 @@ package sypztep.mamy.common.init;
 
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.registry.Registries;
@@ -41,12 +42,12 @@ public class ModItems {
     public static Item HOGYOKU;
 
     public static void init(){
-        WOODEN_POLEARM = registerSworditem("wooden_polearm",new PolearmItem(ToolMaterials.WOOD,4,-3F,new Item.Settings()));
-        STONE_POLEARM = registerSworditem("stone_polearm",new PolearmItem(ToolMaterials.STONE,4,-3F,new Item.Settings()));
-        IRON_POLEARM = registerSworditem("iron_polearm",new PolearmItem(ToolMaterials.IRON,4,-3F,new Item.Settings()));
-        GOLDEN_POLEARM = registerSworditem("golden_polearm",new PolearmItem(ToolMaterials.GOLD,4,-3F,new Item.Settings()));
-        DIAMOND_POLEARM = registerSworditem("diamond_polearm",new PolearmItem(ToolMaterials.DIAMOND,4,-3F,new Item.Settings()));
-        NETHERITE_POLEARM= registerSworditem("netherite_polearm",new PolearmItem(ToolMaterials.NETHERITE,4,-3F,new Item.Settings().fireproof()));
+        WOODEN_POLEARM = registerSworditem("wooden_polearm",new PolearmItem(ToolMaterials.WOOD,4,-3F,new FabricItemSettings()));
+        STONE_POLEARM = registerSworditem("stone_polearm",new PolearmItem(ToolMaterials.STONE,4,-3F,new FabricItemSettings()));
+        IRON_POLEARM = registerSworditem("iron_polearm",new PolearmItem(ToolMaterials.IRON,4,-3F,new FabricItemSettings()));
+        GOLDEN_POLEARM = registerSworditem("golden_polearm",new PolearmItem(ToolMaterials.GOLD,4,-3F,new FabricItemSettings()));
+        DIAMOND_POLEARM = registerSworditem("diamond_polearm",new PolearmItem(ToolMaterials.DIAMOND,4,-3F,new FabricItemSettings()));
+        NETHERITE_POLEARM= registerSworditem("netherite_polearm",new PolearmItem(ToolMaterials.NETHERITE,4,-3F,new FabricItemSettings().fireproof()));
 
         DEATH_SCYTHE = registerSworditem("death_scythe", new DeathScytheItem());
 
@@ -54,10 +55,10 @@ public class ModItems {
         HOGYOKU = registeritem("hogyoku",new HogyokuItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)));
 
         //COSMETIC
-        FURINA_HAT = registeritem("furina_hat",new MamyMaskCosmItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
+        FURINA_HAT = registeritem("furina_hat",new MamyMaskCosmItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),EquipmentSlot.HEAD));
         //MATERIAL
-        ARCHAIC_EYE = registeritem("archaic_eye",new Item(new Item.Settings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
-        PACKSTICK = registeritem("packstick",new Item(new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));
+        ARCHAIC_EYE = registeritem("archaic_eye",new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
+        PACKSTICK = registeritem("packstick",new Item(new FabricItemSettings().maxCount(64).rarity(Rarity.COMMON)));
 
         //HOLLOW MASK
         HALF_HOLLOW_MASK = registerMaskItem("half_hollow_mask", new HollowmaskItem(new FabricItemSettings().maxDamage(10))); // 10 Second

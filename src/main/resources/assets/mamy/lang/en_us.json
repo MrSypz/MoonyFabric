@@ -49,11 +49,14 @@
 
   "item.mamy.furina_hat" : "Furina Hat",
 
+  "key.categories.mamy": "Moony",
+  "key.mamy.special": "Sonido",
+  "key.mamy.special2": "Equip Mask",
+
   "hogyoku.limit_reached": "Hogyoku has reached the limit.",
   "hogyoku.success": "Vizored level increase",
   "vizard.checked": "You don't have Visored.",
   "vizard.already": "You already wearing a mask rightnow.",
-
 
   "effect.mamy.mark": "Mark",
   "effect.mamy.grievouswounds" : "Grievous Wounds",
