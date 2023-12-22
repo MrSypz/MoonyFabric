@@ -20,6 +20,7 @@ public class ModItemGroup {
             content.addAfter(ModItems.IRON_POLEARM,ModItems.GOLDEN_POLEARM);
             content.addAfter(ModItems.GOLDEN_POLEARM,ModItems.DIAMOND_POLEARM);
             content.addAfter(ModItems.DIAMOND_POLEARM,ModItems.NETHERITE_POLEARM);
+            content.addAfter(ModItems.DEATH_SCYTHE,ModItems.BLOODLUST);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(content -> {
             content.addBefore(Items.GOLDEN_CARROT,ModItems.ARCHAIC_EYE);
@@ -48,6 +49,8 @@ public class ModItemGroup {
             .displayName(Text.translatable("itemGroup." + MamyMod.MODID + "cosmetic"))
             .entries((context, entries) -> {
                 entries.add(ModItems.FURINA_HAT);
+                entries.add(ModItems.WANDERER_HAT);
+                entries.add(ModItems.HANEGA);
             })
             .build();
 }

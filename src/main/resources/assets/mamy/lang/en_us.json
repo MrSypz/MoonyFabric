@@ -20,10 +20,19 @@
   "mamy.midnightconfig.knockbackCancelThreshold": "Knockback Cancel Threshold",
   "mamy.midnightconfig.knockbackCancelThreshold.tooltip": "How weak a player's attack can be before the knockback gets nullified, from 0 (0%, cancels multiple attacks on the same tick) to 1 (100%, no knockback), or -0.1 (disables this feature)",
 
+  "mamy.midnightconfig.MaskDashEffect": "MaskDash Effect",
+  "mamy.midnightconfig.distorsion": "Distorsion",
+
+  "mamy.midnightconfig.SwordParry": "Sword Parry",
+  "mamy.midnightconfig.consume_animation": "Consume Animation",
+  "mamy.midnightconfig.prioritize_shield": "Prioritize Shield",
+
+
   "itemGroup.mamymask": "Mask Item",
   "itemGroup.mamycosmetic": "Cosmetic Item",
 
   "item.mamy.death_scythe" : "Death Scythe",
+  "item.mamy.bloodlust" : "Blood Lust",
   "item.mamy.wooden_polearm" : "Wooden Polearm",
   "item.mamy.stone_polearm" : "Stone Polearm",
   "item.mamy.iron_polearm" : "Iron Polearm",
@@ -33,6 +42,8 @@
 
   "item.mamy.death_scythe.desc" : "Swirl enemy around, When using 5 times it gonna apply Grievouswounds. - Consume ",
   "item.mamy.death_scythe.desc.passive" : "When attack on crit target'll move toward you.",
+  "item.mamy.bloodlust.desc" : "If this item has Vengeance can spew blood can deal 15 Damage - Consume",
+  "item.mamy.bloodlust.desc.passive" : " -",
   "item.mamy.half_hollow_mask" : "Half Hollow Mask",
   "item.mamy.hollow_mask_1" : "Hollow Mask Tier 1",
   "item.mamy.hollow_mask_2" : "Hollow Mask Tier 2",
@@ -48,6 +59,8 @@
   "item.mamy.packstick" : "Pack Sticks",
 
   "item.mamy.furina_hat" : "Furina Hat",
+  "item.mamy.wanderer_hat" : "Wanderer Hat",
+  "item.mamy.hanega" : "Hanega",
 
   "key.categories.mamy": "Moony",
   "key.mamy.special": "Sonido",
@@ -82,6 +95,13 @@
   "enchantment.mamy.carve.desc" : "Everytime attack target it gonna decrease protection amount.",
   "enchantment.mamy.missilehomming" : "Homming Missile",
   "enchantment.mamy.missilehomming.desc" : "When use crossbow with firework a firework'll going to direction that you look at.",
+  "enchantment.mamy.greedyang" : "Greed Yang",
+  "enchantment.mamy.greedyang.desc" : "Heal user with amount of damage that user deal",
+  "enchantment.mamy.goliath" : "Goliath",
+  "enchantment.mamy.goliath.desc" : "Deal damage more 8% of target health and heal 8% of damage that done (Not affect to boss)",
+  "enchantment.mamy.vengeance" : "Vengeance",
+  "enchantment.mamy.vengeance.desc" : "Spewing blood deal 15 damages and penetrate all target until it disappear",
+
 
   "death.attack.hogyoku": "%1$s Your soul are now starting kindle.",
   "death.attack.maskimpact": "%1$s How?!",
@@ -90,6 +110,9 @@
   "death.attack.electro.player": "%1$s Electrocuted from %2$s.",
   "death.attack.bleedout": "%1$s Lack of blood because own sadistic.",
   "death.attack.bleedout.player": "%1$s Get exsanguinated by %2$s.",
+  "death.attack.bloodlust": "%1$s HIV got him.",
+  "death.attack.bloodlust.player": "%1$s Get HIV by %2$s.",
+
 
   "attribute.generic.crit_chance": "Crit Chance",
   "attribute.generic.crit_damage": "Crit Damage"

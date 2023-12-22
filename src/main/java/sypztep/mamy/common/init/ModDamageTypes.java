@@ -10,7 +10,8 @@ import org.jetbrains.annotations.Nullable;
 import sypztep.mamy.common.MamyMod;
 
 public class ModDamageTypes {
-
+    public static final RegistryKey<DamageType> BLOODLUST = createType("bloodlust");
+    public static final RegistryKey<DamageType> BLOODSCYTHE = createType("bloodscythe");
     public static final RegistryKey<DamageType> BLEEDOUT = createType("bleedout");
     public static final RegistryKey<DamageType> HOGYOKU = createType("hogyoku");
     public static final RegistryKey<DamageType> ELECTRO = createType("electro");

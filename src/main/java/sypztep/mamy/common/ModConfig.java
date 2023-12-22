@@ -3,7 +3,7 @@ package sypztep.mamy.common;
 import eu.midnightdust.lib.config.MidnightConfig;
 
 
-public class ModConfig extends MidnightConfig{
+public class ModConfig extends MidnightConfig {
     @Comment(centered = true)
     public static Comment iframetext;
     @Entry
@@ -19,12 +19,9 @@ public class ModConfig extends MidnightConfig{
 
     @Entry
     public static float knockbackCancelThreshold = 0.75f;
-
     public static String[] attackExcludedEntities = new String[] {"minecraft:slime", "minecraft:magma_cube"};
-
     public static String[] dmgReceiveExcludedEntities = new String[] {};
-
-    public static String[] damageSrcWhitelist = new String[] {"inFire", "lava", "sweetBerryBush", "cactus", "lightningBolt", "inWall", "hotFloor"};
+    public static String[] damageSrcWhitelist = new String[] {"inFire", "lava", "sweetBerryBush", "cactus", "lightningBolt", "inWall", "hotFloor", "bloodlust", "bite"};
     @Comment(centered = true)
     public static Comment MaskDashEffect;
     @Entry

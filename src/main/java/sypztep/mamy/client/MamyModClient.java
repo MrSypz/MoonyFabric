@@ -8,23 +8,22 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.SwordItem;
-import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import sypztep.mamy.client.packetS2C.*;
 import sypztep.mamy.client.particle.*;
 import sypztep.mamy.client.registry.Itemregistry;
+import sypztep.mamy.client.render.entity.BloodLustEntityRenderer;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.ModConfig;
+import sypztep.mamy.common.init.ModEntityTypes;
 import sypztep.mamy.common.init.ModParticles;
 import sypztep.mamy.common.interfaces.LivingEntityInvoker;
 import sypztep.mamy.common.packetC2S.MaskPacket;
@@ -58,9 +57,11 @@ public class MamyModClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(ResetSonidoInvPacket.ID, new ResetSonidoInvPacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(AddMaskParticlePacket.ID, new AddMaskParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(AddHogyokuParticlePacket.ID, new AddHogyokuParticlePacket.Receiver());
-
+        ClientPlayNetworking.registerGlobalReceiver(AddAirhikeParticlesPacket.ID,new AddAirhikeParticlesPacket.Receiver());
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
+
+        EntityRendererRegistry.register(ModEntityTypes.BLOOD_LUST, BloodLustEntityRenderer::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.BACKATTACK, BackAttackParticle.Factory::new);
 
@@ -115,11 +116,6 @@ public class MamyModClient implements ClientModInitializer {
                          cooldown = DEFAULT_COOLDOWN;
                      }
                 }
-            }
-        });
-        Registries.ITEM.forEach((item) -> {
-            if(item instanceof SwordItem) {
-                FabricModelPredicateProviderRegistry.register(item, new Identifier("parrying"), (stack, world, entity, i) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F);
             }
         });
 

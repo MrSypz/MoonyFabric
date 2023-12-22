@@ -2,8 +2,10 @@ package sypztep.mamy.client.registry;
 
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.util.ModelIdentifier;
+import net.minecraft.item.SwordItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
@@ -24,5 +26,10 @@ public class Itemregistry {
                 out.accept(new ModelIdentifier(id.getNamespace(),id.getPath() + "_handheld","inventory"));
             }));
         }
+        Registries.ITEM.forEach((item) -> {
+            if(item instanceof SwordItem) {
+                FabricModelPredicateProviderRegistry.register(item, new Identifier("parrying"), (stack, world, entity, i) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F);
+            }
+        });
     }
 }

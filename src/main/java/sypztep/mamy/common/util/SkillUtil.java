@@ -11,22 +11,22 @@ import java.util.List;
 public class SkillUtil {
     static int counts;
     public static void ShockWaveDamage(PlayerEntity user,double range, float amount, boolean useCustomDamage,boolean doEffect) {
-        double damageRadiusSquared = range;
-        List<LivingEntity> entities = user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox().expand(damageRadiusSquared,1,damageRadiusSquared));
+        List<LivingEntity> entities = user.getWorld().getNonSpectatingEntities(LivingEntity.class, user.getBoundingBox().expand(range,1, range));
         counts = 0;
         for (LivingEntity target : entities) {
             if (target != user) {
                 double distanceToEntity = target.squaredDistanceTo(user.getX(), user.getY(), user.getZ());
-                double normalizedDistance = Math.sqrt(distanceToEntity) / damageRadiusSquared; // Adjust as needed for your range
+                double normalizedDistance = Math.sqrt(distanceToEntity) / range; // Adjust as needed for your range
                 if (normalizedDistance > 0) {
                     counts++;
                 } else counts = 0;
                 if (!useCustomDamage) {
-                    float damagebyArea = (float) (damageRadiusSquared - (float) (normalizedDistance * (damageRadiusSquared - 1.0f)));
+                    float damagebyArea = (float) (range - (float) (normalizedDistance * (range - 1.0f)));
                     target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.MASKIMPACT, user), damagebyArea);
+                    System.out.println("Hello");
                 } else {
                     float damagebyCustom = (amount - (float) (normalizedDistance * (amount - 0.1f)));
-                    target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BLEEDOUT, user), damagebyCustom);
+                    target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BLOODSCYTHE, user), damagebyCustom);
                 }
                 if (doEffect) {
                     if (user.getWorld() instanceof ServerWorld) { // Particle

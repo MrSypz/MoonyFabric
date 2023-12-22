@@ -42,6 +42,6 @@ public class PolearmItem extends EmptySwordItem{
 
     static {
         REACH_MODIFIER = new EntityAttributeModifier(UUID.fromString("3ad3431a-2ceb-4501-b66b-2487064263c7"), "Weapon modifier", 1.5D, EntityAttributeModifier.Operation.ADDITION);
-        CRIT_CHANCE_MODIFIER = new EntityAttributeModifier(UUID.fromString("29880e68-9300-4d5c-a73a-18ad9c83f80c"), "Weapon modifier",5.0D, EntityAttributeModifier.Operation.ADDITION);
+        CRIT_CHANCE_MODIFIER = new EntityAttributeModifier(UUID.fromString("29880e68-9300-4d5c-a73a-18ad9c83f80c"), "Weapon modifier",10.0D, EntityAttributeModifier.Operation.ADDITION);
     }
 }

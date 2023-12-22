@@ -64,6 +64,7 @@ dependencies {
 
     modImplementation include ("dev.emi:trinkets:${trinkets_version}")
 
+
     modImplementation include("com.jamieswhiteshirt:reach-entity-attributes:$reach_version")
 }
 

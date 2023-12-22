@@ -1,6 +1,7 @@
 package sypztep.mamy.common;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -9,6 +10,7 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sypztep.mamy.common.init.*;
+import sypztep.mamy.common.packetC2S.AirhikePacket;
 import sypztep.mamy.common.packetC2S.MaskPacket;
 import sypztep.mamy.common.packetC2S.SonidoClearPacket;
 import sypztep.mamy.common.packetC2S.SonidoPacket;
@@ -33,6 +35,7 @@ public class MamyMod implements ModInitializer {
         ServerPlayNetworking.registerGlobalReceiver(SonidoClearPacket.ID, new SonidoClearPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(SonidoPacket.ID, new SonidoPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(MaskPacket.ID, new MaskPacket.Receiver());
+        ServerPlayNetworking.registerGlobalReceiver(AirhikePacket.ID,new AirhikePacket.Receiver());
 
         ModEnchantments.init();
         ModSoundEvents.init();
@@ -45,6 +48,8 @@ public class MamyMod implements ModInitializer {
         ModItemGroup.init();
         ModLootableModifiers.LootTable();
         ModConfig.init(MODID, ModConfig.class);
+
+        EntityElytraEvents.ALLOW.register((entity -> false));
 
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
             if (!(entity instanceof PlayerEntity player))

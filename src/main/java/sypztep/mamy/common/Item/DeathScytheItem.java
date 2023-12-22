@@ -25,6 +25,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -40,7 +41,7 @@ import static sypztep.mamy.common.util.SkillUtil.getCounts;
 
 public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundItem, CustomHitParticleItem{
     public DeathScytheItem() {
-        super(ToolMaterials.NETHERITE,6, -3f, new Settings().fireproof());
+        super(ToolMaterials.NETHERITE,6, -3f, new Settings().fireproof().rarity(Rarity.EPIC));
     }
     private static final EntityAttributeModifier REACH_MODIFIER;
     private static final EntityAttributeModifier CRIT_DAMAGE_MODIFIER;
@@ -66,8 +67,8 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         }
         if (!world.isClient()) {
             if (!user.getItemCooldownManager().isCoolingDown(itemStack.getItem())) {
-                SkillUtil.ShockWaveDamage(user,3.0d, 0.5f, true,true);
-                user.heal(getCounts() * 0.25f); //heal amount target hit with efficiency 25%
+                SkillUtil.ShockWaveDamage(user,5.0d, 20.0f, true,true);
+                user.heal(getCounts() * 0.5f); //heal amount target hit with efficiency 5%
                 addSwirlingParticles(user);
                 count++;
                 if (count >= 5 ) {
@@ -93,7 +94,7 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         MutableText info = (Text.translatable(registryName + ".desc" ,String.valueOf(String.format("%.2f",player.getHealth() * 0.25f)))).formatted(Formatting.GRAY);
         MutableText passive = (Text.translatable(registryName + ".desc.passive")).formatted(Formatting.GRAY);
         list.add(Text.literal(" - ").append((Text.literal("Passive : ").append(passive).formatted(Formatting.GOLD))).formatted(Formatting.GRAY));
-        list.add(Text.literal(" - ").append((Text.literal("Ability : RightClick").formatted(Formatting.GOLD))).formatted(Formatting.GRAY));
+        list.add(Text.literal(" - ").append((Text.literal("Ability : Right Click").formatted(Formatting.GOLD))).formatted(Formatting.GRAY));
         list.add((info).append((Text.literal(String.valueOf(String.format("%.2f",player.getHealth() * 0.25f)))).formatted(Formatting.RED).append(Text.literal(" ♥"))));
     }
     private void addSwirlingParticles(PlayerEntity player) { //Client Packet
@@ -119,8 +120,9 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
             serverWorld.spawnParticles(ModParticles.RED_SWEEP_ATTACK_PARTICLE, user.getX() + d0, user.getBodyY(0.5), user.getZ() + d1, 0, d0, 0.0, d1, 0.0);
         }
     }
+
     static {
         REACH_MODIFIER = new EntityAttributeModifier(UUID.fromString("911af262-067d-4da2-854c-20f03cc2dd8b"), "Weapon modifier", 0.5D, EntityAttributeModifier.Operation.ADDITION);
-        CRIT_DAMAGE_MODIFIER = new EntityAttributeModifier(UUID.fromString("4cdc0e38-c037-42bf-864f-5c745ddf0b61"), "Weapon modifier", 5.0D, EntityAttributeModifier.Operation.ADDITION);
+        CRIT_DAMAGE_MODIFIER = new EntityAttributeModifier(UUID.fromString("4cdc0e38-c037-42bf-864f-5c745ddf0b61"), "Weapon modifier", 50.0D, EntityAttributeModifier.Operation.ADDITION);
     }
 }
