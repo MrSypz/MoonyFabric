@@ -16,7 +16,8 @@ import sypztep.mamy.common.init.ModEnchantments;
 import sypztep.mamy.common.init.ModStatusEffects;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin {
+public abstract class LivingEntityMixin{
+
     @Shadow public abstract ItemStack getMainHandStack();
 
     @Shadow public abstract @Nullable StatusEffectInstance getStatusEffect(StatusEffect effect);
@@ -24,6 +25,7 @@ public abstract class LivingEntityMixin {
     @Shadow public boolean handSwinging;
 
     @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
+
 
     @Inject(at = @At("HEAD"), method = "onAttacking")
     public void onAttacking(Entity target, CallbackInfo ci) {
@@ -33,7 +35,7 @@ public abstract class LivingEntityMixin {
             StatusEffectInstance fervorInstance = this.getStatusEffect(ModStatusEffects.LETHALTEMPO);
             if(fervorInstance != null) {
                 tempocount = fervorInstance.getAmplifier();
-                if (tempocount < tempolevel * 2 - 1 && !this.handSwinging)
+                if (tempocount < tempolevel && !this.handSwinging)
                     tempocount++;
             }
             this.addStatusEffect(new StatusEffectInstance(ModStatusEffects.LETHALTEMPO,  20 + tempolevel * 12, tempocount));

@@ -15,18 +15,18 @@ public class ModEnchantments {
     public static List<EmptyEnchantment> ModEnchantmentList = new ArrayList<>();
     //SWORD
     public static EmptyEnchantment ELECTRO_DECREE = new ElectroEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
-    public static EmptyEnchantment LETHAL_TEMPO = new OnHitApplyEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment LETHAL_TEMPO = new LethalTempoEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static EmptyEnchantment FERVOR_OF_BATTLE = new OnHitApply2Enchantment(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static EmptyEnchantment CARVE = new OnHitApplyEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     //CROSSBOW
     public static EmptyEnchantment MISSILE_HOMMING = new CrossbowEnchantment(Enchantment.Rarity.COMMON, EnchantmentTarget.CROSSBOW, EquipmentSlot.MAINHAND);
     //WEARABLE
-    public static EmptyEnchantment VITALITY = new VitalityEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR);
-    public static EmptyEnchantment HOLLOW_CURSE = new HollowCurseEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR);
+    public static EmptyEnchantment VITALITY = new VitalityEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.VANISHABLE);
+    public static EmptyEnchantment HOLLOW_CURSE = new HollowCurseEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR, EquipmentSlot.HEAD);
     //HOE
-    public static EmptyEnchantment GREEDYANG = new GreedYangEnchantment(Enchantment.Rarity.UNCOMMON,EnchantmentTarget.VANISHABLE);
-    public static EmptyEnchantment GOLIATH = new GoliathEnchantment(Enchantment.Rarity.RARE,EnchantmentTarget.WEAPON);
-    public static EmptyEnchantment VENGEANCE = new VengeanceEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment VAMPR = new VamprEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment GOLIATH = new GoliathEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment VENGEANCE = new VengeanceEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND, EquipmentSlot.MAINHAND);
 
 
     public static void init() {
@@ -37,7 +37,7 @@ public class ModEnchantments {
         init("carve", CARVE);
         init("missilehomming", MISSILE_HOMMING);
         init("hollowcurse",HOLLOW_CURSE);
-        init("greedyang",GREEDYANG);
+        init("vampr", VAMPR);
         init("goliath",GOLIATH);
         init("vengeance", VENGEANCE);
     }

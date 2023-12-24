@@ -29,16 +29,16 @@ public class ElectroEnchantment extends EmptyEnchantment {
             return;
         }
         if (user.getWorld() instanceof ServerWorld && target instanceof LivingEntity) {
-            StatusEffectInstance mark = ((LivingEntity) target).getStatusEffect(ModStatusEffects.ELECTRO_MARK);
+            StatusEffectInstance mark = ((LivingEntity) target).getStatusEffect(ModStatusEffects.ELECTRO);
             if(mark != null && mark.getAmplifier() > 8 - level) {
                 for (LivingEntity e : list) {
                     if (!e.equals(user)) {
                         double distanceToTarget = e.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
                         double normalizedDistance = Math.sqrt(distanceToTarget) / 8.5D; // Normalize distance to a range of 0 to 1
                         float damage = level - (float) (normalizedDistance * (level - 0.1f));
-                        e.damage(e.getWorld().getDamageSources().create(ModDamageTypes.ELECTRO,user), damage * 0.7f);
-                        target.playSound(SoundEvents.ENTITY_PUFFER_FISH_FLOP,1f,1.1f);
-                        ((LivingEntity) target).removeStatusEffect(ModStatusEffects.ELECTRO_MARK);
+                        e.damage(e.getWorld().getDamageSources().create(ModDamageTypes.ELECTRO,user),  level + damage);
+                        target.playSound(SoundEvents.BLOCK_DECORATED_POT_SHATTER,1f, (float) (1.0f + user.getRandom().nextGaussian() / 15f));
+                        ((LivingEntity) target).removeStatusEffect(ModStatusEffects.ELECTRO);
                         if (user.getWorld() instanceof ServerWorld) { // Particle
                             double xdif = e.getX() - target.getX();
                             double ydif = e.getBodyY(0.5D) - target.getBodyY(0.5D);
@@ -48,7 +48,7 @@ public class ElectroEnchantment extends EmptyEnchantment {
                             double y = 0;
                             double z = 0;
                             while (Math.abs(x) < Math.abs(xdif)) {
-                                ((ServerWorld) target.getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, target.getX() + x,
+                                ((ServerWorld) target.getWorld()).spawnParticles(ParticleTypes.END_ROD, target.getX() + x,
                                         target.getBodyY(0.5D) + y, target.getZ() + z, 0, 1, 0.0D, 1, 0.1D);
                                 x = x + xdif / particleNumConstant;
                                 y = y + ydif / particleNumConstant;

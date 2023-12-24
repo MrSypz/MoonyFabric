@@ -60,7 +60,7 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     modImplementation include ("com.github.MrSypz:Pickyourpoison-Fabric:${project.pickyourpoison_version}")
-    modImplementation include ("com.github.MrSypz:mamybar:${project.mamybar_version}")
+//    modImplementation include ("com.github.MrSypz:mamybar:${project.mamybar_version}")
 
     modImplementation include ("dev.emi:trinkets:${trinkets_version}")
 

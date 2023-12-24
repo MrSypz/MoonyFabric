@@ -86,9 +86,9 @@
   "enchantment.mamy.electrodecree" : "Electo Decree",
   "enchantment.mamy.electrodecree.desc" : "when hit the same target it'll deal Aoe(range 8 blocks) electro damage ,Highest damage on nearest target.",
   "enchantment.mamy.lethaltempo" : "Lethal Tempo",
-  "enchantment.mamy.lethaltempo.desc" : "Swing weapon faster when attack over time",
+  "enchantment.mamy.lethaltempo.desc" : "Swing weapon faster when attack over time Every 3 hit deal true damage amount (65% of player attack damage)",
   "enchantment.mamy.fervorofbattle" : "Fervor of Battle",
-  "enchantment.mamy.fervorofbattle.desc" : "Deal 1 damage / stacks up to level(maximun 8 stacks).",
+  "enchantment.mamy.fervorofbattle.desc" : "Deal 0.8 damage / stacks up to level(maximun 8 stacks).",
   "enchantment.mamy.hollowcurse" : "Hollow Curse",
   "enchantment.mamy.hollowcurse.desc" : "Can't unequiped and disappear when dead.",
   "enchantment.mamy.carve" : "Carve",
@@ -101,6 +101,8 @@
   "enchantment.mamy.goliath.desc" : "Deal damage more 8% of target health and heal 8% of damage that done (Not affect to boss)",
   "enchantment.mamy.vengeance" : "Vengeance",
   "enchantment.mamy.vengeance.desc" : "Spewing blood deal 15 damages and penetrate all target until it disappear",
+  "enchantment.mamy.vampr" : "Vampr",
+  "enchantment.mamy.vampr.desc" : "Heal (amount of target around user) and deal 1 true damage",
 
 
   "death.attack.hogyoku": "%1$s Your soul are now starting kindle.",
@@ -112,7 +114,6 @@
   "death.attack.bleedout.player": "%1$s Get exsanguinated by %2$s.",
   "death.attack.bloodlust": "%1$s HIV got him.",
   "death.attack.bloodlust.player": "%1$s Get HIV by %2$s.",
-
 
   "attribute.generic.crit_chance": "Crit Chance",
   "attribute.generic.crit_damage": "Crit Damage"

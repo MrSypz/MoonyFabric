@@ -23,10 +23,10 @@ public class PlayerEntityMixin {
             if (target.isAttackable() && !target.getWorld().isClient) {
                 if (!target.handleAttack((PlayerEntity)(Object) this) && target instanceof LivingEntity && !((PlayerEntity)(Object) this).handSwinging) {
                     int mark = 0;
-                    StatusEffectInstance markInstance = ((LivingEntity) target).getStatusEffect(ModStatusEffects.ELECTRO_MARK);
+                    StatusEffectInstance markInstance = ((LivingEntity) target).getStatusEffect(ModStatusEffects.ELECTRO);
                     if(markInstance!= null)
                         mark = markInstance.getAmplifier() + 2; // + (amp เท่าไรถึงจะระเบิด)
-                    ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(ModStatusEffects.ELECTRO_MARK, 20 + electro * 4, mark));
+                    ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(ModStatusEffects.ELECTRO, 20 + electro * 4, mark));
                     ((ServerWorld) ((PlayerEntity)(Object) this).getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, target.getX(), target.getBodyY(0.5D), target.getZ(), 22, 0.4, 0.6, 0.4, 0.0D);
                 }
             }

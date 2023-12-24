@@ -21,9 +21,9 @@ public class GoliathEnchantment extends EmptyEnchantment {
             return;
         }
         if (target instanceof LivingEntity living && !target.getType().isIn(ModTags.EntityTypes.CANNOT_GOLIATH))
-            living.damage(living.getWorld().getDamageSources().playerAttack((PlayerEntity) user),(living.getHealth() * 0.08f));
+            living.damage(living.getWorld().getDamageSources().playerAttack((PlayerEntity) user),(living.getHealth() * 0.12f));
         else if (target instanceof WardenEntity living)
-            living.damage(living.getWorld().getDamageSources().playerAttack((PlayerEntity) user),(living.getHealth() * 0.02f));
+            living.damage(living.getWorld().getDamageSources().playerAttack((PlayerEntity) user),(living.getHealth() * 0.03f));
         user.heal(EnchantmentUtil.AmountDeal * 0.08f); //Heal 8% of damage that deal
         super.onTargetDamaged(user, target, level);
     }

@@ -21,7 +21,7 @@ public class ModConfig extends MidnightConfig {
     public static float knockbackCancelThreshold = 0.75f;
     public static String[] attackExcludedEntities = new String[] {"minecraft:slime", "minecraft:magma_cube"};
     public static String[] dmgReceiveExcludedEntities = new String[] {};
-    public static String[] damageSrcWhitelist = new String[] {"inFire", "lava", "sweetBerryBush", "cactus", "lightningBolt", "inWall", "hotFloor", "bloodlust", "bite"};
+    public static String[] damageSrcWhitelist = new String[] {"inFire", "lava", "sweetBerryBush", "cactus", "lightningBolt", "inWall", "hotFloor"};
     @Comment(centered = true)
     public static Comment MaskDashEffect;
     @Entry

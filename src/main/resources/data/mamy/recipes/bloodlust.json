@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "#",
+        "M"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:iron_block"
+        },
+        "M": {
+            "item": "mamy:iron_polearm"
+        }
+    },
+    "result": {
+        "item": "mamy:bloodlust",
+        "count": 1
+    }
+}
