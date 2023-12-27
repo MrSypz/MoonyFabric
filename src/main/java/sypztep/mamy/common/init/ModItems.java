@@ -56,7 +56,6 @@ public class ModItems {
         NETHERITE_POLEARM= registerSworditem("netherite_polearm", new PolearmItem(ToolMaterials.NETHERITE,4,-3F,new FabricItemSettings().fireproof()));
 
 
-
         DEATH_SCYTHE = registerSworditem("death_scythe", new DeathScytheItem());
         BLOODLUST = registerSworditem("bloodlust", new BloodlustItem(ToolMaterials.IRON,5,-3f,new Item.Settings().rarity(Rarity.COMMON)));
         //CONSUME

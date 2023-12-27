@@ -14,10 +14,11 @@ public class ModEntityTypes {
     public static EntityType<BloodLustEntity> BLOOD_LUST;
     public static void init() {
         BLOOD_LUST = registerEntity("bloodlust", createEntityTypeSlash(BloodLustEntity::new));
+
     }
 
-    private static <T extends Entity> EntityType<T> registerEntity(String id, EntityType<T> entityType) {
-        return Registry.register(Registries.ENTITY_TYPE, MamyMod.MODID + ":" + id, entityType);
+    private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType<T> entityType) {
+        return Registry.register(Registries.ENTITY_TYPE, MamyMod.id(name), entityType);
     }
     private static <T extends Entity> EntityType<T> createEntityType(EntityType.EntityFactory<T> factory) {
         return FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory).dimensions(EntityDimensions.changing(0.5f, 0.5f)).trackRangeBlocks(128).build();

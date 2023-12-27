@@ -19,6 +19,7 @@
     "util.LivingEntityMixin",
     "util.PlayerEntityMixin",
     "util.accesor.LivingEntityAccessor",
+    "util.accesor.TridentEntityAccessor",
     "util.storecrit.LivingEntityMixin",
     "util.storecrit.PlayerEntityMixin",
     "util.storedamage.LivingEntityMixin",

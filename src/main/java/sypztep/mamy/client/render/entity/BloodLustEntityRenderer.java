@@ -12,7 +12,7 @@ import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.entity.projectile.BloodLustEntity;
 
 public class BloodLustEntityRenderer<T extends BloodLustEntity> extends EntityRenderer<T> {
-    public static final Identifier TEXTURE = MamyMod.id( "textures/entity/bloodlust.png");
+    private static final Identifier TEXTURE = MamyMod.id( "textures/entity/bloodlust.png");
     public BloodLustEntityRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);
     }

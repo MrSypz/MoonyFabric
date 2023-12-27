@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
@@ -21,6 +22,7 @@ import sypztep.mamy.client.packetS2C.*;
 import sypztep.mamy.client.particle.*;
 import sypztep.mamy.client.registry.Itemregistry;
 import sypztep.mamy.client.render.entity.BloodLustEntityRenderer;
+import sypztep.mamy.client.render.entity.MamyTridentEntityRenderer;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.ModConfig;
 import sypztep.mamy.common.init.ModEntityTypes;
@@ -59,9 +61,10 @@ public class MamyModClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(AddHogyokuParticlePacket.ID, new AddHogyokuParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(AddAirhikeParticlesPacket.ID,new AddAirhikeParticlesPacket.Receiver());
 
-        ParticleFactoryRegistry.getInstance().register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
-
         EntityRendererRegistry.register(ModEntityTypes.BLOOD_LUST, BloodLustEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.PITCHFORK, (EntityRendererFactory.Context ctx) -> new MamyTridentEntityRenderer(ctx, MamyMod.id("textures/entity/pitchfork.png")));
+
+        ParticleFactoryRegistry.getInstance().register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.BACKATTACK, BackAttackParticle.Factory::new);
 

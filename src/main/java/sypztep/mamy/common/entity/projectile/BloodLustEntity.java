@@ -21,6 +21,7 @@ public class BloodLustEntity extends PersistentProjectileEntity {
     public BloodLustEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
+
     @Override
     protected ItemStack asItemStack() {
         return ItemStack.EMPTY;
