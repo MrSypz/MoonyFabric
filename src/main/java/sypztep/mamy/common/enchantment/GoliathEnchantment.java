@@ -17,6 +17,7 @@ public class GoliathEnchantment extends EmptyEnchantment {
     }
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
+        EnchantmentUtil util = new EnchantmentUtil();
         if (EnchantmentUtil.hasEnchantment(this, user.getMainHandStack()) && user.distanceTo(target) >= 6) {
             return;
         }
@@ -24,7 +25,7 @@ public class GoliathEnchantment extends EmptyEnchantment {
             living.damage(living.getWorld().getDamageSources().playerAttack((PlayerEntity) user),(living.getHealth() * 0.12f));
         else if (target instanceof WardenEntity living)
             living.damage(living.getWorld().getDamageSources().playerAttack((PlayerEntity) user),(living.getHealth() * 0.03f));
-        user.heal(EnchantmentUtil.AmountDeal * 0.08f); //Heal 8% of damage that deal
+        user.heal(util.AmountDeal * 0.08f); //Heal 8% of damage that deal
         super.onTargetDamaged(user, target, level);
     }
     @Override

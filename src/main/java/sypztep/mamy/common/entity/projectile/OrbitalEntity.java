@@ -99,8 +99,7 @@ public class OrbitalEntity extends PersistentProjectileEntity {
 	}
 	private void addParticles(double x, double y, double z) {
 		float range = MathHelper.lerp(15, 0, 0.3F);
-		for (int i = 0; i < 16; i++) {
+		for (int i = 0; i < 16; i++)
 			getWorld().addParticle(ParticleTypes.FLASH,true, x + MathHelper.nextFloat(random, -range, range), y + MathHelper.nextFloat(random, -range, range), z + MathHelper.nextFloat(random, -range, range), MathHelper.nextFloat(random, -2, 2), MathHelper.nextFloat(random, -2, 2), MathHelper.nextFloat(random, -2, 2));
-		}
 	}
 }

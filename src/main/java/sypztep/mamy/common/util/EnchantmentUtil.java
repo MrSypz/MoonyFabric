@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EnchantmentUtil {
-    public static float AmountDeal = 0;
+    public float AmountDeal = 0;
 
     public static boolean hasEnchantment(Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getLevel(enchantment, stack) > 0;
@@ -28,10 +28,10 @@ public class EnchantmentUtil {
     public static boolean hasEnchantment(Enchantment enchantment, Entity entity) {
         return entity instanceof LivingEntity living && EnchantmentHelper.getEquipmentLevel(enchantment, living) > 0;
     }
-    public static float getDamageAmount () {
+    public float getDamageAmount () {
         return AmountDeal;
     }
-    public static void setDamageAmount(float amount) {
+    public void setDamageAmount(float amount) {
         AmountDeal = amount;
     }
     public static boolean isMaskValid(ItemStack stack) {

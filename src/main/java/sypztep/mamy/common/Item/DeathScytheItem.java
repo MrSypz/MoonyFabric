@@ -3,9 +3,6 @@ package sypztep.mamy.common.Item;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -18,7 +15,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -38,7 +34,6 @@ import sypztep.mamy.common.util.SkillUtil;
 import java.util.List;
 import java.util.UUID;
 
-import static sypztep.mamy.common.util.SkillUtil.getCounts;
 
 public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundItem, CustomHitParticleItem {
     public DeathScytheItem() {
@@ -60,25 +55,26 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
     @Override
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+        SkillUtil scytheskill = new SkillUtil();
         if (EnchantmentHelper.getEquipmentLevel(ModEnchantments.VENGEANCE, user) <= 0)
             return super.use(world, user, hand);
         else {
             if (world.isClient()) {
-                if (!user.getItemCooldownManager().isCoolingDown(itemStack.getItem())) {
+                if ((user.getStatusEffect(ModStatusEffects.SCYTHE_COOLDOWN) == null)) {
                     user.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1, (float) (1.5f + user.getRandom().nextGaussian() / 10));
                     return TypedActionResult.consume(itemStack);
                 }
             }
             if (!world.isClient()) {
-                if (!user.getItemCooldownManager().isCoolingDown(itemStack.getItem())) {
-                    SkillUtil.ShockWaveDamage(user, 4.0d, 22.0f, true, true);
-                    user.heal(getCounts() * 0.5f); //heal amount target hit with efficiency 5%
-                    addSwirlingParticles(user);
+                if ((user.getStatusEffect(ModStatusEffects.SCYTHE_COOLDOWN) == null)) {
+                    scytheskill.ShockWaveDamage(user, 5.0d, 22.0f, true, true);
+                    user.heal(scytheskill.getCounts()); //heal 50 % amount damage +
+                    AddSwirlingParticlePacket.send((ServerPlayerEntity) user);
                     count++;
                     if (count >= 5) {
-                        user.getItemCooldownManager().set(itemStack.getItem(), 60);
-                        user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.BLEEDOUT), +user.getHealth() * 0.25f); // consume 25% of player current health
+                        user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.BLEEDOUT), user.getHealth() * 0.25f); // consume 25% of player current health
                         user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.GRIEVOUSWOUNDS, 180, 0, false, false, false));
+                        user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.SCYTHE_COOLDOWN, 120, 0, false, false, true));
                         count = 0;
                     }
                 }
@@ -101,16 +97,6 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         list.add(Text.literal(" - ").append((Text.literal("Passive : ").append(passive).formatted(Formatting.GOLD))).formatted(Formatting.GRAY));
         list.add(Text.literal(" - ").append((Text.literal("Ability : Right Click").formatted(Formatting.GOLD))).formatted(Formatting.GRAY));
         list.add((info).append((Text.literal(String.valueOf(String.format("%.2f",player.getHealth() * 0.25f)))).formatted(Formatting.RED).append(Text.literal(" ♥"))));
-    }
-    private void addSwirlingParticles(PlayerEntity player) { //Client Packet
-        ServerPlayerEntity dys = ((ServerPlayerEntity) player);
-        PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeDouble(dys.getX());
-        buf.writeDouble(dys.getBodyY(0.2f));
-        buf.writeDouble(dys.getZ());
-        for (ServerPlayerEntity pl : PlayerLookup.tracking(dys.getServerWorld(), dys.getChunkPos())) {
-            ServerPlayNetworking.send(pl, AddSwirlingParticlePacket.ID, buf);
-        }
     }
     @Override
     public void playHitSound(PlayerEntity user) {

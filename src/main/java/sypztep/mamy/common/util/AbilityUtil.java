@@ -49,9 +49,10 @@ public class AbilityUtil {
         }
         int baseValue = (int) user.getAttributes().getBaseValue(ModEntityAttributes.GENERIC_HOGYOKU);
         ItemStack Hollowmask = getItemStack(baseValue);
+        SkillUtil maskskill = new SkillUtil();
         Hollowmask.addEnchantment(ModEnchantments.HOLLOW_CURSE, 1);
         user.equipStack(EquipmentSlot.HEAD, Hollowmask);
-        SkillUtil.ShockWaveDamage(user, 10,0, false,false);
+        maskskill.ShockWaveDamage(user, 10,0, false,false);
         user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.MASKIMPACT, user), user.getHealth() * 0.5f);
         OrbitalEntity orbitalEntity = new OrbitalEntity(user.getWorld(),user);
         user.getWorld().spawnEntity(orbitalEntity);

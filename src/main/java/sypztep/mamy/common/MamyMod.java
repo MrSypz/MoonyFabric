@@ -11,10 +11,7 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sypztep.mamy.common.init.*;
-import sypztep.mamy.common.packetC2S.AirhikePacket;
-import sypztep.mamy.common.packetC2S.MaskPacket;
-import sypztep.mamy.common.packetC2S.SonidoClearPacket;
-import sypztep.mamy.common.packetC2S.SonidoPacket;
+import sypztep.mamy.common.packetC2S.*;
 import sypztep.mamy.common.util.HogyokuState;
 
 import java.util.Objects;

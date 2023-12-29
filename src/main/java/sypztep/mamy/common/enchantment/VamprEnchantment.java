@@ -25,6 +25,7 @@ public class VamprEnchantment extends EmptyEnchantment{
         if (!EnchantmentUtil.hasEnchantment(this, user.getMainHandStack()) || user.distanceTo(target) >= 6 || !(target instanceof LivingEntity)){
             return;
         }
+        EnchantmentUtil vampramount = new EnchantmentUtil();
         if (user.getStatusEffect(ModStatusEffects.VAMPR_COOLDOWN) == null) {
             List<LivingEntity> list = target.getWorld().getNonSpectatingEntities(LivingEntity.class, target.getBoundingBox()
                     .expand(1 + level, 0.25D, 1 + level));
@@ -56,7 +57,7 @@ public class VamprEnchantment extends EmptyEnchantment{
                     }
                 }
             }
-            user.heal(counter + (level) + (EnchantmentUtil.getDamageAmount() * 0.3f));
+            user.heal(counter + (level) + (vampramount.getDamageAmount() * 0.3f));
             user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.VAMPR_COOLDOWN, 300 - (level * 20)));
             if(user.getWorld() instanceof ServerWorld)
                 ((ServerWorld) user.getWorld()).spawnParticles(ParticleTypes.HEART, user.getX(), user.getBodyY(0.5D), user.getZ(), 3, 0.4, 0.5, 0.4, 0.0D);
