@@ -25,7 +25,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "modifyAppliedDamage", at = @At("HEAD"))
     private void applyDamage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         if (source.getAttacker() != null) {
-            EnchantmentUtil.getDamageAmount(amount);
+            EnchantmentUtil.setDamageAmount(amount);
         }
     }
 }

@@ -28,26 +28,29 @@ public class EnchantmentUtil {
     public static boolean hasEnchantment(Enchantment enchantment, Entity entity) {
         return entity instanceof LivingEntity living && EnchantmentHelper.getEquipmentLevel(enchantment, living) > 0;
     }
-    public static float getDamageAmount(float amount) {
-        return AmountDeal = amount;
+    public static float getDamageAmount () {
+        return AmountDeal;
+    }
+    public static void setDamageAmount(float amount) {
+        AmountDeal = amount;
     }
     public static boolean isMaskValid(ItemStack stack) {
         return stack != null && stack.getItem() instanceof HollowmaskItem ;
     }
     public static boolean hasMaskOnHelmet(PlayerEntity player) {
-        return isMaskValid(getChestSlotItem(player));
+        return isMaskValid(getHeadSlot(player));
     }
     public static boolean hasMaskEquipped(PlayerEntity player) {
-        return isMaskValid(getEquippedCloakItem(player));
+        return isMaskValid(getEquippedMaskItem(player));
     }
 
-    public static ItemStack getChestSlotItem(PlayerEntity player) {
+    public static ItemStack getHeadSlot(PlayerEntity player) {
         return player.getEquippedStack(EquipmentSlot.HEAD);
     }
 
-    public static ItemStack getEquippedCloakItem(PlayerEntity player) {
+    public static ItemStack getEquippedMaskItem(PlayerEntity player) {
         if (hasMaskOnHelmet(player) && VizardComponent.hasMask && VizardComponent.invisDuration != 0) {
-            return getChestSlotItem(player);
+            return getHeadSlot(player);
         }
         return null;
     }

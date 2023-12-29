@@ -7,17 +7,14 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import sypztep.mamy.common.MamyMod;
-import sypztep.mamy.common.statuseffects.EmptyStatusEffect;
-import sypztep.mamy.common.statuseffects.MarkStatusEffect;
-import sypztep.mamy.common.statuseffects.TempoStatusEffect;
-import sypztep.mamy.common.statuseffects.VamprCooldownEffect;
+import sypztep.mamy.common.statuseffects.*;
 
 public class ModStatusEffects {
 
     public static final StatusEffect ELECTRO = new MarkStatusEffect();
     public static final StatusEffect GRIEVOUSWOUNDS = new EmptyStatusEffect(StatusEffectCategory.HARMFUL,448536);
     public static final StatusEffect LETHALTEMPO = new TempoStatusEffect();
-    public static final StatusEffect VAMPR_COOLDOWN = new VamprCooldownEffect();
+    public static final StatusEffect VAMPR_COOLDOWN = new SecCooldown();
     public static final StatusEffect FERVOR_OF_BATTLE = new TempoStatusEffect()
             .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,"28E38CA1-61D3-4E65-98CD-D15DF2E33CF3",0.8D, EntityAttributeModifier.Operation.ADDITION);
     public static final StatusEffect CARVE = new MarkStatusEffect()

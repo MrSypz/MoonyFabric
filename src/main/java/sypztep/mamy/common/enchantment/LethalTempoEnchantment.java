@@ -6,6 +6,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.SwordItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import sypztep.mamy.common.init.ModDamageTypes;
@@ -21,10 +22,10 @@ public class LethalTempoEnchantment extends OnHitApplyEnchantment{
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         float damage = (float) user.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE) * 0.65f;
-        if (EnchantmentUtil.hasEnchantment(this, user.getMainHandStack()) && user.distanceTo(target) >= 6) {
+        if (EnchantmentUtil.hasEnchantment(this, user.getMainHandStack()) && user.distanceTo(target) >= 6 ) {
             return;
         }
-        if (user.getWorld() instanceof ServerWorld && target instanceof LivingEntity LivingTarget) {
+        if (user.getWorld() instanceof ServerWorld && target instanceof LivingEntity LivingTarget && user.getMainHandStack().getItem() instanceof SwordItem) {
             StatusEffectInstance bid = ((LivingEntity) target).getStatusEffect(ModStatusEffects.BRING_IT_DOWN);
             if (bid != null && bid.getAmplifier() > 6 - level) {
                 if (!LivingTarget.equals(user)) {

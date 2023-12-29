@@ -1,5 +1,7 @@
 package sypztep.mamy.client.render.entity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -10,7 +12,7 @@ import net.minecraft.util.math.MathHelper;
 import org.joml.Quaternionf;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.entity.projectile.BloodLustEntity;
-
+@Environment(EnvType.CLIENT)
 public class BloodLustEntityRenderer<T extends BloodLustEntity> extends EntityRenderer<T> {
     private static final Identifier TEXTURE = MamyMod.id( "textures/entity/bloodlust.png");
     public BloodLustEntityRenderer(EntityRendererFactory.Context ctx) {

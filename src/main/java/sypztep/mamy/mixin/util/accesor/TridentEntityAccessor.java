@@ -9,24 +9,24 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(TridentEntity.class)
 public interface TridentEntityAccessor {
     @Accessor("LOYALTY")
-    static TrackedData<Byte> impaled$getLoyalty() {
+    static TrackedData<Byte> mamy$getLoyalty() {
         return null;
     }
 
     @Accessor("ENCHANTED")
-    static TrackedData<Boolean> impaled$getEnchanted() {
+    static TrackedData<Boolean> mamy$getEnchanted() {
         return null;
     }
 
     @Accessor("tridentStack")
-    ItemStack impaled$getTridentStack();
+    ItemStack mamy$getTridentStack();
 
     @Accessor("tridentStack")
-    void impaled$setTridentStack(ItemStack stack);
+    void mamy$setTridentStack(ItemStack stack);
 
     @Accessor("dealtDamage")
-    boolean impaled$hasDealtDamage();
+    boolean mamy$hasDealtDamage();
 
     @Accessor("dealtDamage")
-    void impaled$setDealtDamage(boolean dealtDamage);
+    void mamy$setDealtDamage(boolean dealtDamage);
 }

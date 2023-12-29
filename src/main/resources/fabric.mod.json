@@ -15,17 +15,20 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "sypztep.mamy.client.MamyModClient"
+      "sypztep.mamy.client.MamyModClient",
+      "sypztep.sincereloyalty.SincereLoyaltyClient::INSTANCE"
     ],
     "main": [
-      "sypztep.mamy.common.MamyMod"
+      "sypztep.mamy.common.MamyMod",
+      "sypztep.sincereloyalty.SincereLoyalty"
     ],
     "cardinal-components-entity": [
       "sypztep.mamy.common.init.ModEntityComponents"
     ]
   },
   "mixins": [
-    "mamy.mixins.json"
+    "mamy.mixins.json",
+    "sincereloyalty.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

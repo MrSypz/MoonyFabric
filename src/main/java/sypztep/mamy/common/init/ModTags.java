@@ -13,5 +13,7 @@ public class ModTags {
     }
     public static class Items {
         public static final TagKey<Item> CAN_BLOCK = TagKey.of(Registries.ITEM.getKey(), MamyMod.id("can_block"));
+        public static final TagKey<Item> LOYALTY_CATALYSTS = TagKey.of(Registries.ITEM.getKey(), MamyMod.id("loyalty_catalysts"));
+        public static final TagKey<Item> TRIDENTS = TagKey.of(Registries.ITEM.getKey(), MamyMod.id("tridents"));
     }
 }

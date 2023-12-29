@@ -28,18 +28,11 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow
     public abstract float getHealth();
 
-    @Shadow
-    public abstract float getMaxHealth();
 
     @Inject(method = "heal", at = @At("HEAD"), cancellable = true)
     private void mamy$GrievousReduceHeal(float amount, CallbackInfo ci) {
         if (this.hasStatusEffect(ModStatusEffects.GRIEVOUSWOUNDS) && this.getHealth() > 0.0f) {
-            float maxHealth = (this.getMaxHealth() * 0.5f);
-            float health = this.getHealth();
-            if (health < maxHealth)
-                this.setHealth(this.getHealth() + (amount *= 0.6f));
-            else
-                this.setHealth(this.getHealth() + (amount *= 0.75f));
+            this.setHealth(this.getHealth() + (amount *= 0.6f));
             ci.cancel();
         }
     }

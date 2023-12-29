@@ -9,6 +9,12 @@
     "enchantment.missilehomming.FireworkRocketEntityMixin",
     "enchantment.missilehomming.ProjectileEntityAccessor",
     "moditem.deathscythe.PlayerEntityMixin",
+    "moditem.throwingstuff.EnchantmentTargetMixin",
+    "moditem.throwingstuff.EntityMixin",
+    "moditem.throwingstuff.impaling.ImpalingEnchantmentMixin",
+    "moditem.throwingstuff.impaling.MobEntityMixin",
+    "moditem.throwingstuff.impaling.PlayerEntityMixin",
+    "moditem.throwingstuff.impaling.TridentEntityMixin",
     "statuseffect.carve.PlayerEntityMixin",
     "statuseffect.electrodecree.PlayerEntityMixin",
     "statuseffect.fervorofbattle.LivingEntityMixin",
@@ -35,6 +41,8 @@
   "client": [
     "moditem.hollowmask.client.ArmorFeatureRendererMixin",
     "moditem.hollowmask.client.PlayerEntityRendererMixin",
+    "moditem.throwingstuff.client.InGameOverlayRendererMixin",
+    "moditem.throwingstuff.impaling.client.EntityRendererMixin",
     "statuseffect.grievouswounds.client.InGameHudMixin"
   ],
   "injectors": {

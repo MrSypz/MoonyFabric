@@ -7,6 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.TridentEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
@@ -15,7 +16,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
-import sypztep.mamy.client.render.model.MamyTridentEntityModel;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -26,7 +26,7 @@ public class MamyTridentItemRenderer implements BuiltinItemRendererRegistry.Dyna
     private final Identifier texture;
     private final EntityModelLayer modelLayer;
     private ItemRenderer itemRenderer;
-    private MamyTridentEntityModel tridentModel;
+    private TridentEntityModel model;
     private BakedModel inventoryTridentModel;
 
     public MamyTridentItemRenderer(Identifier tridentId, Identifier texture, EntityModelLayer modelLayer) {
@@ -50,14 +50,14 @@ public class MamyTridentItemRenderer implements BuiltinItemRendererRegistry.Dyna
     public void reload(ResourceManager manager) {
         MinecraftClient mc = MinecraftClient.getInstance();
         this.itemRenderer = mc.getItemRenderer();
-        this.tridentModel = new MamyTridentEntityModel(mc.getEntityModelLoader().getModelPart(this.modelLayer));
+        this.model = new TridentEntityModel(mc.getEntityModelLoader().getModelPart(this.modelLayer));
         this.inventoryTridentModel = mc.getBakedModelManager().getModel(new ModelIdentifier(tridentId.getNamespace(),tridentId.getPath() + "_in_inventory", "inventory"));
     }
 
 
     @Override
     public void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if (this.tridentModel != null) {
+        if (this.model != null) {
             if (mode == ModelTransformationMode.GUI || mode == ModelTransformationMode.GROUND || mode == ModelTransformationMode.FIXED) {
                 matrices.pop(); // cancel the previous transformation and pray that we are not breaking the state
                 matrices.push();
@@ -65,8 +65,8 @@ public class MamyTridentItemRenderer implements BuiltinItemRendererRegistry.Dyna
             } else {
                 matrices.push();
                 matrices.scale(1.0F, -1.0F, -1.0F);
-                VertexConsumer vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, this.tridentModel.getLayer(this.texture), false, stack.hasGlint());
-                this.tridentModel.render(matrices, vertexConsumer, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
+                VertexConsumer vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, this.model.getLayer(this.texture), false, stack.hasGlint());
+                this.model.render(matrices, vertexConsumer, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
                 matrices.pop();
             }
         }

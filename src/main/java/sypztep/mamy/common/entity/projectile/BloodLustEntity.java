@@ -1,5 +1,6 @@
 package sypztep.mamy.common.entity.projectile;
 
+import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -10,9 +11,17 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import sypztep.mamy.common.init.*;
 
+import java.util.Iterator;
+import java.util.Set;
+
 public class BloodLustEntity extends PersistentProjectileEntity {
 
+    private final Set<StatusEffectInstance> effects = Sets.newHashSet();
     private int ticksUntilRemove = 5;
+    public void addEffect(StatusEffectInstance effect) {
+        this.effects.add(effect);
+    }
+
 
     public BloodLustEntity(World world, LivingEntity owner) {
         super(ModEntityTypes.BLOOD_LUST, owner, world);
@@ -43,10 +52,13 @@ public class BloodLustEntity extends PersistentProjectileEntity {
         if (this.ticksUntilRemove <= 0)
             this.discard();
         if (!this.getWorld().isClient) {
+            Iterator<LivingEntity> var6 = this.getWorld().getEntitiesByClass(LivingEntity.class, this.getBoundingBox(), (livingEntityx) -> this.getOwner() != livingEntityx).iterator();
+            while (var6.hasNext()) {
+                LivingEntity livingEntity = var6.next();
+                livingEntity.damage(getWorld().getDamageSources().create(ModDamageTypes.BLOODLUST,this,getOwner()), 15F);
 
-            for (LivingEntity livingEntity : this.getWorld().getEntitiesByClass(LivingEntity.class, this.getBoundingBox(), (livingEntityx) -> this.getOwner() != livingEntityx)) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(ModStatusEffects.GRIEVOUSWOUNDS, 60));
-                livingEntity.damage(getWorld().getDamageSources().create(ModDamageTypes.BLOODLUST, this, getOwner()), 15.0f);
+                for (StatusEffectInstance effect : this.effects)
+                    livingEntity.addStatusEffect(effect);
             }
         }
     }

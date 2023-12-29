@@ -10,6 +10,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
@@ -29,6 +30,8 @@ import sypztep.mamy.common.entity.projectile.BloodLustEntity;
 import sypztep.mamy.common.init.*;
 import sypztep.mamy.common.util.EnchantmentUtil;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,17 +48,37 @@ public class BloodlustItem extends EmptySwordItem implements CustomHitSoundItem,
          else {
             float f = 1.0F;
             if (!world.isClient && user instanceof LivingEntity) {
-                BloodLustEntity bloodScythe = new BloodLustEntity(world, user);
-                bloodScythe.setOwner(user);
-                bloodScythe.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, f * 3.0F, 0.0F);
-                bloodScythe.setDamage(bloodScythe.getDamage());
+                BloodLustEntity bloodLust = new BloodLustEntity(world, user);
+                bloodLust.setOwner(user);
+                bloodLust.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, f * 3.0F, 0.0F);
+                bloodLust.setDamage(bloodLust.getDamage());
                 user.getStackInHand(hand).damage(1, user, (p) -> {
                     p.sendToolBreakStatus(hand);
                 });
-                bloodScythe.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+                bloodLust.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+                ArrayList<StatusEffectInstance> statusEffectsHalved = new ArrayList();
+                float absorption = user.getAbsorptionAmount();
+                Iterator var8 = user.getStatusEffects().iterator();
+
+                StatusEffectInstance statusEffectInstance;
+                while (var8.hasNext()) {
+                    statusEffectInstance = (StatusEffectInstance) var8.next();
+                    StatusEffectInstance statusHalved = new StatusEffectInstance(statusEffectInstance.getEffectType(), statusEffectInstance.getDuration() / 2, statusEffectInstance.getAmplifier(), statusEffectInstance.isAmbient(), statusEffectInstance.shouldShowParticles(), statusEffectInstance.shouldShowIcon());
+                    bloodLust.addEffect(statusHalved);
+                    statusEffectsHalved.add(statusHalved);
+                }
+
+                user.clearStatusEffects();
+                var8 = statusEffectsHalved.iterator();
+
+                while (var8.hasNext()) {
+                    statusEffectInstance = (StatusEffectInstance) var8.next();
+                    user.addStatusEffect(statusEffectInstance);
+                }
+                user.setAbsorptionAmount(absorption);
                 user.damage(world.getDamageSources().create(ModDamageTypes.BLEEDOUT), 3F);
                 user.getItemCooldownManager().set(this, 30);
-                world.spawnEntity(bloodScythe);
+                world.spawnEntity(bloodLust);
             }
             world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSoundEvents.ITEM_SPEWING, SoundCategory.PLAYERS, 1.0F, 1.0F);
             return TypedActionResult.success(user.getStackInHand(hand));
@@ -72,7 +95,7 @@ public class BloodlustItem extends EmptySwordItem implements CustomHitSoundItem,
     }
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (entity.age % 2 == 0 &&  (entity instanceof PlayerEntity player) && world.isClient) {
+        if (entity.age % 12 == 0 &&  (entity instanceof PlayerEntity player) && world.isClient) {
             if (EnchantmentUtil.hasEnchantment(ModEnchantments.VENGEANCE,stack)) {
                 if (player.getEquippedStack(EquipmentSlot.MAINHAND) == stack || player.getEquippedStack(EquipmentSlot.OFFHAND) == stack) {
                     float randomx = (float) (Math.random() * 6);

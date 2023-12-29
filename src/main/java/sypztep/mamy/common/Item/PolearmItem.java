@@ -13,7 +13,7 @@ import sypztep.mamy.common.init.ModEntityAttributes;
 
 import java.util.UUID;
 
-public class PolearmItem extends EmptySwordItem{
+public class PolearmItem extends EmptySwordItem {
     private final ToolMaterial material;
     private final float attackDamage;
     private static final EntityAttributeModifier REACH_MODIFIER;

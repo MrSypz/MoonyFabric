@@ -26,7 +26,8 @@ public class ModEnchantments {
     //HOE
     public static EmptyEnchantment VAMPR = new VamprEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static EmptyEnchantment GOLIATH = new GoliathEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
-    public static EmptyEnchantment VENGEANCE = new VengeanceEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND, EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment VENGEANCE = new VengeanceEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
+    public static EmptyEnchantment GALE = new GaleEnchantment(Enchantment.Rarity.COMMON, EnchantmentTarget.TRIDENT, EquipmentSlot.MAINHAND);
 
 
     public static void init() {
@@ -40,6 +41,7 @@ public class ModEnchantments {
         init("vampr", VAMPR);
         init("goliath",GOLIATH);
         init("vengeance", VENGEANCE);
+        init("gale", GALE);
     }
     public static void init(String name, EmptyEnchantment enchantment){
         Registry.register(Registries.ENCHANTMENT,MamyMod.id(name), enchantment);

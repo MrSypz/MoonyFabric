@@ -17,6 +17,7 @@ public class ModDamageTypes {
     public static final RegistryKey<DamageType> HOGYOKU = createType("hogyoku");
     public static final RegistryKey<DamageType> ELECTRO = createType("electro");
     public static final RegistryKey<DamageType> MASKIMPACT = createType("maskimpact");
+    public static final RegistryKey<DamageType> CINNABAR = createType("cinnabar");
     public static RegistryKey<DamageType> createType(String name) {
         return RegistryKey.of(RegistryKeys.DAMAGE_TYPE, MamyMod.id(name));
     }

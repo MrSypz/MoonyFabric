@@ -39,7 +39,7 @@ import java.util.UUID;
 
 import static sypztep.mamy.common.util.SkillUtil.getCounts;
 
-public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundItem, CustomHitParticleItem{
+public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundItem, CustomHitParticleItem {
     public DeathScytheItem() {
         super(ToolMaterials.NETHERITE,6, -3f, new Settings().fireproof().rarity(Rarity.EPIC));
     }
@@ -67,7 +67,7 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         }
         if (!world.isClient()) {
             if (!user.getItemCooldownManager().isCoolingDown(itemStack.getItem())) {
-                SkillUtil.ShockWaveDamage(user,5.0d, 20.0f, true,true);
+                SkillUtil.ShockWaveDamage(user,5.0d, 22.0f, true,true);
                 user.heal(getCounts() * 0.5f); //heal amount target hit with efficiency 5%
                 addSwirlingParticles(user);
                 count++;

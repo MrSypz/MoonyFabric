@@ -26,7 +26,7 @@ public abstract class LivingEntityMixin extends Entity {
 		if (!isOnGround()) {
 			VizardComponent vizardComponent = ModEntityComponents.VIZARD.getNullable(this);
 			if (vizardComponent != null && vizardComponent.getTicksInAir() > 5) {
-				return value * 4.0f;
+				return value * 2.0f;
 			}
 		}
 		return value;

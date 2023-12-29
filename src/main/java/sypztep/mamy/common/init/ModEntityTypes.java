@@ -9,19 +9,31 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.entity.projectile.BloodLustEntity;
+import sypztep.mamy.common.entity.projectile.HomaEntity;
+import sypztep.mamy.common.entity.projectile.OrbitalEntity;
+import sypztep.mamy.common.entity.projectile.PitchforkEntity;
 
 public class ModEntityTypes {
     public static EntityType<BloodLustEntity> BLOOD_LUST;
+    public static EntityType<PitchforkEntity> PITCHFORK;
+    public static EntityType<HomaEntity> HOMA;
+    public static EntityType<OrbitalEntity> ORBITAL;
+
     public static void init() {
         BLOOD_LUST = registerEntity("bloodlust", createEntityTypeSlash(BloodLustEntity::new));
-
+        PITCHFORK = registerEntity("pitchfork", createEntityType(PitchforkEntity::new));
+        HOMA = registerEntity("homa", createEntityType(HomaEntity::new));
+        ORBITAL = registerEntity("orbital", createNoHitbock(OrbitalEntity::new));
     }
 
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType<T> entityType) {
         return Registry.register(Registries.ENTITY_TYPE, MamyMod.id(name), entityType);
     }
     private static <T extends Entity> EntityType<T> createEntityType(EntityType.EntityFactory<T> factory) {
-        return FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory).dimensions(EntityDimensions.changing(0.5f, 0.5f)).trackRangeBlocks(128).build();
+        return FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory).dimensions(EntityDimensions.changing(0.5f, 0.5f)).trackRangeBlocks(126).trackedUpdateRate(20).build();
+    }
+    private static <T extends Entity> EntityType<T> createNoHitbock(EntityType.EntityFactory<T> factory) {
+        return FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory).dimensions(EntityDimensions.changing(0.1f, 0.1f)).trackRangeBlocks(512).trackedUpdateRate(4).build();
     }
     private static <T extends Entity> EntityType<T> createEntityTypeSlash(EntityType.EntityFactory<T> factory) {
         return FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory).dimensions(EntityDimensions.changing(5.0F, 0.2F)).build();

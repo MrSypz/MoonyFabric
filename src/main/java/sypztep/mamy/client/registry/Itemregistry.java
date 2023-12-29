@@ -14,6 +14,7 @@ import net.minecraft.util.Identifier;
 import sypztep.mamy.client.render.entity.MamyItemRenderer;
 import sypztep.mamy.client.render.entity.MamyTridentItemRenderer;
 import sypztep.mamy.common.Item.EmptySwordItem;
+import sypztep.mamy.common.Item.MamyTridentItem;
 import sypztep.mamy.common.init.ModItems;
 
 public class Itemregistry {
@@ -43,6 +44,18 @@ public class Itemregistry {
             ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(mamyTridentItemRenderer);
             BuiltinItemRendererRegistry.INSTANCE.register(item, mamyTridentItemRenderer);
             ModelLoadingRegistry.INSTANCE.registerModelProvider(((manager, out) -> out.accept(new ModelIdentifier(id.getNamespace(), id.getPath() + "_in_inventory", "inventory"))));
+            FabricModelPredicateProviderRegistry.register(item, new Identifier("throwing"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F);
+        }
+        for (MamyTridentItem item : ModItems.ALL_3DTRIDENTS) {
+            Identifier id = Registries.ITEM.getId(item);
+
+            MamyItemRenderer mamyItemRenderer = new MamyItemRenderer(id);
+            ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(mamyItemRenderer);
+            BuiltinItemRendererRegistry.INSTANCE.register(item, mamyItemRenderer);
+            ModelLoadingRegistry.INSTANCE.registerModelProvider(((manager, out) -> {
+                out.accept(new ModelIdentifier(id.getNamespace(),id.getPath() + "_gui","inventory"));
+                out.accept(new ModelIdentifier(id.getNamespace(),id.getPath() + "_handheld","inventory"));
+            }));
         }
     }
 }

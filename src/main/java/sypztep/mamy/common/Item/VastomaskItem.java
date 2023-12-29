@@ -9,7 +9,7 @@ import sypztep.mamy.client.render.entity.VastomaskRenderer;
 
 import java.util.function.Consumer;
 
-public class VastomaskItem extends HollowmaskItem{
+public class VastomaskItem extends HollowmaskItem {
 
     public VastomaskItem(Settings settings) {
         super(settings);

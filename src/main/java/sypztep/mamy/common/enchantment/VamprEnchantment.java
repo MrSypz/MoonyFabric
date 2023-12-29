@@ -34,6 +34,7 @@ public class VamprEnchantment extends EmptyEnchantment{
                 if (!e.equals(user)) {
                     counter++;
                     e.damage(target.getWorld().getDamageSources().magic(), 1.0f);
+                    e.addStatusEffect(new StatusEffectInstance(ModStatusEffects.GRIEVOUSWOUNDS,20*level,0));
                     target.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_STEP,1.0f,1.3f);
                     if (target.getWorld() instanceof ServerWorld) {
                         double xdif = e.getX() - user.getX();
@@ -55,7 +56,7 @@ public class VamprEnchantment extends EmptyEnchantment{
                     }
                 }
             }
-            user.heal(counter + (level) + (EnchantmentUtil.AmountDeal * 0.3f));
+            user.heal(counter + (level) + (EnchantmentUtil.getDamageAmount() * 0.3f));
             user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.VAMPR_COOLDOWN, 300 - (level * 20)));
             if(user.getWorld() instanceof ServerWorld)
                 ((ServerWorld) user.getWorld()).spawnParticles(ParticleTypes.HEART, user.getX(), user.getBodyY(0.5D), user.getZ(), 3, 0.4, 0.5, 0.4, 0.0D);
