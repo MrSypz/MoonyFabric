@@ -20,10 +20,9 @@ public class SkillUtil {
                 if (normalizedDistance > 0) {
                     counts++;
                 } else counts = 0;
-                if (!useCustomDamage) {
-                    float damagebyArea = (float) (range - (float) (normalizedDistance * (range - 1.0f)));
+                if (!useCustomDamage) { // Damage when equipMask
+                    float damagebyArea = (float) (32f + range - (float) (normalizedDistance * (32f + range - 1.0f)));
                     target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.MASKIMPACT, user), damagebyArea);
-                    System.out.println("Hello");
                 } else {
                     float damagebyCustom = (amount - (float) (normalizedDistance * (amount - 0.1f)));
                     target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BLOODSCYTHE, user), damagebyCustom);

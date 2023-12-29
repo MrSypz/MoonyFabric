@@ -16,12 +16,6 @@ public class ModItemGroup {
             content.add(ModItems.DEATH_SCYTHE);
             content.addAfter(Items.TRIDENT, ModItems.PITCHFORK);
             content.addAfter(ModItems.PITCHFORK, ModItems.HOMA);
-            content.addAfter(Items.NETHERITE_AXE, ModItems.WOODEN_POLEARM);
-            content.addAfter(ModItems.WOODEN_POLEARM, ModItems.STONE_POLEARM);
-            content.addAfter(ModItems.STONE_POLEARM, ModItems.IRON_POLEARM);
-            content.addAfter(ModItems.IRON_POLEARM, ModItems.GOLDEN_POLEARM);
-            content.addAfter(ModItems.GOLDEN_POLEARM, ModItems.DIAMOND_POLEARM);
-            content.addAfter(ModItems.DIAMOND_POLEARM, ModItems.NETHERITE_POLEARM);
             content.addAfter(ModItems.DEATH_SCYTHE, ModItems.BLOODLUST);
 
         });

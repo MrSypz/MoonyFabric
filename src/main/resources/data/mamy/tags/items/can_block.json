@@ -6,12 +6,6 @@
     "minecraft:iron_sword",
     "minecraft:golden_sword",
     "minecraft:diamond_sword",
-    "minecraft:netherite_sword",
-    "mamy:wooden_polearm",
-    "mamy:stone_polearm",
-    "mamy:iron_polearm",
-    "mamy:golden_polearm",
-    "mamy:diamond_polearm",
-    "mamy:netherite_polearm"
+    "minecraft:netherite_sword"
   ]
 }

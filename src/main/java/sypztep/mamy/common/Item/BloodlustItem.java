@@ -15,13 +15,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -38,8 +39,9 @@ import java.util.UUID;
 public class BloodlustItem extends EmptySwordItem implements CustomHitSoundItem, CustomHitParticleItem {
     private static final EntityAttributeModifier REACH_MODIFIER;
     private static final EntityAttributeModifier CRIT_DAMAGE_MODIFIER;
-    public BloodlustItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
-        super(toolMaterial, attackDamage, attackSpeed, settings);
+    public BloodlustItem() {
+        super(ToolMaterials.NETHERITE,8, -3f, new Settings().fireproof().rarity(Rarity.EPIC));
+
     }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -141,7 +143,7 @@ public class BloodlustItem extends EmptySwordItem implements CustomHitSoundItem,
         }
     }
     static {
-        REACH_MODIFIER = new EntityAttributeModifier(UUID.fromString("911af262-067d-4da2-854c-20f03cc2dd8b"), "Weapon modifier", 0.5D, EntityAttributeModifier.Operation.ADDITION);
-        CRIT_DAMAGE_MODIFIER = new EntityAttributeModifier(UUID.fromString("4cdc0e38-c037-42bf-864f-5c745ddf0b61"), "Weapon modifier", 15.0D, EntityAttributeModifier.Operation.ADDITION);
+        REACH_MODIFIER = new EntityAttributeModifier(UUID.fromString("911af262-067d-4da2-854c-20f03cc2dd8b"), "Weapon modifier", 1.5D, EntityAttributeModifier.Operation.ADDITION);
+        CRIT_DAMAGE_MODIFIER = new EntityAttributeModifier(UUID.fromString("4cdc0e38-c037-42bf-864f-5c745ddf0b61"), "Weapon modifier", 50.0D, EntityAttributeModifier.Operation.ADDITION);
     }
 }

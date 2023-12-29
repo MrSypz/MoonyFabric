@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import org.jetbrains.annotations.NotNull;
 import sypztep.mamy.common.Item.HollowmaskItem;
+import sypztep.mamy.common.entity.projectile.OrbitalEntity;
 import sypztep.mamy.common.init.*;
 
 public class AbilityUtil {
@@ -50,8 +51,11 @@ public class AbilityUtil {
         ItemStack Hollowmask = getItemStack(baseValue);
         Hollowmask.addEnchantment(ModEnchantments.HOLLOW_CURSE, 1);
         user.equipStack(EquipmentSlot.HEAD, Hollowmask);
-        SkillUtil.ShockWaveDamage(user, 5,0, false,false);
+        SkillUtil.ShockWaveDamage(user, 10,0, false,false);
         user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.MASKIMPACT, user), user.getHealth() * 0.5f);
+        OrbitalEntity orbitalEntity = new OrbitalEntity(user.getWorld(),user);
+        user.getWorld().spawnEntity(orbitalEntity);
+
 
     }
 

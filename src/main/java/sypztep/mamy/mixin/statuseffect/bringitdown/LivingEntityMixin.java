@@ -1,4 +1,4 @@
-package sypztep.mamy.mixin.statuseffect.fervorofbattle;
+package sypztep.mamy.mixin.statuseffect.bringitdown;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

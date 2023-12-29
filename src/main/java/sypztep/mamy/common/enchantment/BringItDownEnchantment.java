@@ -14,8 +14,8 @@ import sypztep.mamy.common.init.ModSoundEvents;
 import sypztep.mamy.common.init.ModStatusEffects;
 import sypztep.mamy.common.util.EnchantmentUtil;
 
-public class LethalTempoEnchantment extends OnHitApplyEnchantment{
-    public LethalTempoEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
+public class BringItDownEnchantment extends OnHitApplyEnchantment{
+    public BringItDownEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
     }
 

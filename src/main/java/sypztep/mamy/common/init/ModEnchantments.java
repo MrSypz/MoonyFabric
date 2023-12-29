@@ -15,7 +15,7 @@ public class ModEnchantments {
     public static List<EmptyEnchantment> ModEnchantmentList = new ArrayList<>();
     //SWORD
     public static EmptyEnchantment ELECTRO_DECREE = new ElectroEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
-    public static EmptyEnchantment LETHAL_TEMPO = new LethalTempoEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
+    public static EmptyEnchantment BRING_OT_DOWN = new BringItDownEnchantment(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static EmptyEnchantment FERVOR_OF_BATTLE = new OnHitApply2Enchantment(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     public static EmptyEnchantment CARVE = new OnHitApplyEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND);
     //CROSSBOW
@@ -33,7 +33,7 @@ public class ModEnchantments {
     public static void init() {
         init("vitality", VITALITY);
         init("electrodecree", ELECTRO_DECREE);
-        init("lethaltempo", LETHAL_TEMPO);
+        init("bringitdown", BRING_OT_DOWN);
         init("fervorofbattle", FERVOR_OF_BATTLE);
         init("carve", CARVE);
         init("missilehomming", MISSILE_HOMMING);

@@ -38,14 +38,6 @@ public class ModItems {
 
     public static EmptySwordItem DEATH_SCYTHE;
 
-    public static PolearmItem WOODEN_POLEARM;
-    public static PolearmItem STONE_POLEARM;
-    public static PolearmItem IRON_POLEARM;
-    public static PolearmItem GOLDEN_POLEARM;
-    public static PolearmItem DIAMOND_POLEARM;
-    public static PolearmItem NETHERITE_POLEARM;
-
-
     public static HollowmaskItem HALF_HOLLOW_MASK;
     public static HollowmaskItem HOLLOW_MASK_TIER1;
     public static HollowmaskItem HOLLOW_MASK_TIER2;
@@ -71,22 +63,15 @@ public class ModItems {
 
 
     public static void init(){
-        WOODEN_POLEARM = registerSworditem("wooden_polearm", new PolearmItem(ToolMaterials.WOOD,4,-3F,new FabricItemSettings()));
-        STONE_POLEARM = registerSworditem("stone_polearm", new PolearmItem(ToolMaterials.STONE,4,-3F,new FabricItemSettings()));
-        IRON_POLEARM = registerSworditem("iron_polearm", new PolearmItem(ToolMaterials.IRON,4,-3F,new FabricItemSettings()));
-        GOLDEN_POLEARM = registerSworditem("golden_polearm", new PolearmItem(ToolMaterials.GOLD,4,-3F,new FabricItemSettings()));
-        DIAMOND_POLEARM = registerSworditem("diamond_polearm", new PolearmItem(ToolMaterials.DIAMOND,4,-3F,new FabricItemSettings()));
-        NETHERITE_POLEARM = registerSworditem("netherite_polearm", new PolearmItem(ToolMaterials.NETHERITE,4,-3F,new FabricItemSettings().fireproof()));
 
         PITCHFORK = registerTridentItem("pitchfork", new PitchforkItem(new FabricItemSettings().maxDamage(150)),true);
         HOMA = register3DTrident("homa", new HomaItem(new FabricItemSettings().maxDamage(325).fireproof()),true);
         ENGULFING = register3DTrident("engulfing", new HomaItem(new FabricItemSettings().maxDamage(325).fireproof()),true);
 
-        DEATHGOD_UPGRADE_SMITHING_TEMPLATE = registeritem("warden_upgrade_smithing_template", createDeathGodUpgradeSmithingTemplate());
-
+        DEATHGOD_UPGRADE_SMITHING_TEMPLATE = registeritem("deathgod_upgrade_smithing_template", createDeathGodUpgradeSmithingTemplate());
 
         DEATH_SCYTHE = registerSworditem("death_scythe", new DeathScytheItem());
-        BLOODLUST = registerSworditem("bloodlust", new BloodlustItem(ToolMaterials.IRON,5,-3f,new Item.Settings().rarity(Rarity.COMMON)));
+        BLOODLUST = registerSworditem("bloodlust", new BloodlustItem());
         //CONSUME
         HOGYOKU = registeritem("hogyoku", new HogyokuItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)));
 

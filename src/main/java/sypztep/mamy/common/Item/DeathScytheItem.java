@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -57,29 +58,33 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        if (world.isClient()) {
-            if (!user.getItemCooldownManager().isCoolingDown(itemStack.getItem())) {
-                user.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1, (float) (1.5f + user.getRandom().nextGaussian() / 10));
-                return TypedActionResult.consume(itemStack);
-            }
-        }
-        if (!world.isClient()) {
-            if (!user.getItemCooldownManager().isCoolingDown(itemStack.getItem())) {
-                SkillUtil.ShockWaveDamage(user,5.0d, 22.0f, true,true);
-                user.heal(getCounts() * 0.5f); //heal amount target hit with efficiency 5%
-                addSwirlingParticles(user);
-                count++;
-                if (count >= 5 ) {
-                    user.getItemCooldownManager().set(itemStack.getItem(), 60);
-                    user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.BLEEDOUT), + user.getHealth() * 0.25f); // consume 25% of player current health
-                    user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.GRIEVOUSWOUNDS,180,0,false,false,false));
-                    count = 0;
+        if (EnchantmentHelper.getEquipmentLevel(ModEnchantments.VENGEANCE, user) <= 0)
+            return super.use(world, user, hand);
+        else {
+            if (world.isClient()) {
+                if (!user.getItemCooldownManager().isCoolingDown(itemStack.getItem())) {
+                    user.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1, (float) (1.5f + user.getRandom().nextGaussian() / 10));
+                    return TypedActionResult.consume(itemStack);
                 }
             }
+            if (!world.isClient()) {
+                if (!user.getItemCooldownManager().isCoolingDown(itemStack.getItem())) {
+                    SkillUtil.ShockWaveDamage(user, 4.0d, 22.0f, true, true);
+                    user.heal(getCounts() * 0.5f); //heal amount target hit with efficiency 5%
+                    addSwirlingParticles(user);
+                    count++;
+                    if (count >= 5) {
+                        user.getItemCooldownManager().set(itemStack.getItem(), 60);
+                        user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.BLEEDOUT), +user.getHealth() * 0.25f); // consume 25% of player current health
+                        user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.GRIEVOUSWOUNDS, 180, 0, false, false, false));
+                        count = 0;
+                    }
+                }
+            }
+            return TypedActionResult.pass(itemStack);
         }
-        return TypedActionResult.pass(itemStack);
     }
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {

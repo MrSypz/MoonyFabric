@@ -23,6 +23,6 @@ public class VengeanceEnchantment extends EmptyEnchantment{
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return stack.isOf(ModItems.BLOODLUST) || stack.isOf(Items.BOOK) || stack.isOf(Items.ENCHANTED_BOOK);
+        return stack.isOf(ModItems.BLOODLUST) || stack.isOf(ModItems.DEATH_SCYTHE) || stack.isOf(Items.BOOK) || stack.isOf(Items.ENCHANTED_BOOK);
     }
 }
