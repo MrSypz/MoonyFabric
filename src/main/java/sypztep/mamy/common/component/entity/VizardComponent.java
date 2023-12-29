@@ -158,7 +158,7 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
     public static void addAirhikeParticles(Entity entity) {
         if (MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || entity != MinecraftClient.getInstance().cameraEntity) {
             for (int i = 0; i < 1; i++) {
-                entity.getWorld().addParticle(ModParticles.SHOCKWAVE, entity.getParticleX(0.2F), entity.getY(), entity.getParticleZ(0.2F), 0, 0, 0);
+                entity.getWorld().addParticle(ModParticles.BLOODWAVE, entity.getParticleX(0.2F), entity.getY(), entity.getParticleZ(0.2F), 0, 0, 0);
             }
         }
     }

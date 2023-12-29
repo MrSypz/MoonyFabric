@@ -52,12 +52,11 @@ public class AbilityUtil {
         SkillUtil maskskill = new SkillUtil();
         Hollowmask.addEnchantment(ModEnchantments.HOLLOW_CURSE, 1);
         user.equipStack(EquipmentSlot.HEAD, Hollowmask);
-        maskskill.ShockWaveDamage(user, 10,0, false,false);
+        maskskill.ShockWaveDamage(user, 32, (float) Math.pow(2,baseValue), false,false);
         user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.MASKIMPACT, user), user.getHealth() * 0.5f);
         OrbitalEntity orbitalEntity = new OrbitalEntity(user.getWorld(),user);
-        user.getWorld().spawnEntity(orbitalEntity);
-
-
+        if (baseValue > 4)
+            user.getWorld().spawnEntity(orbitalEntity);
     }
 
     public static void addUseMaskParticle(PlayerEntity player) { //Client Packet
@@ -66,7 +65,7 @@ public class AbilityUtil {
                 player.getWorld().addParticle(ParticleTypes.FLASH, player.getParticleX(2), player.getRandomBodyY(), player.getParticleZ(2), 0, 0, 0);
             for (int i = 0; i < 22; ++i)
                 player.getWorld().addParticle(ModParticles.BLOOD_BUBBLE_SPLATTER, player.getParticleX(2), player.getRandomBodyY(), player.getParticleZ(2), 0.1, 0.1, 0.1);
-            player.getWorld().addParticle(ModParticles.BLOODWAVE, player.getParticleX(2), player.getBodyY(0.2f), player.getParticleZ(2), 0.0, 0.0, 0.0);
+            player.getWorld().addParticle(ModParticles.SHOCKWAVE, player.getX(), player.getY(), player.getZ(), 0.0, 0.0, 0.0);
 
         }
     }

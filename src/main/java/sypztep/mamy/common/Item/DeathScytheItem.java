@@ -7,6 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -17,7 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -29,6 +29,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import sypztep.mamy.client.packetS2C.AddSwirlingParticlePacket;
 import sypztep.mamy.common.init.*;
+import sypztep.mamy.common.packetC2S.SwirlPacket;
 import sypztep.mamy.common.util.SkillUtil;
 
 import java.util.List;
@@ -59,17 +60,12 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         if (EnchantmentHelper.getEquipmentLevel(ModEnchantments.VENGEANCE, user) <= 0)
             return super.use(world, user, hand);
         else {
-            if (world.isClient()) {
-                if ((user.getStatusEffect(ModStatusEffects.SCYTHE_COOLDOWN) == null)) {
-                    user.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 1, (float) (1.5f + user.getRandom().nextGaussian() / 10));
-                    return TypedActionResult.consume(itemStack);
-                }
-            }
             if (!world.isClient()) {
                 if ((user.getStatusEffect(ModStatusEffects.SCYTHE_COOLDOWN) == null)) {
                     scytheskill.ShockWaveDamage(user, 5.0d, 22.0f, true, true);
                     user.heal(scytheskill.getCounts()); //heal 50 % amount damage +
-                    AddSwirlingParticlePacket.send((ServerPlayerEntity) user);
+                    AddSwirlingParticlePacket.send((ServerPlayerEntity) user,user.getId());
+                    SwirlPacket.send();
                     count++;
                     if (count >= 5) {
                         user.damage(user.getWorld().getDamageSources().create(ModDamageTypes.BLEEDOUT), user.getHealth() * 0.25f); // consume 25% of player current health
@@ -78,8 +74,17 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
                         count = 0;
                     }
                 }
-            }
+            } else
+                if ((user.getStatusEffect(ModStatusEffects.SCYTHE_COOLDOWN) == null))
+                    SwirlPacket.send();
             return TypedActionResult.pass(itemStack);
+        }
+    }
+    public static void addDeathScytheParticles(Entity entity) {
+        if (MinecraftClient.getInstance().gameRenderer.getCamera().isThirdPerson() || entity != MinecraftClient.getInstance().cameraEntity) {
+            for (int i = 0; i < 1; i++) {
+                entity.getWorld().addParticle(ModParticles.BLOODWAVE, entity.getX(), entity.getBodyY(0.2f), entity.getZ(), 0, 0, 0);
+            }
         }
     }
     @Override

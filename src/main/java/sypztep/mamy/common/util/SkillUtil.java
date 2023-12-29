@@ -17,16 +17,14 @@ public class SkillUtil {
             if (target != user) {
                 double distanceToEntity = target.squaredDistanceTo(user.getX(), user.getY(), user.getZ());
                 double normalizedDistance = Math.sqrt(distanceToEntity) / range; // Adjust as needed for your range
-                if (normalizedDistance > 0) {
+                if (normalizedDistance > 0)
                     counts++;
-                } else counts = 0;
-                if (!useCustomDamage) { // Damage when equipMask
-                    float damagebyArea = (float) (32f + range - (float) (normalizedDistance * (32f + range - 1.0f)));
+                 else counts = 0;
+                float damagebyArea = amount - (float) (normalizedDistance * (amount - 1.0f));
+                if (!useCustomDamage)
                     target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.MASKIMPACT, user), damagebyArea);
-                } else {
-                    float damagebyCustom = (amount - (float) (normalizedDistance * (amount - 0.1f)));
-                    target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BLOODSCYTHE, user), damagebyCustom);
-                }
+                 else target.damage(target.getWorld().getDamageSources().create(ModDamageTypes.BLOODSCYTHE, user), damagebyArea);
+
                 if (doEffect) {
                     if (user.getWorld() instanceof ServerWorld) { // Particle
                         double xdif = target.getX() - user.getX();

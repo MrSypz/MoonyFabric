@@ -35,6 +35,7 @@ public class MamyMod implements ModInitializer {
         ServerPlayNetworking.registerGlobalReceiver(SonidoPacket.ID, new SonidoPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(MaskPacket.ID, new MaskPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(AirhikePacket.ID,new AirhikePacket.Receiver());
+        ServerPlayNetworking.registerGlobalReceiver(SwirlPacket.ID,new SwirlPacket.Receiver());
 
         ModEnchantments.init();
         ModSoundEvents.init();
