@@ -12,6 +12,7 @@ loom {
 
 repositories {
     mavenLocal()
+    mavenCentral()
     maven {
         name = "MidnightLib"
         url = "https://api.modrinth.com/maven"
@@ -32,6 +33,7 @@ repositories {
         name = "jitpack"
         url = "https://jitpack.io"
     }
+    maven { url "https://maven.shedaniel.me/" }
     maven {
         url "https://maven.jamieswhiteshirt.com/libs-release"
         content {
@@ -60,14 +62,13 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     modImplementation include ("com.github.MrSypz:Pickyourpoison-Fabric:${project.pickyourpoison_version}")
-    modImplementation "com.github.moriyashiine:enchancement:${project.enchancement_version}"
+//    modImplementation "com.github.moriyashiine:enchancement:${project.enchancement_version}"
 
     modImplementation include ("dev.emi:trinkets:${trinkets_version}")
 
     modImplementation include("com.jamieswhiteshirt:reach-entity-attributes:$reach_version")
 
-    implementation 'org.json:json:20211205'
-    include 'org.json:json:20211205'
+    modImplementation "com.ptsmods:devlogin:3.4.1"
 }
 
 processResources {

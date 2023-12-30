@@ -5,11 +5,11 @@ import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sypztep.mamy.common.compat.MamyCompat;
 import sypztep.mamy.common.init.*;
 import sypztep.mamy.common.packetC2S.*;
 import sypztep.mamy.common.util.HogyokuState;
@@ -22,14 +22,11 @@ public class MamyMod implements ModInitializer {
     public static Identifier id(String id) {
         return new Identifier(MODID, id);
     }
-    public static boolean isEnhancementLoaded = false;
 
     @Override
     public void onInitialize() {
         LOGGER.info("Moony pls don't wet yourself for Minecraft 1.20.1 Fabric Edition.");
-
-
-        isEnhancementLoaded = FabricLoader.getInstance().isModLoaded("enchancement");
+        MamyCompat.init();
         //C2S Packet
         ServerPlayNetworking.registerGlobalReceiver(SonidoClearPacket.ID, new SonidoClearPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(SonidoPacket.ID, new SonidoPacket.Receiver());

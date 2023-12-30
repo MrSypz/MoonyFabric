@@ -15,12 +15,12 @@
     "moditem.throwingstuff.impaling.MobEntityMixin",
     "moditem.throwingstuff.impaling.PlayerEntityMixin",
     "moditem.throwingstuff.impaling.TridentEntityMixin",
+    "statuseffect.bringitdown.LivingEntityMixin",
+    "statuseffect.bringitdown.PlayerEntityMixin",
     "statuseffect.carve.PlayerEntityMixin",
     "statuseffect.electrodecree.PlayerEntityMixin",
-    "statuseffect.bringitdown.LivingEntityMixin",
     "statuseffect.grievouswounds.LivingEntityMixin",
     "statuseffect.hollowpower.LivingEntityMixin",
-    "statuseffect.bringitdown.PlayerEntityMixin",
     "util.LivingEntityMixin",
     "util.PlayerEntityMixin",
     "util.accesor.LivingEntityAccessor",
@@ -42,7 +42,8 @@
     "moditem.hollowmask.client.PlayerEntityRendererMixin",
     "moditem.throwingstuff.client.InGameOverlayRendererMixin",
     "moditem.throwingstuff.impaling.client.EntityRendererMixin",
-    "statuseffect.grievouswounds.client.InGameHudMixin"
+    "statuseffect.grievouswounds.client.InGameHudMixin",
+    "util.accesor.CreativeSlotAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

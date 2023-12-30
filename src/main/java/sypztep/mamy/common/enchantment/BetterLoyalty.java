@@ -5,8 +5,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvents;
-import sypztep.sincereloyalty.LoyalTrident;
-import sypztep.sincereloyalty.TridentRecaller;
+import sypztep.trueloyalty.LoyalTrident;
+import sypztep.trueloyalty.TridentRecaller;
 
 public final class BetterLoyalty {
     public static boolean tryInsertTrident(ItemStack stack, PlayerEntity player) {

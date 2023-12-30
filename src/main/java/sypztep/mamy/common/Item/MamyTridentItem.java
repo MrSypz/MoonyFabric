@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import sypztep.mamy.common.entity.projectile.MamyTridentEntity;
 import sypztep.mamy.common.init.ModEntityTypes;
 import sypztep.mamy.common.init.ModItems;
-import sypztep.sincereloyalty.LoyalTrident;
+import sypztep.trueloyalty.LoyalTrident;
 
 import java.util.Objects;
 

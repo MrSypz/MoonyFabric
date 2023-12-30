@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.TridentItem;
 
 public class TridentEnchantment extends EmptyEnchantment {
-    public TridentEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
+    public TridentEnchantment(Rarity weight, EnchantmentTarget target, EnchantmentTarget crossbow, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
     }
     @Override

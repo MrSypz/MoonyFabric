@@ -27,6 +27,12 @@
   "mamy.midnightconfig.consume_animation": "Consume Animation",
   "mamy.midnightconfig.prioritize_shield": "Prioritize Shield",
 
+  "mamy.midnightconfig.FeatureCosmetic": "Feature Cosmetic",
+  "mamy.midnightconfig.cosmetics": "Enable Cosmetics",
+  "mamy.midnightconfig.enum.CosmeticsOptions.ENABLE": "Yes",
+  "mamy.midnightconfig.enum.CosmeticsOptions.FIRST_PERSON": "Yes and in First Person",
+  "mamy.midnightconfig.enum.CosmeticsOptions.DISABLE": "No",
+
 
   "itemGroup.mamymask": "Mask Item",
   "itemGroup.mamycosmetic": "Cosmetic Item",
@@ -104,7 +110,8 @@
 
 
   "death.attack.hogyoku": "%1$s Your soul are now starting kindle.",
-  "death.attack.maskimpact": "%1$s How?!",
+  "death.attack.hogyoku.player": "%1$s How?!",
+  "death.attack.maskimpact": "%1$s Death from the impact from Anon power",
   "death.attack.maskimpact.player": "%1$s Impact by strange wave.",
   "death.attack.electro": "%1$s Electrocuted by accident.",
   "death.attack.electro.player": "%1$s Electrocuted from %2$s.",

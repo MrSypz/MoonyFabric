@@ -21,7 +21,6 @@ public class ModItemGroup {
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(content -> {
             content.addBefore(Items.GOLDEN_CARROT,ModItems.ARCHAIC_EYE);
-            content.addAfter(Items.STICK,ModItems.PACKSTICK);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(content -> {
             content.addBefore(Items.APPLE,ModItems.HOGYOKU);
@@ -47,7 +46,6 @@ public class ModItemGroup {
             .entries((context, entries) -> {
                 entries.add(ModItems.FURINA_HAT);
                 entries.add(ModItems.WANDERER_HAT);
-                entries.add(ModItems.HANEGA);
             })
             .build();
 }

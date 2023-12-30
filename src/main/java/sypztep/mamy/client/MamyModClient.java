@@ -39,6 +39,8 @@ import static sypztep.mamy.common.component.entity.VizardComponent.dodash;
 public class MamyModClient implements ClientModInitializer {
     public static final KeyBinding SONIDO_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
     public static final KeyBinding SPECIAL_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special2", GLFW.GLFW_KEY_V, "key.categories." + MamyMod.MODID));
+    public static final KeyBinding WEAPON_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".select_weapon", GLFW.GLFW_KEY_LEFT_ALT + GLFW.GLFW_KEY_R, "key.categories." + MamyMod.MODID));
+    public static final KeyBinding SWAPWEAPON_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".swap_weapon", GLFW.GLFW_KEY_F, "key.categories." + MamyMod.MODID));
     private static final ManagedShaderEffect DASHWARP = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
     private static final ManagedShaderEffect HOLLOW_VISION = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/hollowvision.json"));
     public static float distortMultiply = 0.0f;
@@ -69,18 +71,19 @@ public class MamyModClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntityTypes.HOMA, HomaRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.ORBITAL, OrbitalEntityRenderer::new);
 
-        ParticleFactoryRegistry.getInstance().register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.BACKATTACK, BackAttackParticle.Factory::new);
+        ParticleFactoryRegistry particleRegistry = ParticleFactoryRegistry.getInstance();
+        particleRegistry.register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
+        particleRegistry.register(ModParticles.BACKATTACK, BackAttackParticle.Factory::new);
 
-        ParticleFactoryRegistry.getInstance().register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.BLOODWAVE, BloodwaveParticle.Factory::new);
+        particleRegistry.register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);
+        particleRegistry.register(ModParticles.BLOODWAVE, BloodwaveParticle.Factory::new);
 
-        ParticleFactoryRegistry.getInstance().register(ModParticles.BLOOD_BUBBLE, BloodBubbleParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.BLOOD_BUBBLE_SPLATTER, BloodBubbleSplatterParticle.Factory::new);
+        particleRegistry.register(ModParticles.BLOOD_BUBBLE, BloodBubbleParticle.Factory::new);
+        particleRegistry.register(ModParticles.BLOOD_BUBBLE_SPLATTER, BloodBubbleSplatterParticle.Factory::new);
 
-        ParticleFactoryRegistry.getInstance().register(ModParticles.DRAGON_FIRE, DragonFireParticle.DefaultFactory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.DRAGON_FIRE_SPLATTER, DragonFireSplatterParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.EMPTY_PARTICLE, EmptyParticle.Factory::new);
+        particleRegistry.register(ModParticles.DRAGON_FIRE, DragonFireParticle.DefaultFactory::new);
+        particleRegistry.register(ModParticles.DRAGON_FIRE_SPLATTER, DragonFireSplatterParticle.Factory::new);
+        particleRegistry.register(ModParticles.EMPTY_PARTICLE, EmptyParticle.Factory::new);
 
         Itemregistry.init();
 
@@ -93,14 +96,13 @@ public class MamyModClient implements ClientModInitializer {
                 MamyModClient.HOLLOW_VISION.render(tickDelta);
         });
 
-
         ClientTickEvents.START_CLIENT_TICK.register( client -> {
             PlayerEntity player = client.getCameraEntity() instanceof PlayerEntity ? (PlayerEntity) client.getCameraEntity() : null;
-            if (player == null || !(player instanceof LivingEntity) || !AbilityUtil.hasAnyMask(player)) {
+            if (!(player instanceof LivingEntity) || !AbilityUtil.hasAnyMask(player)) {
                 smoothshade = 40;
                 return;
             }
-            if (smoothshade > 0) {
+            if (smoothshade > 10) {
                 smoothshade--;
                 setSaturation(smoothshade * 0.01f);
             }

@@ -16,11 +16,12 @@
   "entrypoints": {
     "client": [
       "sypztep.mamy.client.MamyModClient",
-      "sypztep.sincereloyalty.SincereLoyaltyClient::INSTANCE"
+      "sypztep.trueloyalty.TrueLoyaltyClient::INSTANCE",
+      "sypztep.mamy.feature.MamyFeature"
     ],
     "main": [
       "sypztep.mamy.common.MamyMod",
-      "sypztep.sincereloyalty.SincereLoyalty"
+      "sypztep.trueloyalty.TrueLoyalty"
     ],
     "cardinal-components-entity": [
       "sypztep.mamy.common.init.ModEntityComponents"
@@ -28,7 +29,7 @@
   },
   "mixins": [
     "mamy.mixins.json",
-    "sincereloyalty.mixins.json"
+    "trueloyalty.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
@@ -38,7 +39,8 @@
   },
   "custom": {
     "cardinal-components": [
-      "mamy:vizard"
+      "mamy:vizard",
+      "mamy:backweapon"
     ]
   }
 }

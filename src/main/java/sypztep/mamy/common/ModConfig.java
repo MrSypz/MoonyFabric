@@ -26,7 +26,6 @@ public class ModConfig extends MidnightConfig {
     public static Comment MaskDashEffect;
     @Entry
     public static float distorsion = 1.0f;
-
     @Comment(centered = true)
     public static Comment SwordParry;
     public static double default_multiplier = 0.50D;
@@ -34,5 +33,22 @@ public class ModConfig extends MidnightConfig {
     public static boolean consume_animation = false;
     @Entry
     public static boolean prioritize_shield = true;
+    @Comment(centered = true)
+    public static Comment FeatureCosmetic;
+    @Entry (min = -1024.0f)
+    public static float offsetx = 0.0f;
+    @Entry (min = -1024.0f)
 
+    public static float offsety = 0.0f;
+    @Entry (min = -1024.0f)
+
+    public static float offsetz = 0.0f;
+    @Entry
+    public static CosmeticsOptions cosmetics = CosmeticsOptions.ENABLE;
+    public static boolean shouldDisplayCosmetics() {
+        return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
+    }
+    public enum CosmeticsOptions {
+        ENABLE, FIRST_PERSON, DISABLE
+    }
 }

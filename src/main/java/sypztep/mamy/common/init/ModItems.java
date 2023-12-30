@@ -46,7 +46,6 @@ public class ModItems {
     public static VastomaskItem VASTO_MASK;
 
     public static MamyMaskCosmItem FURINA_HAT;
-    public static MamyMaskCosmItem HANEGA;
     public static MamyMaskCosmItem WANDERER_HAT;
 
     public static MamyTridentItem PITCHFORK;
@@ -55,7 +54,6 @@ public class ModItems {
 
 
     public static Item ARCHAIC_EYE;
-    public static Item PACKSTICK;
     public static Item HOGYOKU;
     public static Item DEATHGOD_UPGRADE_SMITHING_TEMPLATE;
 
@@ -77,11 +75,9 @@ public class ModItems {
 
         //COSMETIC
         FURINA_HAT = registeritem("furina_hat", new MamyMaskCosmItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),EquipmentSlot.HEAD));
-        HANEGA = registeritem("hanega", new MamyMaskCosmItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),EquipmentSlot.HEAD));
         WANDERER_HAT = registeritem("wanderer_hat", new MamyMaskCosmItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),EquipmentSlot.HEAD));
         //MATERIAL
         ARCHAIC_EYE = registeritem("archaic_eye", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
-        PACKSTICK = registeritem("packstick", new Item(new FabricItemSettings().maxCount(64).rarity(Rarity.COMMON)));
 
         //HOLLOW MASK
         HALF_HOLLOW_MASK = registerMaskItem("half_hollow_mask", new HollowmaskItem(new FabricItemSettings().maxDamage(15))); // 10 Second
