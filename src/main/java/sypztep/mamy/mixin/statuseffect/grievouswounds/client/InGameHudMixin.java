@@ -18,7 +18,7 @@ import sypztep.mamy.common.init.ModStatusEffects;
 
 @Environment(EnvType.CLIENT)
 @Mixin(InGameHud.class)
-public class InGameHudMixin{
+public class InGameHudMixin {
     @Unique
     private static final Identifier GRIEVOUS_WOUNDS_HEARTS = MamyMod.id("textures/gui/grievous_wounds_hearts.png");
 

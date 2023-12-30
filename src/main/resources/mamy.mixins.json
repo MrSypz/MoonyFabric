@@ -42,8 +42,7 @@
     "moditem.hollowmask.client.PlayerEntityRendererMixin",
     "moditem.throwingstuff.client.InGameOverlayRendererMixin",
     "moditem.throwingstuff.impaling.client.EntityRendererMixin",
-    "statuseffect.grievouswounds.client.InGameHudMixin",
-    "util.accesor.CreativeSlotAccessor"
+    "statuseffect.grievouswounds.client.InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

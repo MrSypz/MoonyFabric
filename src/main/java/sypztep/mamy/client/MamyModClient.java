@@ -39,8 +39,6 @@ import static sypztep.mamy.common.component.entity.VizardComponent.dodash;
 public class MamyModClient implements ClientModInitializer {
     public static final KeyBinding SONIDO_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
     public static final KeyBinding SPECIAL_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special2", GLFW.GLFW_KEY_V, "key.categories." + MamyMod.MODID));
-    public static final KeyBinding WEAPON_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".select_weapon", GLFW.GLFW_KEY_LEFT_ALT + GLFW.GLFW_KEY_R, "key.categories." + MamyMod.MODID));
-    public static final KeyBinding SWAPWEAPON_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".swap_weapon", GLFW.GLFW_KEY_F, "key.categories." + MamyMod.MODID));
     private static final ManagedShaderEffect DASHWARP = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
     private static final ManagedShaderEffect HOLLOW_VISION = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/hollowvision.json"));
     public static float distortMultiply = 0.0f;
@@ -59,7 +57,6 @@ public class MamyModClient implements ClientModInitializer {
     }
     @Override
     public void onInitializeClient() {
-
         ClientPlayNetworking.registerGlobalReceiver(AddSonidoParticlePacket.ID, new AddSonidoParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(AddSwirlingParticlePacket.ID, new AddSwirlingParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(ResetSonidoInvPacket.ID, new ResetSonidoInvPacket.Receiver());
@@ -107,7 +104,7 @@ public class MamyModClient implements ClientModInitializer {
                 setSaturation(smoothshade * 0.01f);
             }
         });
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+        ClientTickEvents.END_CLIENT_TICK.register((client) -> {
             if (cooldown > 0)
                 cooldown--;
             if (SPECIAL_KEYBINDING.isPressed() && cooldown == 0) {

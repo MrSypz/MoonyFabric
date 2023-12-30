@@ -39,8 +39,7 @@
   },
   "custom": {
     "cardinal-components": [
-      "mamy:vizard",
-      "mamy:backweapon"
+      "mamy:vizard"
     ]
   }
 }

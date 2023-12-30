@@ -14,7 +14,7 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
-        name = "MidnightLib"
+        name = "Modrinth"
         url = "https://api.modrinth.com/maven"
     }
     maven {
@@ -62,7 +62,10 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     modImplementation include ("com.github.MrSypz:Pickyourpoison-Fabric:${project.pickyourpoison_version}")
-//    modImplementation "com.github.moriyashiine:enchancement:${project.enchancement_version}"
+    modImplementation "com.github.moriyashiine:enchancement:${project.enchancement_version}"
+
+    modCompileOnly "maven.modrinth:sodium:${sodium_version}"
+    modRuntimeOnly "maven.modrinth:sodium:${sodium_version}"
 
     modImplementation include ("dev.emi:trinkets:${trinkets_version}")
 
