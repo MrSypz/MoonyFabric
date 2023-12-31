@@ -38,7 +38,7 @@ import java.util.UUID;
 
 public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundItem, CustomHitParticleItem {
     public DeathScytheItem() {
-        super(ToolMaterials.NETHERITE,6, -3f, new Settings().fireproof().rarity(Rarity.EPIC));
+        super(ToolMaterials.NETHERITE,8, -3f, new Settings().fireproof().rarity(Rarity.EPIC));
     }
     private static final EntityAttributeModifier REACH_MODIFIER;
     private static final EntityAttributeModifier CRIT_DAMAGE_MODIFIER;

@@ -28,6 +28,13 @@
     "util.storecrit.LivingEntityMixin",
     "util.storecrit.PlayerEntityMixin",
     "util.storedamage.LivingEntityMixin",
+    "vanilla.backslot.PersistentProjectileEntityMixin",
+    "vanilla.backslot.PlayerInventoryMixin",
+    "vanilla.backslot.PlayerScreenHandlerMixin",
+    "vanilla.backslot.ProjectileEntityMixin",
+    "vanilla.backslot.ServerPlayNetworkHandlerMixin",
+    "vanilla.backslot.TridentItemMixin",
+    "vanilla.backslot.compat.OnDeathItemDropCompatibility",
     "vanilla.iframebypass.LivingEntityMixin",
     "vanilla.iframebypass.PlayerEntityMixin",
     "vanilla.newdamagesystem.backattack.LivingEntityMixin",
@@ -41,8 +48,16 @@
     "moditem.hollowmask.client.ArmorFeatureRendererMixin",
     "moditem.hollowmask.client.PlayerEntityRendererMixin",
     "moditem.throwingstuff.client.InGameOverlayRendererMixin",
+    "moditem.throwingstuff.impaling.client.InGameOverlayRendererMixin",
     "moditem.throwingstuff.impaling.client.EntityRendererMixin",
-    "statuseffect.grievouswounds.client.InGameHudMixin"
+    "moditem.throwingstuff.impaling.client.TridentRiptideFeatureRendererMixin",
+    "statuseffect.grievouswounds.client.InGameHudMixin",
+    "util.accesor.CreativeSlotAccessor",
+    "vanilla.backslot.client.CreativeInventoryScreenMixin",
+    "vanilla.backslot.client.InGameHudMixin",
+    "vanilla.backslot.client.InventoryScreenMixin",
+    "vanilla.backslot.client.MinecraftClientMixin",
+    "vanilla.backslot.client.PlayerEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

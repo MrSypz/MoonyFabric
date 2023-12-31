@@ -54,6 +54,7 @@ public class ModItems {
 
 
     public static Item ARCHAIC_EYE;
+    public static Item PALE_CINNABAR;
     public static Item HOGYOKU;
     public static Item DEATHGOD_UPGRADE_SMITHING_TEMPLATE;
 
@@ -78,6 +79,7 @@ public class ModItems {
         WANDERER_HAT = registeritem("wanderer_hat", new MamyMaskCosmItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),EquipmentSlot.HEAD));
         //MATERIAL
         ARCHAIC_EYE = registeritem("archaic_eye", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
+        PALE_CINNABAR = registeritem("pale_cinnabar", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.RARE)));
 
         //HOLLOW MASK
         HALF_HOLLOW_MASK = registerMaskItem("half_hollow_mask", new HollowmaskItem(new FabricItemSettings().maxDamage(15))); // 10 Second

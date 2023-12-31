@@ -6,10 +6,14 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sypztep.mamy.common.compat.MamyCompat;
+import sypztep.mamy.common.component.entity.BackWeaponComponent;
 import sypztep.mamy.common.init.*;
 import sypztep.mamy.common.packetC2S.*;
 import sypztep.mamy.common.util.HogyokuState;
@@ -22,6 +26,9 @@ public class MamyMod implements ModInitializer {
     public static Identifier id(String id) {
         return new Identifier(MODID, id);
     }
+    public static final Identifier holdWeaponPacketId = id("hold_packet");
+    public static final Identifier swapWeaponPacketId = id("swap_packet");
+    public static final Identifier swapInventoryPacketId = id("swap_inventory_packet");
 
     @Override
     public void onInitialize() {
@@ -45,6 +52,7 @@ public class MamyMod implements ModInitializer {
         ModItemGroup.init();
         ModLootableModifiers.LootTable();
         ModConfig.init(MODID, ModConfig.class);
+        packetinit();
 
         EntityElytraEvents.ALLOW.register((entity -> false));
 
@@ -68,11 +76,46 @@ public class MamyMod implements ModInitializer {
 
             Objects.requireNonNull(newPlayer.getAttributeInstance(ModEntityAttributes.GENERIC_HOGYOKU)).setBaseValue(v);
         }));
+
     }
 
     void setupNewPlayer(String name, HogyokuState state, PlayerEntity player) {
         state.map.put(name, 0);
         state.markDirty();
         Objects.requireNonNull(player.getAttributeInstance(ModEntityAttributes.GENERIC_HOGYOKU)).setBaseValue(0);
+    }
+    public static void packetinit() {
+        ServerPlayNetworking.registerGlobalReceiver(holdWeaponPacketId, (server, player, handler, buf, responseSender) -> {
+            boolean hold = buf.readBoolean();
+            BackWeaponComponent.setHoldingBackWeapon(player, hold);
+        });
+        ServerPlayNetworking.registerGlobalReceiver(swapWeaponPacketId, (server, player, handler, buf, responseSender) -> {
+            if (!player.isSpectator()) {
+                boolean toggled = BackWeaponComponent.isHoldingBackWeapon(player);
+                BackWeaponComponent.setHoldingBackWeapon(player, false);
+                ItemStack itemStack = BackWeaponComponent.getBackWeapon(player);
+                boolean success = BackWeaponComponent.setBackWeapon(player, player.getStackInHand(Hand.MAIN_HAND));
+                if (success) {
+                    player.setStackInHand(Hand.MAIN_HAND, itemStack);
+                }
+                player.clearActiveItem();
+                BackWeaponComponent.setHoldingBackWeapon(player, toggled);
+            }
+        });
+        ServerPlayNetworking.registerGlobalReceiver(swapInventoryPacketId, (server, player, handler, buf, responseSender) -> {
+            int slotId = buf.readInt();
+            if (!player.isSpectator()) {
+                if (!player.currentScreenHandler.isValid(slotId)) {
+                    return;
+                }
+
+                Slot slot = player.currentScreenHandler.getSlot(slotId);
+                ItemStack itemStack = BackWeaponComponent.getBackWeapon(player);
+                boolean success = BackWeaponComponent.setBackWeapon(player, slot.getStack());
+                if (success) {
+                    slot.setStack(itemStack);
+                }
+            }
+        });
     }
 }

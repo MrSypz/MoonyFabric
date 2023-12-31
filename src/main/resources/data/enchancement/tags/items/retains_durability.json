@@ -28,14 +28,6 @@
 	  {
 		  "id": "mamy:half_hollow_mask",
 		  "required": false
-	  },
-	  {
-		  "id": "mamy:vasto_mask",
-		  "required": false
-	  },
-	  {
-		  "id": "mamy:bloodlust",
-		  "required": false
 	  }
   ]
 }

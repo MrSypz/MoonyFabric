@@ -72,6 +72,7 @@
   "hogyoku.success": "Vizored level increase",
   "vizard.checked": "You don't have Visored.",
   "vizard.already": "You already wearing a mask rightnow.",
+  "backslot.cannot.consume": "Can't use trident with backslot!",
 
   "effect.mamy.mark": "Mark",
   "effect.mamy.grievouswounds" : "Grievous Wounds",

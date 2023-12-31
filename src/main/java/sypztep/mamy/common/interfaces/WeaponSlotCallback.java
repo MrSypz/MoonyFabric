@@ -1,4 +1,4 @@
-package sypztep.mamy.common.util;
+package sypztep.mamy.common.interfaces;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
@@ -15,11 +15,9 @@ public interface WeaponSlotCallback {
             for(int var5 = 0; var5 < var4; ++var5) {
                 WeaponSlotCallback listener = var3[var5];
                 ActionResult result = listener.interact(player, stack);
-                if (result != ActionResult.PASS) {
+                if (result != ActionResult.PASS)
                     return result;
-                }
             }
-
             return ActionResult.PASS;
         };
     });
