@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EnchantmentUtil {
+    public float AmountDeal = 0;
 
     public static boolean hasEnchantment(Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getLevel(enchantment, stack) > 0;
@@ -27,23 +28,29 @@ public class EnchantmentUtil {
     public static boolean hasEnchantment(Enchantment enchantment, Entity entity) {
         return entity instanceof LivingEntity living && EnchantmentHelper.getEquipmentLevel(enchantment, living) > 0;
     }
+    public float getDamageAmount () {
+        return AmountDeal;
+    }
+    public void setDamageAmount(float amount) {
+        AmountDeal = amount;
+    }
     public static boolean isMaskValid(ItemStack stack) {
         return stack != null && stack.getItem() instanceof HollowmaskItem ;
     }
     public static boolean hasMaskOnHelmet(PlayerEntity player) {
-        return isMaskValid(getChestSlotItem(player));
+        return isMaskValid(getHeadSlot(player));
     }
     public static boolean hasMaskEquipped(PlayerEntity player) {
-        return isMaskValid(getEquippedCloakItem(player));
+        return isMaskValid(getEquippedMaskItem(player));
     }
 
-    public static ItemStack getChestSlotItem(PlayerEntity player) {
+    public static ItemStack getHeadSlot(PlayerEntity player) {
         return player.getEquippedStack(EquipmentSlot.HEAD);
     }
 
-    public static ItemStack getEquippedCloakItem(PlayerEntity player) {
+    public static ItemStack getEquippedMaskItem(PlayerEntity player) {
         if (hasMaskOnHelmet(player) && VizardComponent.hasMask && VizardComponent.invisDuration != 0) {
-            return getChestSlotItem(player);
+            return getHeadSlot(player);
         }
         return null;
     }
@@ -107,6 +114,21 @@ public class EnchantmentUtil {
         }
         return true;
     }
+    public static boolean isGroundedOrAirborne(LivingEntity living, boolean allowWater) {
+        if (living instanceof PlayerEntity player && player.getAbilities().flying) {
+            return false;
+        }
+        if (!allowWater) {
+            if (living.isTouchingWater() || living.isSwimming()) {
+                return false;
+            }
+        }
+        return !living.isClimbing() && living.getVehicle() == null;
+    }
+    public static boolean isGroundedOrAirborne(LivingEntity living) {
+        return isGroundedOrAirborne(living, false);
+    }
+
     @FunctionalInterface
     interface Consumer {
         void accept(EmptyEnchantment enchantment, int level, ItemStack itemStack);

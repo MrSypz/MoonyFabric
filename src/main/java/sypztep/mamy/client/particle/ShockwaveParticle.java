@@ -18,16 +18,16 @@ public class ShockwaveParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteProvider;
     private static final Quaternionf QUATERNION = new Quaternionf(0F, -0.7F, 0.7F, 0F);
 
-    ShockwaveParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x, y + 0.5, z, 0.0, 0.0, 0.0);
+    ShockwaveParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider, double velocityX, double velocityY, double velocityZ) {
+        super(world, x, y , z, 0.0, 0.0, 0.0);
         this.spriteProvider = spriteProvider;
         this.maxAge = 10;
-        this.scale = 1.5F;
+        this.scale = 25F;
         this.gravityStrength = 0.008F;
         this.velocityX = velocityX;
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
-        this.setSpriteForAge(spriteProvider);
+        this.setSpriteForAge(this.spriteProvider);
     }
     @Override
     public void buildGeometry(VertexConsumer buffer, Camera camera, float ticks) {
@@ -86,7 +86,7 @@ public class ShockwaveParticle extends SpriteBillboardParticle {
     @Environment(EnvType.CLIENT)
     public record Factory(SpriteProvider sprites) implements ParticleFactory<DefaultParticleType> {
         public Particle createParticle(DefaultParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new ShockwaveParticle(world, x, y, z, xSpeed, ySpeed, zSpeed, sprites);
+            return new ShockwaveParticle(world, x, y, z, sprites, xSpeed, ySpeed, zSpeed);
         }
     }
 }

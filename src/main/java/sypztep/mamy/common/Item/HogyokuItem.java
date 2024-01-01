@@ -44,7 +44,7 @@ public class HogyokuItem extends Item {
         int v;
         if (state.map.containsKey(name))
             v = state.map.get(user.getEntityName()) + 1;
-        else v = 0;
+        else v = 1;
         if (v < 6) {
             state.map.put(name, v);
             state.markDirty();
@@ -79,7 +79,7 @@ public class HogyokuItem extends Item {
         MutableText info = (Text.translatable(registryName + ".desc")).formatted(Formatting.GRAY);
         MutableText passive = (Text.translatable(registryName + ".desc.passive")).formatted(Formatting.GRAY);
         list.add(Text.literal(" - ").append((Text.literal("Passive : ").append(passive).formatted(Formatting.GOLD))).formatted(Formatting.GRAY));
-        list.add(Text.literal(" - ").append((Text.literal("Ability : RightClick").formatted(Formatting.GOLD))).formatted(Formatting.GRAY));
+        list.add(Text.literal(" - ").append((Text.literal("Ability : Right Click").formatted(Formatting.GOLD))).formatted(Formatting.GRAY));
         list.add((info).append((Text.literal(String.valueOf(String.format("%.2f",player.getHealth())))).formatted(Formatting.RED).append(Text.literal(" ♥"))));
     }
 

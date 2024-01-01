@@ -19,6 +19,7 @@ import java.util.List;
 public class ModLootableModifiers {
     private static final Identifier DESERT_PYRAMID_ARCHAEOLOGY_LOOT = new Identifier("minecraft", "archaeology/desert_pyramid");
     private static final Identifier BASTION_TREASURE_CHEST_LOOT_TABLE_ID = new Identifier("minecraft", "chests/bastion_treasure");
+    private static final Identifier OCEAN_RUIN_ARCHAEOLOGY_LOOT = new Identifier("minecraft","archaeology/ocean_ruin_warm");
     public static void LootTable() {
         LootTableEvents.REPLACE.register(((resourceManager, lootManager, id, original, source) -> {
             if (DESERT_PYRAMID_ARCHAEOLOGY_LOOT.equals(id)) {
@@ -26,14 +27,24 @@ public class ModLootableModifiers {
                 poolEntries.add(ItemEntry.builder(Items.BOOK).weight(2)
                     .apply(new EnchantRandomlyLootFunction.Builder()
                     .add(ModEnchantments.VITALITY)).build());
-
+                poolEntries.add(ItemEntry.builder(ModItems.HOGYOKU).weight(1)
+                        .build());
+                LootPool.Builder pool = LootPool.builder().with(poolEntries);
+                return LootTable.builder().pool(pool).build();
+            }
+            if (OCEAN_RUIN_ARCHAEOLOGY_LOOT.equals(id)) {
+                List<LootPoolEntry> poolEntries = new ArrayList<>(Arrays.asList(original.pools[0].entries));
+                poolEntries.add(ItemEntry.builder(ModItems.FURINA_HAT).weight(1)
+                        .build());
+                poolEntries.add(ItemEntry.builder(ModItems.WANDERER_HAT).weight(1)
+                        .build());
                 LootPool.Builder pool = LootPool.builder().with(poolEntries);
                 return LootTable.builder().pool(pool).build();
             }
             return null;
         }));
         UniformLootNumberProvider lootTableRange = UniformLootNumberProvider.create(1, 1);
-        LootCondition chanceLootCondition = RandomChanceLootCondition.builder(10).build();
+        LootCondition chanceLootCondition = RandomChanceLootCondition.builder(1.0f).build();
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, supplier, setter) -> {
             if (BASTION_TREASURE_CHEST_LOOT_TABLE_ID.equals(id)) {
                 LootPool lootPool = LootPool.builder()

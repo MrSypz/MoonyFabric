@@ -15,10 +15,10 @@ public interface ModSoundEvents {
     SoundEvent ENTITY_GENERIC_BLOODHIT = createSoundEvent("entity.generic.bloodhit");
 	SoundEvent ENTITY_GENERIC_SONIDO = createSoundEvent("entity.generic.sonido");
 	SoundEvent ENTITY_PLAYER_ATTACK_SCYTHE = createSoundEvent("entity.player.attack.scythe");
+	SoundEvent ENTITY_PLAYER_ATTACK_LETHAL = createSoundEvent("entity.player.attack.lethal");
+	SoundEvent ENTITY_GENERIC_AIRHIKE = createSoundEvent("entity.generic.airhike");
 	SoundEvent ITEM_CARVE = createSoundEvent("item.carve");
-
-	SoundEvent ITEM_SPEWING =createSoundEvent("item.spewing");
-
+	SoundEvent ITEM_SPEWING = createSoundEvent("item.spewing");
 	static void init() {
 		SOUND_EVENTS.keySet().forEach((soundEvent) -> {
 			Registry.register(Registries.SOUND_EVENT, SOUND_EVENTS.get(soundEvent), soundEvent);

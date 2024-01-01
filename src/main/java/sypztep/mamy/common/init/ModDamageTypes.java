@@ -10,11 +10,14 @@ import org.jetbrains.annotations.Nullable;
 import sypztep.mamy.common.MamyMod;
 
 public class ModDamageTypes {
-
+    public static final RegistryKey<DamageType> BRINGITDOWN = createType("bringitdown");
+    public static final RegistryKey<DamageType> BLOODLUST = createType("bloodlust");
+    public static final RegistryKey<DamageType> BLOODSCYTHE = createType("bloodscythe");
     public static final RegistryKey<DamageType> BLEEDOUT = createType("bleedout");
     public static final RegistryKey<DamageType> HOGYOKU = createType("hogyoku");
     public static final RegistryKey<DamageType> ELECTRO = createType("electro");
     public static final RegistryKey<DamageType> MASKIMPACT = createType("maskimpact");
+    public static final RegistryKey<DamageType> CINNABAR = createType("cinnabar");
     public static RegistryKey<DamageType> createType(String name) {
         return RegistryKey.of(RegistryKeys.DAMAGE_TYPE, MamyMod.id(name));
     }

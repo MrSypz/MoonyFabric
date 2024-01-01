@@ -14,16 +14,14 @@ public class ModItemGroup {
     public static void init(){
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(content -> {
             content.add(ModItems.DEATH_SCYTHE);
-            content.addAfter(Items.NETHERITE_AXE,ModItems.WOODEN_POLEARM);
-            content.addAfter(ModItems.WOODEN_POLEARM,ModItems.STONE_POLEARM);
-            content.addAfter(ModItems.STONE_POLEARM,ModItems.IRON_POLEARM);
-            content.addAfter(ModItems.IRON_POLEARM,ModItems.GOLDEN_POLEARM);
-            content.addAfter(ModItems.GOLDEN_POLEARM,ModItems.DIAMOND_POLEARM);
-            content.addAfter(ModItems.DIAMOND_POLEARM,ModItems.NETHERITE_POLEARM);
+            content.addAfter(Items.TRIDENT, ModItems.PITCHFORK);
+            content.addAfter(ModItems.PITCHFORK, ModItems.HOMA);
+            content.addAfter(ModItems.DEATH_SCYTHE, ModItems.BLOODLUST);
+
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(content -> {
-            content.addBefore(Items.GOLDEN_CARROT,ModItems.ARCHAIC_EYE);
-            content.addAfter(Items.STICK,ModItems.PACKSTICK);
+            content.add(ModItems.ARCHAIC_EYE);
+            content.add(ModItems.PALE_CINNABAR);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(content -> {
             content.addBefore(Items.APPLE,ModItems.HOGYOKU);
@@ -48,6 +46,7 @@ public class ModItemGroup {
             .displayName(Text.translatable("itemGroup." + MamyMod.MODID + "cosmetic"))
             .entries((context, entries) -> {
                 entries.add(ModItems.FURINA_HAT);
+                entries.add(ModItems.WANDERER_HAT);
             })
             .build();
 }

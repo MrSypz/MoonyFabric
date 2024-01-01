@@ -47,8 +47,8 @@ public abstract class LivingEntityMixin extends Entity {
         mamy$appearBlocking = true;
         if(item instanceof SwordItem && this.isUsingItem() && this.blockedByShield(mamy$cachedSource)) {
             double multiplier = ModConfig.default_multiplier;
-            System.out.println(old +" into "+old * multiplier);
-            old *= multiplier;
+//            System.out.println(old +" into "+old * multiplier);
+            old *= (float) multiplier;
         }
         mamy$appearBlocking = false;
         return old;

@@ -17,6 +17,21 @@
     ],
     "subtitle": "entity.player.attack.scythe"
   },
+  "entity.player.attack.lethal": {
+    "sounds": [
+      "mamy:entity/lethal"
+    ],
+    "subtitle": "entity.player.attack.lethal"
+  },
+  "entity.generic.airhike": {
+    "sounds": [
+      "dig/sand1",
+      "dig/sand2",
+      "dig/sand3",
+      "dig/sand4"
+    ],
+    "subtitle": "subtitles.mamy.entity.generic.airhike"
+  },
   "item.spewing": {
     "sounds": [
       "mamy:item/spewing_1",

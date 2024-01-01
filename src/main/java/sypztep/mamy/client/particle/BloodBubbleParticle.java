@@ -30,7 +30,7 @@ public class BloodBubbleParticle extends SpriteBillboardParticle {
         if (this.age++ >= this.maxAge){
             this.markDead();
         } else {
-            this.velocityY -= 0.05;
+            this.velocityY = 0.0;
             this.move(this.velocityX, this.velocityY, this.velocityZ);
             if (this.ascending && this.y == this.prevPosY) {
                 this.velocityX *= 1.1;

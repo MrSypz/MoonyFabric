@@ -25,7 +25,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (source.isIn(DamageTypeTags.BYPASSES_EFFECTS))
             return value;
         if (source.getSource() != null && this.hasStatusEffect(ModStatusEffects.HOLLOW_POWER)) {
-            return value * 0.9F;
+            return value * 0.8F;
         }
         return value;
     }

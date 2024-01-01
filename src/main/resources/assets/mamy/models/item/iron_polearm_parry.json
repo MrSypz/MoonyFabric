@@ -1,6 +1,0 @@
-{
-	"parent": "mamy:item/polearm_handheld_parry",
-	"textures": {
-		"layer0": "mamy:item/iron_polearm_handheld"
-	}
-}

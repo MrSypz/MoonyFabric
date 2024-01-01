@@ -10,9 +10,10 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class MamyMaskCosmItem extends Item implements Equipment {
-
-    public MamyMaskCosmItem(Settings settings) {
+    public static EquipmentSlot selectslot;
+    public MamyMaskCosmItem(Settings settings,EquipmentSlot slot) {
         super(settings);
+        selectslot = slot;
     }
 
     @Override
@@ -21,6 +22,6 @@ public class MamyMaskCosmItem extends Item implements Equipment {
     }
     @Override
     public EquipmentSlot getSlotType() {
-        return EquipmentSlot.HEAD;
+        return selectslot;
     }
 }

@@ -12,8 +12,9 @@ loom {
 
 repositories {
     mavenLocal()
+    mavenCentral()
     maven {
-        name = "MidnightLib"
+        name = "Modrinth"
         url = "https://api.modrinth.com/maven"
     }
     maven {
@@ -32,6 +33,7 @@ repositories {
         name = "jitpack"
         url = "https://jitpack.io"
     }
+    maven { url "https://maven.shedaniel.me/" }
     maven {
         url "https://maven.jamieswhiteshirt.com/libs-release"
         content {
@@ -47,6 +49,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
+    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}")))
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cardinal_components_version}")
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}")
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cardinal_components_version}")
@@ -60,11 +63,16 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     modImplementation include ("com.github.MrSypz:Pickyourpoison-Fabric:${project.pickyourpoison_version}")
-    modImplementation include ("com.github.MrSypz:mamybar:${project.mamybar_version}")
+    modImplementation "com.github.moriyashiine:enchancement:${project.enchancement_version}"
+
+    modCompileOnly "maven.modrinth:sodium:${sodium_version}"
+    modRuntimeOnly "maven.modrinth:sodium:${sodium_version}"
 
     modImplementation include ("dev.emi:trinkets:${trinkets_version}")
 
     modImplementation include("com.jamieswhiteshirt:reach-entity-attributes:$reach_version")
+
+    modImplementation "com.ptsmods:devlogin:3.4.1"
 }
 
 processResources {

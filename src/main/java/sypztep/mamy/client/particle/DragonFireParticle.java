@@ -15,7 +15,6 @@ public class DragonFireParticle extends SpriteBillboardParticle {
         this.spriteProvider = spriteProvider;
         this.setSpriteForAge(spriteProvider);
         this.scale *= 1.75F + this.random.nextFloat() * 0.7F;
-        this.gravityStrength = -0.015F;
 
     }
 

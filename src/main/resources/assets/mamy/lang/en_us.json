@@ -20,19 +20,32 @@
   "mamy.midnightconfig.knockbackCancelThreshold": "Knockback Cancel Threshold",
   "mamy.midnightconfig.knockbackCancelThreshold.tooltip": "How weak a player's attack can be before the knockback gets nullified, from 0 (0%, cancels multiple attacks on the same tick) to 1 (100%, no knockback), or -0.1 (disables this feature)",
 
+  "mamy.midnightconfig.MaskDashEffect": "MaskDash Effect",
+  "mamy.midnightconfig.distorsion": "Distorsion",
+
+  "mamy.midnightconfig.SwordParry": "Sword Parry",
+  "mamy.midnightconfig.consume_animation": "Consume Animation",
+  "mamy.midnightconfig.prioritize_shield": "Prioritize Shield",
+
+  "mamy.midnightconfig.FeatureCosmetic": "Feature Cosmetic",
+  "mamy.midnightconfig.cosmetics": "Enable Cosmetics",
+  "mamy.midnightconfig.enum.CosmeticsOptions.ENABLE": "Yes",
+  "mamy.midnightconfig.enum.CosmeticsOptions.FIRST_PERSON": "Yes and in First Person",
+  "mamy.midnightconfig.enum.CosmeticsOptions.DISABLE": "No",
+
+
   "itemGroup.mamymask": "Mask Item",
   "itemGroup.mamycosmetic": "Cosmetic Item",
 
   "item.mamy.death_scythe" : "Death Scythe",
-  "item.mamy.wooden_polearm" : "Wooden Polearm",
-  "item.mamy.stone_polearm" : "Stone Polearm",
-  "item.mamy.iron_polearm" : "Iron Polearm",
-  "item.mamy.golden_polearm" : "Golden Polearm",
-  "item.mamy.diamond_polearm" : "Diamond Polearm",
-  "item.mamy.netherite_polearm" : "Netherite Polearm",
+  "item.mamy.bloodlust" : "Blood Lust",
+  "item.mamy.pitchfork" : "Pitchfork",
+  "item.mamy.homa" : "Staff of Homa",
 
-  "item.mamy.death_scythe.desc" : "Swirl enemy around, When using 5 times it gonna apply Grievouswounds. - Consume ",
+  "item.mamy.death_scythe.desc" : "If this item has Vengeance Swirl enemy around, When using 5 times it gonna apply Grievouswounds. - Consume ",
   "item.mamy.death_scythe.desc.passive" : "When attack on crit target'll move toward you.",
+  "item.mamy.bloodlust.desc" : "If this item has Vengeance can spew blood can deal 15 Damage - Consume",
+  "item.mamy.bloodlust.desc.passive" : " -",
   "item.mamy.half_hollow_mask" : "Half Hollow Mask",
   "item.mamy.hollow_mask_1" : "Hollow Mask Tier 1",
   "item.mamy.hollow_mask_2" : "Hollow Mask Tier 2",
@@ -48,18 +61,26 @@
   "item.mamy.packstick" : "Pack Sticks",
 
   "item.mamy.furina_hat" : "Furina Hat",
+  "item.mamy.wanderer_hat" : "Wanderer Hat",
+  "item.mamy.hanega" : "Hanega",
+
+  "key.categories.mamy": "Moony",
+  "key.mamy.special": "Sonido",
+  "key.mamy.special2": "Equip Mask",
 
   "hogyoku.limit_reached": "Hogyoku has reached the limit.",
   "hogyoku.success": "Vizored level increase",
   "vizard.checked": "You don't have Visored.",
   "vizard.already": "You already wearing a mask rightnow.",
-
+  "backslot.cannot.consume": "Can't use trident with backslot!",
 
   "effect.mamy.mark": "Mark",
   "effect.mamy.grievouswounds" : "Grievous Wounds",
-  "effect.mamy.lethaltempo": "Lethal Tempo",
+  "effect.mamy.bringitdown": "Bring It Down",
   "effect.mamy.fervorofbattle": "Fervor of Battle",
   "effect.mamy.hollowpower": "Hollow Power",
+  "effect.mamy.vamprcooldown": "Vampr Cooldown",
+  "effect.mamy.scythecooldown": "Scythe Cooldown",
 
   "subtitles.mamy.entity.generic.blindstab": "Blindstab",
   "subtitles.mamy.entity.generic.bloodhit": "Bloodhit",
@@ -69,24 +90,42 @@
   "enchantment.mamy.vitality.desc" : "Increase player maxhealth.",
   "enchantment.mamy.electrodecree" : "Electo Decree",
   "enchantment.mamy.electrodecree.desc" : "when hit the same target it'll deal Aoe(range 8 blocks) electro damage ,Highest damage on nearest target.",
-  "enchantment.mamy.lethaltempo" : "Lethal Tempo",
-  "enchantment.mamy.lethaltempo.desc" : "Swing weapon faster when attack over time",
+  "enchantment.mamy.bringitdown" : "Bring it down",
+  "enchantment.mamy.bringitdown.desc" : "Every 3 hit deal true damage amount (65% of player attack damage)",
   "enchantment.mamy.fervorofbattle" : "Fervor of Battle",
-  "enchantment.mamy.fervorofbattle.desc" : "Deal 1 damage / stacks up to level(maximun 8 stacks).",
+  "enchantment.mamy.fervorofbattle.desc" : "Deal 0.8 damage / stacks up to level(maximun 8 stacks).",
   "enchantment.mamy.hollowcurse" : "Hollow Curse",
   "enchantment.mamy.hollowcurse.desc" : "Can't unequiped and disappear when dead.",
   "enchantment.mamy.carve" : "Carve",
   "enchantment.mamy.carve.desc" : "Everytime attack target it gonna decrease protection amount.",
-  "enchantment.mamy.hissilehomming" : "Homming Missle",
-  "enchantment.mamy.hissilehomming.desc" : "When use crossbow with firework a firework'll going to direction that you look at.",
+  "enchantment.mamy.missilehomming" : "Homming Missile",
+  "enchantment.mamy.missilehomming.desc" : "When use crossbow with firework a firework'll going to direction that you look at.",
+  "enchantment.mamy.greedyang" : "Greed Yang",
+  "enchantment.mamy.greedyang.desc" : "Heal user with amount of damage that user deal",
+  "enchantment.mamy.goliath" : "Goliath",
+  "enchantment.mamy.goliath.desc" : "Deal damage more 12% of target health and heal 8% of damage that done (Not affect to boss)",
+  "enchantment.mamy.vengeance" : "Vengeance",
+  "enchantment.mamy.vengeance.desc" : "Unique Enchantment that enable item to use special feature.",
+  "enchantment.mamy.vampr" : "Vampr",
+  "enchantment.mamy.vampr.desc" : "Heal (amount of target around user) and deal 1 true damage.",
+  "enchantment.mamy.hail" : "Hail",
+  "enchantment.mamy.hail.desc" : "Shot a horde of arrors from the sky.",
+
 
   "death.attack.hogyoku": "%1$s Your soul are now starting kindle.",
-  "death.attack.maskimpact": "%1$s How?!",
+  "death.attack.hogyoku.player": "%1$s How?!",
+  "death.attack.maskimpact": "%1$s Death from the impact from Anon power",
   "death.attack.maskimpact.player": "%1$s Impact by strange wave.",
   "death.attack.electro": "%1$s Electrocuted by accident.",
   "death.attack.electro.player": "%1$s Electrocuted from %2$s.",
   "death.attack.bleedout": "%1$s Lack of blood because own sadistic.",
   "death.attack.bleedout.player": "%1$s Get exsanguinated by %2$s.",
+  "death.attack.bloodlust": "%1$s HIV got him.",
+  "death.attack.bloodlust.player": "%1$s Get HIV by %2$s.",
 
-  "attribute.generic.crit_chance": "Crit Chance"
+  "attribute.generic.crit_chance": "Crit Chance",
+  "attribute.generic.crit_damage": "Crit Damage",
+
+  "mamy:tooltip.owned_by": "(to %s)",
+  "mamy:trident_recall_fail": "Failed to recall your tridents"
 }

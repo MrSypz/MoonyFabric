@@ -8,25 +8,31 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.SwordItem;
-import net.minecraft.registry.Registries;
+import net.minecraft.item.TridentItem;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import sypztep.mamy.client.packetS2C.*;
 import sypztep.mamy.client.particle.*;
 import sypztep.mamy.client.registry.Itemregistry;
+import sypztep.mamy.client.render.entity.*;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.ModConfig;
+import sypztep.mamy.common.component.entity.BackWeaponComponent;
+import sypztep.mamy.common.init.ModEntityTypes;
+import sypztep.mamy.common.init.ModItems;
 import sypztep.mamy.common.init.ModParticles;
 import sypztep.mamy.common.interfaces.LivingEntityInvoker;
+import sypztep.mamy.common.interfaces.WeaponSlotCallback;
 import sypztep.mamy.common.packetC2S.MaskPacket;
 import sypztep.mamy.common.packetC2S.SyncCritFlagPacket;
 import sypztep.mamy.common.util.AbilityUtil;
@@ -36,6 +42,8 @@ import static sypztep.mamy.common.component.entity.VizardComponent.dodash;
 public class MamyModClient implements ClientModInitializer {
     public static final KeyBinding SONIDO_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
     public static final KeyBinding SPECIAL_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".special2", GLFW.GLFW_KEY_V, "key.categories." + MamyMod.MODID));
+    public static final KeyBinding WEAPON_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".select_weapon", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
+    public static final KeyBinding SWAP_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".swap_weapon", GLFW.GLFW_KEY_G, "key.categories." + MamyMod.MODID));
     private static final ManagedShaderEffect DASHWARP = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
     private static final ManagedShaderEffect HOLLOW_VISION = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/hollowvision.json"));
     public static float distortMultiply = 0.0f;
@@ -58,21 +66,25 @@ public class MamyModClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(ResetSonidoInvPacket.ID, new ResetSonidoInvPacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(AddMaskParticlePacket.ID, new AddMaskParticlePacket.Receiver());
         ClientPlayNetworking.registerGlobalReceiver(AddHogyokuParticlePacket.ID, new AddHogyokuParticlePacket.Receiver());
+        ClientPlayNetworking.registerGlobalReceiver(AddAirhikeParticlesPacket.ID,new AddAirhikeParticlesPacket.Receiver());
+        EntityRendererRegistry.register(ModEntityTypes.BLOOD_LUST, BloodLustEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.PITCHFORK,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/pitchfork.png"), EntityModelLayers.TRIDENT));
+        EntityRendererRegistry.register(ModEntityTypes.HOMA, HomaEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.HOMA_SOUL, HomaSoulEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ORBITAL, OrbitalEntityRenderer::new);
 
+        ParticleFactoryRegistry particleRegistry = ParticleFactoryRegistry.getInstance();
+        particleRegistry.register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
+        particleRegistry.register(ModParticles.BACKATTACK, BackAttackParticle.Factory::new);
 
-        ParticleFactoryRegistry.getInstance().register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
+        particleRegistry.register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);
+        particleRegistry.register(ModParticles.BLOODWAVE, BloodwaveParticle.Factory::new);
 
-        ParticleFactoryRegistry.getInstance().register(ModParticles.BACKATTACK, BackAttackParticle.Factory::new);
-
-        ParticleFactoryRegistry.getInstance().register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.BLOODWAVE, BloodwaveParticle.Factory::new);
-
-        ParticleFactoryRegistry.getInstance().register(ModParticles.BLOOD_BUBBLE, BloodBubbleParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.BLOOD_BUBBLE_SPLATTER, BloodBubbleSplatterParticle.Factory::new);
-
-        ParticleFactoryRegistry.getInstance().register(ModParticles.DRAGON_FIRE, DragonFireParticle.DefaultFactory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.DRAGON_FIRE_SPLATTER, DragonFireSplatterParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.EMPTY_PARTICLE, EmptyParticle.Factory::new);
+        particleRegistry.register(ModParticles.BLOOD_BUBBLE, BloodBubbleParticle.Factory::new);
+        particleRegistry.register(ModParticles.BLOOD_BUBBLE_SPLATTER, BloodBubbleSplatterParticle.Factory::new);
+        particleRegistry.register(ModParticles.DRAGON_FIRE, DragonFireParticle.DefaultFactory::new);
+        particleRegistry.register(ModParticles.DRAGON_FIRE_SPLATTER, DragonFireSplatterParticle.Factory::new);
+        particleRegistry.register(ModParticles.EMPTY_PARTICLE, EmptyParticle.Factory::new);
 
         Itemregistry.init();
 
@@ -84,20 +96,33 @@ public class MamyModClient implements ClientModInitializer {
             if (MinecraftClient.getInstance().player != null && AbilityUtil.hasAnyMask(MinecraftClient.getInstance().player))
                 MamyModClient.HOLLOW_VISION.render(tickDelta);
         });
-
+        WeaponSlotCallback.EVENT.register((player, stack) -> {
+            if (stack.getItem() == ModItems.BLOODLUST || stack.getItem() == ModItems.DEATH_SCYTHE) {
+                return ActionResult.FAIL;
+            } else  {
+                return stack.getItem() instanceof TridentItem ? ActionResult.FAIL : ActionResult.PASS;
+            }
+        });
 
         ClientTickEvents.START_CLIENT_TICK.register( client -> {
             PlayerEntity player = client.getCameraEntity() instanceof PlayerEntity ? (PlayerEntity) client.getCameraEntity() : null;
-            if (player == null || !(player instanceof LivingEntity) || !AbilityUtil.hasAnyMask(player)) {
+            if (!(player instanceof LivingEntity) || !AbilityUtil.hasAnyMask(player)) {
                 smoothshade = 40;
                 return;
             }
-            if (smoothshade > 0) {
+            if (smoothshade > 10) {
                 smoothshade--;
                 setSaturation(smoothshade * 0.01f);
             }
         });
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+        ClientTickEvents.END_CLIENT_TICK.register((client) -> {
+            if (WEAPON_KEYBINDING.wasPressed() && client.player != null) {
+                BackWeaponComponent.setHoldingBackWeapon(client.player, !BackWeaponComponent.isHoldingBackWeapon(client.player));
+            }
+
+            if (SWAP_KEYBINDING.wasPressed()) {
+                ClientPlayNetworking.send(MamyMod.swapWeaponPacketId, PacketByteBufs.empty());
+            }
             if (cooldown > 0)
                 cooldown--;
             if (SPECIAL_KEYBINDING.isPressed() && cooldown == 0) {
@@ -115,11 +140,6 @@ public class MamyModClient implements ClientModInitializer {
                          cooldown = DEFAULT_COOLDOWN;
                      }
                 }
-            }
-        });
-        Registries.ITEM.forEach((item) -> {
-            if(item instanceof SwordItem) {
-                FabricModelPredicateProviderRegistry.register(item, new Identifier("parrying"), (stack, world, entity, i) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0F : 0.0F);
             }
         });
 
