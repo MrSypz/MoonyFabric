@@ -35,15 +35,15 @@ public class DragonFireParticle extends SpriteBillboardParticle {
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
         this.setSpriteForAge(this.spriteProvider);
-        if (this.age++ >= this.maxAge && this.random.nextFloat() <= .35F){
+        if (this.age++ >= this.maxAge){
             this.markDead();
             this.world.addParticle(ParticleTypes.SMOKE, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
         } else {
-            this.velocityY -= 0.03;
+            this.velocityY = 0.0F;
             this.move(this.velocityX, this.velocityY, this.velocityZ);
             if (this.ascending && this.y == this.prevPosY) {
-                this.velocityX *= 0.5;
-                this.velocityZ *= 0.5;
+                this.velocityX *= 0.5F;
+                this.velocityZ *= 0.5F;
             }
         }
     }

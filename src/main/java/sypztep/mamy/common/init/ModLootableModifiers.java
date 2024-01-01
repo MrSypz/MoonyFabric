@@ -18,9 +18,11 @@ import java.util.List;
 
 public class ModLootableModifiers {
     private static final Identifier DESERT_PYRAMID_ARCHAEOLOGY_LOOT = new Identifier("minecraft", "archaeology/desert_pyramid");
+    private static final Identifier DESERT_WELL_ARCHAEOLOGY_LOOT = new Identifier("minecraft", "archaeology/desert_well");
     private static final Identifier BASTION_TREASURE_CHEST_LOOT_TABLE_ID = new Identifier("minecraft", "chests/bastion_treasure");
     private static final Identifier OCEAN_RUIN_ARCHAEOLOGY_LOOT = new Identifier("minecraft","archaeology/ocean_ruin_warm");
     public static void LootTable() {
+        //ARCHAEOLOGY
         LootTableEvents.REPLACE.register(((resourceManager, lootManager, id, original, source) -> {
             if (DESERT_PYRAMID_ARCHAEOLOGY_LOOT.equals(id)) {
                 List<LootPoolEntry> poolEntries = new ArrayList<>(Arrays.asList(original.pools[0].entries));
@@ -41,18 +43,34 @@ public class ModLootableModifiers {
                 LootPool.Builder pool = LootPool.builder().with(poolEntries);
                 return LootTable.builder().pool(pool).build();
             }
+            if (DESERT_WELL_ARCHAEOLOGY_LOOT.equals(id)) {
+                List<LootPoolEntry> poolEntries = new ArrayList<>(Arrays.asList(original.pools[0].entries));
+                poolEntries.add(ItemEntry.builder(ModItems.BROKEN_LUST_HANDLE).weight(1)
+                        .build());
+                LootPool.Builder pool = LootPool.builder().with(poolEntries);
+                return LootTable.builder().pool(pool).build();
+            }
             return null;
         }));
+        //CHEST
+        //BASTION LOOT
         UniformLootNumberProvider lootTableRange = UniformLootNumberProvider.create(1, 1);
-        LootCondition chanceLootCondition = RandomChanceLootCondition.builder(1.0f).build();
+        LootCondition firstItemChanceLootCondition = RandomChanceLootCondition.builder(0.5f).build();
+        LootPool firstItemPool = LootPool.builder()
+                .rolls(lootTableRange)
+                .conditionally(firstItemChanceLootCondition)
+                .with(ItemEntry.builder(ModItems.ARCHAIC_EYE).build())
+                .build();
+        LootCondition secondItemChanceLootCondition = RandomChanceLootCondition.builder(10f).build();
+        LootPool secondItemPool = LootPool.builder()
+                .rolls(lootTableRange)
+                .conditionally(secondItemChanceLootCondition)
+                .with(ItemEntry.builder(ModItems.PALE_CINNABAR).build())
+                .build();
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, supplier, setter) -> {
             if (BASTION_TREASURE_CHEST_LOOT_TABLE_ID.equals(id)) {
-                LootPool lootPool = LootPool.builder()
-                        .rolls(lootTableRange)
-                        .conditionally(chanceLootCondition)
-                        .with(ItemEntry.builder(ModItems.ARCHAIC_EYE).build()).build();
-
-                supplier.pool(lootPool);
+                supplier.pool(firstItemPool); // Add the first item's loot pool
+                supplier.pool(secondItemPool); // Add the second item's loot pool
             }
         });
     }

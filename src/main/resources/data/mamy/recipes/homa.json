@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#M#",
+        " T ",
+        " n "
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:fermented_spider_eye"
+        },
+        "M": {
+            "item": "mamy:pale_cinnabar"
+        },
+        "T": {
+            "item": "minecraft:trident"
+        },
+        "n": {
+            "item": "minecraft:netherite_ingot"
+        }
+    },
+    "result": {
+        "item": "mamy:homa",
+        "count": 1
+    }
+}

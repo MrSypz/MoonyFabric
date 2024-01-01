@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#  ",
+        " #G",
+        " #B"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:netherite_block"
+        },
+        "G": {
+            "item": "minecraft:gold_block"
+        },
+        "B": {
+            "item": "broken_lust_handle"
+        }
+    },
+    "result": {
+        "item": "mamy:bloodlust",
+        "count": 1
+    }
+}

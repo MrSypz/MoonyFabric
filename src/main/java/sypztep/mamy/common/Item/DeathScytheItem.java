@@ -121,4 +121,5 @@ public class DeathScytheItem extends EmptySwordItem implements CustomHitSoundIte
         REACH_MODIFIER = new EntityAttributeModifier(UUID.fromString("911af262-067d-4da2-854c-20f03cc2dd8b"), "Weapon modifier", 0.5D, EntityAttributeModifier.Operation.ADDITION);
         CRIT_DAMAGE_MODIFIER = new EntityAttributeModifier(UUID.fromString("4cdc0e38-c037-42bf-864f-5c745ddf0b61"), "Weapon modifier", 50.0D, EntityAttributeModifier.Operation.ADDITION);
     }
+
 }

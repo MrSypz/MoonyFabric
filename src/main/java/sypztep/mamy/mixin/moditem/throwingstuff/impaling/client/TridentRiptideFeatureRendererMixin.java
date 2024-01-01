@@ -25,8 +25,8 @@ public abstract class TridentRiptideFeatureRendererMixin {
     private VertexConsumer swapHotRiptide(VertexConsumer orig, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, LivingEntity livingEntity) {
         if (livingEntity instanceof PlayerEntity && livingEntity.isUsingRiptide() && (livingEntity.getMainHandStack().getItem() == ModItems.HOMA || (livingEntity.getOffHandStack().getItem() == ModItems.HOMA) && !livingEntity.getMainHandStack().isIn(ModTags.Items.TRIDENTS)))
             return vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(HELLFORK_RIPTIDE_TEXTURE));
-//         else if (livingEntity instanceof PlayerEntity && livingEntity.isUsingRiptide() && (livingEntity.getMainHandStack().getItem() == ModItems.SOULFORK || (livingEntity.getOffHandStack().getItem() == ModItems.SOULFORK) && !livingEntity.getMainHandStack().isIn(SincereLoyalty.TRIDENTS)))
-//            return vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(SOULFORK_RIPTIDE_TEXTURE));
+         else if (livingEntity instanceof PlayerEntity && livingEntity.isUsingRiptide() && (livingEntity.getMainHandStack().getItem() == ModItems.HOMASOUL || (livingEntity.getOffHandStack().getItem() == ModItems.HOMASOUL) && !livingEntity.getMainHandStack().isIn(ModTags.Items.TRIDENTS)))
+            return vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(SOULFORK_RIPTIDE_TEXTURE));
         return orig;
     }
 }

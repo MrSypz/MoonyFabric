@@ -17,7 +17,6 @@ public class DragonFireSplatterParticle extends SpriteBillboardParticle {
         this.velocityX = velocityX;
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
-        this.gravityStrength = -0.015F;
     }
     @Override
     public ParticleTextureSheet getType() {

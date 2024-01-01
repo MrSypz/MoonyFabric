@@ -9,7 +9,6 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -44,20 +43,19 @@ public class HomaItem extends MamyTridentItem implements CustomHitParticleItem,C
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         Multimap<EntityAttribute, EntityAttributeModifier> map = LinkedHashMultimap.create(super.getAttributeModifiers(slot));
         if (slot == EquipmentSlot.MAINHAND) {
-            map.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", 2, EntityAttributeModifier.Operation.MULTIPLY_BASE));
             map.put(ModEntityAttributes.GENERIC_CRIT_DAMAGE, CRIT_DAMAGE_MODIFIER);
         }
         return map;
     }
     @Override
     protected boolean canRiptide(PlayerEntity playerEntity) {
-        return playerEntity.isInLava() || playerEntity.isOnFire() || playerEntity.getMainHandStack().getItem() == ModItems.HOMA;
+        return playerEntity.isInLava() || playerEntity.isOnFire() || playerEntity.getMainHandStack().getItem() == ModItems.HOMASOUL || playerEntity.getOffHandStack().getItem() == ModItems.HOMASOUL;
     }
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         super.onStoppedUsing(stack, world, user, remainingUseTicks);
 
-        if (user instanceof PlayerEntity player && user.isUsingRiptide() && stack.getItem() == ModItems.HOMA) {
+        if (user instanceof PlayerEntity player && user.isUsingRiptide() && stack.getItem() == ModItems.HOMASOUL) {
             if (player.experienceLevel <= 0) {
                 user.damage(world.getDamageSources().create(ModDamageTypes.CINNABAR), 2F);
                 user.playSound(SoundEvents.ENTITY_PLAYER_HURT, 1.0f, 1.0f);
@@ -75,7 +73,7 @@ public class HomaItem extends MamyTridentItem implements CustomHitParticleItem,C
         ItemStack itemStack = user.getStackInHand(hand);
         if (itemStack.getDamage() >= itemStack.getMaxDamage() - 1) {
             return TypedActionResult.fail(itemStack);
-        } else if (EnchantmentHelper.getRiptide(itemStack) > 0 && !user.isInLava() && !user.isOnFire() && !(itemStack.hasNbt() && itemStack.getItem() == ModItems.HOMA)) {
+        } else if (EnchantmentHelper.getRiptide(itemStack) > 0 && !user.isInLava() && !user.isOnFire() && !(itemStack.hasNbt() && itemStack.getItem() == ModItems.HOMASOUL)) {
             return TypedActionResult.fail(itemStack);
         } else {
             user.setCurrentHand(hand);
@@ -160,7 +158,7 @@ public class HomaItem extends MamyTridentItem implements CustomHitParticleItem,C
         double d1 = MathHelper.cos(user.getYaw() * 0.017453292F);
         World world = user.getWorld();
         if (world instanceof ServerWorld serverWorld) {
-            serverWorld.spawnParticles(ModParticles.RED_SWEEP_ATTACK_PARTICLE, user.getX() + d0, user.getBodyY(0.5), user.getZ() + d1, 0, d0, 0.0, d1, 0.0);
+            serverWorld.spawnParticles(ModParticles.FIRE_SWEEP_ATTACK_PARTICLE, user.getX() + d0, user.getBodyY(0.5), user.getZ() + d1, 0, d0, 0.0, d1, 0.0);
         }
     }
 

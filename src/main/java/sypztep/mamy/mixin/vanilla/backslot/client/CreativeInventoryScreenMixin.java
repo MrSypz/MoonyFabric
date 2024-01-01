@@ -2,6 +2,7 @@ package sypztep.mamy.mixin.vanilla.backslot.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import dev.emi.trinkets.TrinketScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
@@ -11,23 +12,29 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.util.WeaponSlot;
 import sypztep.mamy.mixin.util.accesor.CreativeSlotAccessor;
 
+import java.util.List;
+
+import static net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen.CreativeScreenHandler;
+import static net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen.CreativeSlot;
+
 @Environment(EnvType.CLIENT)
 @Mixin(CreativeInventoryScreen.class)
-public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
+public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeScreenHandler> implements TrinketScreen {
     @Shadow
     private static ItemGroup selectedTab;
 
-    public CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
+    @Shadow private @Nullable List<Slot> slots;
+
+    public CreativeInventoryScreenMixin(CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
     }
-
     @WrapOperation(
             method = {"setSelectedTab"},
             at = {@At(
@@ -37,14 +44,13 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
             )}
     )
     private boolean mamy$moveWeaponSlot(DefaultedList<Slot> slots, Object object, Operation<Boolean> operation) {
-        if (object instanceof CreativeInventoryScreen.CreativeSlot newSlot) {
+        if (object instanceof CreativeSlot newSlot) {
             Slot slot = ((CreativeSlotAccessor)newSlot).getSlot();
-            if (slot instanceof WeaponSlot) {
-                MamyMod.LOGGER.info(String.valueOf(slot.id));
-                return (Boolean)operation.call(new Object[]{slots, new CreativeInventoryScreen.CreativeSlot(slot, 0, 127, 20)});
+            if (slot instanceof WeaponSlot weaponSlot) {
+//                this.handler.slots.add(new CreativeSlot(slot, 0, 127, 20));
+                return (Boolean)operation.call(new Object[]{slots, new CreativeInventoryScreen.CreativeSlot(slot, weaponSlot.getIndex(), 127, 20)});
             }
         }
-
         return (Boolean)operation.call(new Object[]{slots, object});
     }
 //    @Inject(

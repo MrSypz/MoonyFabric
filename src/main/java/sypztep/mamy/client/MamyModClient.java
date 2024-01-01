@@ -75,6 +75,7 @@ public class MamyModClient implements ClientModInitializer {
 
         ParticleFactoryRegistry particleRegistry = ParticleFactoryRegistry.getInstance();
         particleRegistry.register(ModParticles.RED_SWEEP_ATTACK_PARTICLE, DeathScytheAttackParticle.Factory::new);
+        particleRegistry.register(ModParticles.FIRE_SWEEP_ATTACK_PARTICLE, FireSweepAttackParticle.Factory::new);
         particleRegistry.register(ModParticles.BACKATTACK, BackAttackParticle.Factory::new);
 
         particleRegistry.register(ModParticles.SHOCKWAVE, ShockwaveParticle.Factory::new);
