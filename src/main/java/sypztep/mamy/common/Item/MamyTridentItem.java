@@ -93,6 +93,8 @@ public class MamyTridentItem extends TridentItem {
             return type = ModEntityTypes.PITCHFORK;
         else if (itemStack.isOf(ModItems.HOMA))
             return type = ModEntityTypes.HOMA;
+        else if (itemStack.isOf(ModItems.HOMASOUL))
+            return type = ModEntityTypes.HOMA_SOUL;
         return type = ModEntityTypes.PITCHFORK;
     }
 

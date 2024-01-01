@@ -14,12 +14,12 @@ public class HomaEntityModel extends GeoModel<HomaEntity> {
 
     @Override
     public Identifier getTextureResource(HomaEntity animatable) {
-        return new Identifier(MODID, "textures/entity/homa.png");
+        return new Identifier(MODID, "textures/item/homa_handheld.png");
     }
 
     @Override
     public Identifier getAnimationResource(HomaEntity animatable) {
-        return new Identifier(MODID,"animations/hollowmask.animation.json");
+        return null;
     }
 
 }

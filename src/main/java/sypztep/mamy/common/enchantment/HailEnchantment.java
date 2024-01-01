@@ -7,6 +7,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.util.hit.HitResult;
@@ -15,10 +16,10 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class GaleEnchantment extends BownCrossbowEnchantment {
+public class HailEnchantment extends BownCrossbowEnchantment {
 
 
-    public GaleEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
+    public HailEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
         super(weight, target, slotTypes);
     }
 
@@ -43,7 +44,9 @@ public class GaleEnchantment extends BownCrossbowEnchantment {
                 ArrowEntity[] arrowEntities = new ArrowEntity[numberOfArrows];
                 Random random = new Random();
 
+
                 for (int i = 0; i < numberOfArrows; i++) {
+                    arrowEntities[i].pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
                     arrowEntities[i] = EntityType.ARROW.create(world);
                     double randomAngle = Math.toRadians(random.nextDouble() * 360);
                     double randomRadius = Math.sqrt(random.nextDouble()) * 6;

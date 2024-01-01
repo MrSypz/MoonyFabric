@@ -20,7 +20,8 @@ public class ModItemGroup {
 
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(content -> {
-            content.addBefore(Items.GOLDEN_CARROT,ModItems.ARCHAIC_EYE);
+            content.add(ModItems.ARCHAIC_EYE);
+            content.add(ModItems.PALE_CINNABAR);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(content -> {
             content.addBefore(Items.APPLE,ModItems.HOGYOKU);

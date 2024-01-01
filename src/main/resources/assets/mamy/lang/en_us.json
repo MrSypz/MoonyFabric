@@ -105,9 +105,11 @@
   "enchantment.mamy.goliath" : "Goliath",
   "enchantment.mamy.goliath.desc" : "Deal damage more 12% of target health and heal 8% of damage that done (Not affect to boss)",
   "enchantment.mamy.vengeance" : "Vengeance",
-  "enchantment.mamy.vengeance.desc" : "Spewing blood deal 15 damages and penetrate all target until it disappear",
+  "enchantment.mamy.vengeance.desc" : "Unique Enchantment that enable item to use special feature.",
   "enchantment.mamy.vampr" : "Vampr",
-  "enchantment.mamy.vampr.desc" : "Heal (amount of target around user) and deal 1 true damage",
+  "enchantment.mamy.vampr.desc" : "Heal (amount of target around user) and deal 1 true damage.",
+  "enchantment.mamy.hail" : "Hail",
+  "enchantment.mamy.hail.desc" : "Shot a horde of arrors from the sky.",
 
 
   "death.attack.hogyoku": "%1$s Your soul are now starting kindle.",

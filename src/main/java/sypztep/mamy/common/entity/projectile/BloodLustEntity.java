@@ -43,7 +43,7 @@ public class BloodLustEntity extends PersistentProjectileEntity {
             this.getWorld().addParticle(ModParticles.BLOOD_BUBBLE,this.getX() + (double)x * Math.cos(this.getYaw()), this.getY(), this.getZ() + (double)x * Math.sin(this.getYaw()), this.getVelocity().getX(), this.getVelocity().getY(), this.getVelocity().getZ());
 
         if (this.inGround || this.age > 20) {
-            for(int i = 0; i < 25; ++i) {
+            for(int i = 0; i < 50; ++i) {
                 this.getWorld().addParticle(ModParticles.BLOOD_BUBBLE_SPLATTER, this.getX() + this.random.nextGaussian() * 2.0 * Math.cos(this.getYaw()), this.getY(), this.getZ() + this.random.nextGaussian() * 2.0 * Math.sin(this.getYaw()), this.random.nextGaussian() / 10.0, this.random.nextFloat() / 2.0F, this.random.nextGaussian() / 10.0);
             }
             --this.ticksUntilRemove;
@@ -51,14 +51,21 @@ public class BloodLustEntity extends PersistentProjectileEntity {
 
         if (this.ticksUntilRemove <= 0)
             this.discard();
-        if (!this.getWorld().isClient) {
-            Iterator<LivingEntity> var6 = this.getWorld().getEntitiesByClass(LivingEntity.class, this.getBoundingBox(), (livingEntityx) -> this.getOwner() != livingEntityx).iterator();
-            while (var6.hasNext()) {
-                LivingEntity livingEntity = var6.next();
-                livingEntity.damage(getWorld().getDamageSources().create(ModDamageTypes.BLOODLUST,this,getOwner()), 15F);
 
-                for (StatusEffectInstance effect : this.effects)
+        if (!this.getWorld().isClient) {
+            Iterator var6 = this.getWorld().getEntitiesByClass(LivingEntity.class, this.getBoundingBox(), (livingEntityx) -> {
+                return this.getOwner() != livingEntityx;
+            }).iterator();
+
+            while (var6.hasNext()) {
+                LivingEntity livingEntity = (LivingEntity) var6.next();
+                livingEntity.damage(getWorld().getDamageSources().create(ModDamageTypes.BLOODLUST,this,getOwner()), 12F);
+                Iterator var3 = this.effects.iterator();
+
+                while (var3.hasNext()) {
+                    StatusEffectInstance effect = (StatusEffectInstance) var3.next();
                     livingEntity.addStatusEffect(effect);
+                }
             }
         }
     }

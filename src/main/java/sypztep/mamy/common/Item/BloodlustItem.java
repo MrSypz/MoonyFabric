@@ -79,8 +79,14 @@ public class BloodlustItem extends EmptySwordItem implements CustomHitSoundItem,
                 }
                 user.setAbsorptionAmount(absorption);
                 user.damage(world.getDamageSources().create(ModDamageTypes.BLEEDOUT), 3F);
-                user.getItemCooldownManager().set(this, 30);
+                user.getItemCooldownManager().set(this, 20);
                 world.spawnEntity(bloodLust);
+                if (world instanceof ServerWorld serverWorld) {
+                    double d = (double)(-MathHelper.sin(user.getYaw() * 0.017453292F));
+                    double e = (double)MathHelper.cos(user.getYaw() * 0.017453292F);
+                    double pitch = (double)user.getPitch() * -0.02;
+                    serverWorld.spawnParticles(ModParticles.RED_SWEEP_ATTACK_PARTICLE, user.getX() + d, user.getBodyY(0.5) + pitch, user.getZ() + e, 0, d, 0.0, e, 0.0);
+                }
             }
             world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSoundEvents.ITEM_SPEWING, SoundCategory.PLAYERS, 1.0F, 1.0F);
             return TypedActionResult.success(user.getStackInHand(hand));
@@ -97,17 +103,26 @@ public class BloodlustItem extends EmptySwordItem implements CustomHitSoundItem,
     }
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (entity.age % 12 == 0 &&  (entity instanceof PlayerEntity player) && world.isClient) {
+        if (entity.age % 20 == 0 &&  (entity instanceof PlayerEntity player) && world.isClient) {
             if (EnchantmentUtil.hasEnchantment(ModEnchantments.VENGEANCE,stack)) {
                 if (player.getEquippedStack(EquipmentSlot.MAINHAND) == stack || player.getEquippedStack(EquipmentSlot.OFFHAND) == stack) {
-                    float randomx = (float) (Math.random() * 6);
-                    float randomz = (float) (Math.random() * 6);
+                    double speed = 0.1; // You can adjust the speed of particles
+                    float yaw = player.getYaw(); // Get the player's yaw rotation (horizontal)
+                    float pitch = player.getPitch(); // Get the player's pitch rotation (vertical)
 
-                    world.addParticle(ModParticles.BLOOD_BUBBLE,
-                            player.getX() + player.getHandPosOffset(this).getX(),
-                            player.getY() + player.getHandPosOffset(this).getY() + 1.2,
-                            player.getZ() + player.getHandPosOffset(this).getZ(),
-                            1 * randomx, -5, -1 * randomz);
+                    double motionX = -Math.sin(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
+                    double motionY = -Math.sin(Math.toRadians(pitch));
+                    double motionZ = Math.cos(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
+
+                    for (int i = 0; i < 14; i++) {
+                        world.addParticle(
+                                ModParticles.BLOOD_BUBBLE,
+                                player.getX() + player.getHandPosOffset(this).getX(),
+                                player.getY() + player.getHandPosOffset(this).getY() + 1.2,
+                                player.getZ() + player.getHandPosOffset(this).getZ(),
+                                speed * motionX, speed * motionY, speed * motionZ
+                        );
+                    }
                 }
             }
         }
@@ -137,8 +152,8 @@ public class BloodlustItem extends EmptySwordItem implements CustomHitSoundItem,
     public void spawnHitParticles(PlayerEntity user) {
         double d0 = -MathHelper.sin(user.getYaw() * 0.017453292F);
         double d1 = MathHelper.cos(user.getYaw() * 0.017453292F);
-        World var7 = user.getWorld();
-        if (var7 instanceof ServerWorld serverWorld) {
+        World world = user.getWorld();
+        if (world instanceof ServerWorld serverWorld) {
             serverWorld.spawnParticles(ModParticles.RED_SWEEP_ATTACK_PARTICLE, user.getX() + d0, user.getBodyY(0.5), user.getZ() + d1, 0, d0, 0.0, d1, 0.0);
         }
     }

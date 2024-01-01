@@ -41,7 +41,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
             Slot slot = ((CreativeSlotAccessor)newSlot).getSlot();
             if (slot instanceof WeaponSlot) {
                 MamyMod.LOGGER.info(String.valueOf(slot.id));
-                return (Boolean)operation.call(new Object[]{slots, new CreativeInventoryScreen.CreativeSlot(slot, slot.id, 127, 20)});
+                return (Boolean)operation.call(new Object[]{slots, new CreativeInventoryScreen.CreativeSlot(slot, 0, 127, 20)});
             }
         }
 

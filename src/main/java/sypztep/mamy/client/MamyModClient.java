@@ -24,10 +24,7 @@ import org.lwjgl.glfw.GLFW;
 import sypztep.mamy.client.packetS2C.*;
 import sypztep.mamy.client.particle.*;
 import sypztep.mamy.client.registry.Itemregistry;
-import sypztep.mamy.client.render.entity.BloodLustEntityRenderer;
-import sypztep.mamy.client.render.entity.HomaRenderer;
-import sypztep.mamy.client.render.entity.MamyTridentEntityRenderer;
-import sypztep.mamy.client.render.entity.OrbitalEntityRenderer;
+import sypztep.mamy.client.render.entity.*;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.ModConfig;
 import sypztep.mamy.common.component.entity.BackWeaponComponent;
@@ -72,7 +69,8 @@ public class MamyModClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(AddAirhikeParticlesPacket.ID,new AddAirhikeParticlesPacket.Receiver());
         EntityRendererRegistry.register(ModEntityTypes.BLOOD_LUST, BloodLustEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.PITCHFORK,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/pitchfork.png"), EntityModelLayers.TRIDENT));
-        EntityRendererRegistry.register(ModEntityTypes.HOMA, HomaRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.HOMA, HomaEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.HOMA_SOUL, HomaSoulEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.ORBITAL, OrbitalEntityRenderer::new);
 
         ParticleFactoryRegistry particleRegistry = ParticleFactoryRegistry.getInstance();

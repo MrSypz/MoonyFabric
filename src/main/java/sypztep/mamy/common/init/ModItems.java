@@ -50,6 +50,7 @@ public class ModItems {
 
     public static MamyTridentItem PITCHFORK;
     public static MamyTridentItem HOMA;
+    public static MamyTridentItem HOMASOUL;
     public static MamyTridentItem ENGULFING;
 
 
@@ -65,6 +66,7 @@ public class ModItems {
 
         PITCHFORK = registerTridentItem("pitchfork", new PitchforkItem(new FabricItemSettings().maxDamage(150)),true);
         HOMA = register3DTrident("homa", new HomaItem(new FabricItemSettings().maxDamage(325).fireproof()),true);
+        HOMASOUL = register3DTrident("homasoul", new HomaItem(new FabricItemSettings().maxDamage(325).fireproof()),true);
         ENGULFING = register3DTrident("engulfing", new HomaItem(new FabricItemSettings().maxDamage(325).fireproof()),true);
 
         DEATHGOD_UPGRADE_SMITHING_TEMPLATE = registeritem("deathgod_upgrade_smithing_template", createDeathGodUpgradeSmithingTemplate());

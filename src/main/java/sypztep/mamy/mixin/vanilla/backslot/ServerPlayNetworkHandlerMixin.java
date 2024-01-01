@@ -22,6 +22,5 @@ public class ServerPlayNetworkHandlerMixin {
         if (packet.getAction() == PlayerActionC2SPacket.Action.SWAP_ITEM_WITH_OFFHAND) {
             BackWeaponComponent.setHoldingBackWeapon(this.player, false);
         }
-
     }
 }

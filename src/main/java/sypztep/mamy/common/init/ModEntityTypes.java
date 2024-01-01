@@ -8,21 +8,20 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import sypztep.mamy.common.MamyMod;
-import sypztep.mamy.common.entity.projectile.BloodLustEntity;
-import sypztep.mamy.common.entity.projectile.HomaEntity;
-import sypztep.mamy.common.entity.projectile.OrbitalEntity;
-import sypztep.mamy.common.entity.projectile.PitchforkEntity;
+import sypztep.mamy.common.entity.projectile.*;
 
 public class ModEntityTypes {
     public static EntityType<BloodLustEntity> BLOOD_LUST;
     public static EntityType<PitchforkEntity> PITCHFORK;
     public static EntityType<HomaEntity> HOMA;
+    public static EntityType<HomaSoulEntity> HOMA_SOUL;
     public static EntityType<OrbitalEntity> ORBITAL;
 
     public static void init() {
         BLOOD_LUST = registerEntity("bloodlust", createEntityTypeSlash(BloodLustEntity::new));
         PITCHFORK = registerEntity("pitchfork", createEntityType(PitchforkEntity::new));
         HOMA = registerEntity("homa", createEntityType(HomaEntity::new));
+        HOMA_SOUL = registerEntity("homasoul", createEntityType(HomaSoulEntity::new));
         ORBITAL = registerEntity("orbital", createNoHitbock(OrbitalEntity::new));
     }
 

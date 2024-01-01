@@ -22,6 +22,6 @@ public abstract class PlayerScreenHandlerMixin extends AbstractRecipeScreenHandl
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void onConstructed(PlayerInventory inventory, boolean onServer, PlayerEntity owner, CallbackInfo info) {
-        this.addSlot(new WeaponSlot(BackWeaponComponent.getBackWeaponInventory(inventory.player), 0, 77, 44));
+        this.addSlot(new WeaponSlot(BackWeaponComponent.getBackWeaponInventory(inventory.player), 0, 77 + 56, 44 + 18));
     }
 }

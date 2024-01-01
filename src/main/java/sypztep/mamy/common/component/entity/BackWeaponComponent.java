@@ -89,11 +89,10 @@ public class BackWeaponComponent implements AutoSyncedComponent {
             ClientPlayNetworking.send(MamyMod.holdWeaponPacketId, buf);
         } else {
             if (getBackWeapon(player).getItem() instanceof TridentItem) {
-                if (EnchantmentUtil.hasEnchantment(Enchantments.RIPTIDE, getBackWeapon(player))) {
+                if (EnchantmentUtil.hasEnchantment(Enchantments.RIPTIDE, getBackWeapon(player)))
                     ModEntityComponents.BACK_WEAPON_COMPONENT.get(player).setHoldingBackWeapon(holdingBackWeapon);
-                    return;
-                }
-            } else  ModEntityComponents.BACK_WEAPON_COMPONENT.get(player).setHoldingBackWeapon(holdingBackWeapon);
+            } else
+                ModEntityComponents.BACK_WEAPON_COMPONENT.get(player).setHoldingBackWeapon(holdingBackWeapon);
         }
     }
 }

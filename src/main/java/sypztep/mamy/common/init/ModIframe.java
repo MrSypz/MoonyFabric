@@ -3,6 +3,7 @@ package sypztep.mamy.common.init;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import sypztep.mamy.common.ModConfig;
@@ -17,6 +18,19 @@ public class ModIframe {
         EntityHurtCallback.EVENT.register((entity, source, amount) -> {
             if (entity.getEntityWorld().isClient) {
                 return ActionResult.PASS;
+            }
+            Entity trueSource = source.getAttacker();
+            if (ModConfig.debugMode && entity instanceof PlayerEntity) {
+                String debugSource;
+                if (trueSource == null || EntityType.getId(trueSource.getType()) == null) {
+                    debugSource = "null";
+                } else {
+                    debugSource = EntityType.getId(trueSource.getType()).toString();
+                }
+                String message = String.format("Type of damage received: %s\nAmount: %.3f\nTrue Source (mob id): %s\n",
+                        source.getName(), amount, debugSource);
+                ((PlayerEntity) entity).sendMessage(Text.literal(message), false);
+
             }
             if (ModConfig.excludePlayers && entity instanceof PlayerEntity) {
                 return ActionResult.PASS;
@@ -65,6 +79,11 @@ public class ModIframe {
         PlayerAttackCallback.EVENT.register((player, target) -> {
             if (player.getEntityWorld().isClient) {
                 return ActionResult.PASS;
+            }
+            if (ModConfig.debugMode) {
+                String message = String.format("Entity attacked: %s",
+                        EntityType.getId(target.getType()));
+                player.sendMessage(Text.literal(message), false);
             }
 
             float str = player.getAttackCooldownProgress(0);

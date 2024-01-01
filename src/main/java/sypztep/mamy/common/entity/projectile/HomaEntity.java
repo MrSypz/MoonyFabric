@@ -6,8 +6,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class HomaEntity extends MamyTridentEntity implements GeoEntity {
@@ -38,11 +37,6 @@ public class HomaEntity extends MamyTridentEntity implements GeoEntity {
     }
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this,"controller",0,this::predicate));
-    }
-    private PlayState predicate(AnimationState animationState) {
-        animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
     }
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

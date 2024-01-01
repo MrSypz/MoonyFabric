@@ -13,6 +13,7 @@ import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import sypztep.mamy.client.render.entity.MamyItemRenderer;
 import sypztep.mamy.client.render.entity.MamyTridentItemRenderer;
+import sypztep.mamy.client.render.model.HomaSoulEntityModel;
 import sypztep.mamy.common.Item.EmptySwordItem;
 import sypztep.mamy.common.Item.MamyTridentItem;
 import sypztep.mamy.common.init.ModItems;
@@ -40,6 +41,7 @@ public class Itemregistry {
             Identifier texture = new Identifier(id.getNamespace(), "textures/entity/" + id.getPath() + ".png");
 
             EntityModelLayer modelLayer = EntityModelLayers.TRIDENT;
+            HomaSoulEntityModel modelLayer1 = new HomaSoulEntityModel();
             MamyTridentItemRenderer mamyTridentItemRenderer = new MamyTridentItemRenderer(id, texture, modelLayer);
             ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(mamyTridentItemRenderer);
             BuiltinItemRendererRegistry.INSTANCE.register(item, mamyTridentItemRenderer);

@@ -33,12 +33,14 @@ public class DeathScytheFeatureRenderer extends HeldItemFeatureRenderer<Abstract
                     matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(0.0F));
                     matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
                     matrixStack.scale(1.65F,1.65F,1.65F);
-                }
+                    heldItemRenderer.renderItem(livingEntity, stack, ModelTransformationMode.FIXED, false, matrixStack, vertexConsumerProvider, i);
+                } else
                 if (stack.getItem() == ModItems.BLOODLUST) {
                     matrixStack.translate(-0.1, 0.25, 0.275);
                     matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(0.0F));
                     matrixStack.scale(2.0F,2.0F,1.4F);
-                }
+                    heldItemRenderer.renderItem(livingEntity, stack, ModelTransformationMode.FIXED, false, matrixStack, vertexConsumerProvider, i);
+                } else
                 if (stack.getItem() instanceof TridentItem) {
                     matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(52.0F));
                     matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(40.0F));
@@ -46,8 +48,7 @@ public class DeathScytheFeatureRenderer extends HeldItemFeatureRenderer<Abstract
                     matrixStack.translate(-0.26D, 0.0D, 0.0D);
                     matrixStack.scale(1.0F, -1.0F, -1.0F);
                     heldItemRenderer.renderItem(livingEntity, stack, ModelTransformationMode.THIRD_PERSON_RIGHT_HAND, false, matrixStack, vertexConsumerProvider, i);
-                } else
-                    heldItemRenderer.renderItem(livingEntity, stack, ModelTransformationMode.FIXED, false, matrixStack, vertexConsumerProvider, i);
+                }
                 matrixStack.pop();
             }
         }

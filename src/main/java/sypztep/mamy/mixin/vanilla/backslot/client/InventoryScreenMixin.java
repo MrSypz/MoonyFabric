@@ -24,8 +24,8 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
 
     @Inject(method = "drawBackground", at = @At(value = "RETURN"))
     public void drawBackgroundMixin(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo info) {
-        int i = this.x + 76;
-        int j = this.y + 43;
+        int i = this.x + 76 + 56;
+        int j = this.y + 43 + 18;
         context.drawTexture(BACKGROUND_TEXTURE, i, j, 76, 61, 18, 18);
         context.drawTexture(BACKGROUND_TEXTURE, i, j, 76, 61, 18, 18);
 
