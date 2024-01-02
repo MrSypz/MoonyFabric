@@ -176,6 +176,6 @@ public class HomaItem extends MamyTridentItem implements CustomHitParticleItem,C
 
     }
     static {
-        CRIT_DAMAGE_MODIFIER = new EntityAttributeModifier(UUID.fromString("4cdc0e38-c037-42bf-864f-5c745ddf0a62"), "Weapon modifier", 15.0D, EntityAttributeModifier.Operation.ADDITION);
+        CRIT_DAMAGE_MODIFIER = new EntityAttributeModifier(UUID.fromString("4cdc0e38-c037-42bf-864f-5c745ddf0a62"), "Weapon modifier", 50.0D, EntityAttributeModifier.Operation.ADDITION);
     }
 }
