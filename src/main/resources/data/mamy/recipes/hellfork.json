@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "M",
+        "T",
+        "B"
+    ],
+    "key": {
+        "M": {
+            "item": "mamy:ancient_trident"
+        },
+        "T": {
+            "item": "minecraft:trident"
+        },
+        "B": {
+            "item": "minecraft:netherite_ingot"
+        }
+    },
+    "result": {
+        "item": "mamy:hellfork",
+        "count": 1
+    }
+}

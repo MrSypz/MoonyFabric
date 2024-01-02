@@ -22,6 +22,7 @@ public abstract class EntityMixin {
     @Shadow
     public abstract double getZ();
 
+
     @Inject(method = "doesRenderOnFire", at = @At(value = "RETURN"), cancellable = true)
     public void removePlayerFireRenderDuringHellforkRiptide(CallbackInfoReturnable<Boolean> cir) {
         if (((Object) this) instanceof PlayerEntity && ((PlayerEntity) (Object) this).isUsingRiptide() && ((((((PlayerEntity) (Object) this).getMainHandStack().getItem() instanceof HomaItem) || (((PlayerEntity) (Object) this).getOffHandStack().getItem() instanceof HomaItem))

@@ -19,9 +19,6 @@ public interface TridentEntityAccessor {
     }
 
     @Accessor("tridentStack")
-    ItemStack mamy$getTridentStack();
-
-    @Accessor("tridentStack")
     void mamy$setTridentStack(ItemStack stack);
 
     @Accessor("dealtDamage")

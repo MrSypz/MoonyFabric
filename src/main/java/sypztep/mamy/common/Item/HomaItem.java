@@ -1,7 +1,6 @@
 package sypztep.mamy.common.Item;
 
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -51,7 +50,6 @@ public class HomaItem extends MamyTridentItem implements CustomHitParticleItem,C
     }
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
-        Multimap<EntityAttribute, EntityAttributeModifier> map = LinkedHashMultimap.create(super.getAttributeModifiers(slot));
         if (slot == EquipmentSlot.MAINHAND) {
             return this.attributeModifiers;
         }

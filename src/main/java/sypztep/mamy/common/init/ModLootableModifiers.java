@@ -54,23 +54,31 @@ public class ModLootableModifiers {
         }));
         //CHEST
         //BASTION LOOT
-        UniformLootNumberProvider lootTableRange = UniformLootNumberProvider.create(1, 1);
-        LootCondition firstItemChanceLootCondition = RandomChanceLootCondition.builder(0.5f).build();
-        LootPool firstItemPool = LootPool.builder()
+        UniformLootNumberProvider lootTableRange = UniformLootNumberProvider.create(0, 1);
+        LootCondition archaic_eye_lootchance = RandomChanceLootCondition.builder(0.5f).build();
+        LootPool archaic_eye = LootPool.builder()
                 .rolls(lootTableRange)
-                .conditionally(firstItemChanceLootCondition)
+                .conditionally(archaic_eye_lootchance)
                 .with(ItemEntry.builder(ModItems.ARCHAIC_EYE).build())
                 .build();
-        LootCondition secondItemChanceLootCondition = RandomChanceLootCondition.builder(10f).build();
-        LootPool secondItemPool = LootPool.builder()
+        LootCondition pale_cinnabar_lootchance = RandomChanceLootCondition.builder(0.5f).build();
+        LootPool pale_cinnabar = LootPool.builder()
                 .rolls(lootTableRange)
-                .conditionally(secondItemChanceLootCondition)
+                .conditionally(pale_cinnabar_lootchance)
                 .with(ItemEntry.builder(ModItems.PALE_CINNABAR).build())
                 .build();
+        LootCondition ancient_trident__lootchance = RandomChanceLootCondition.builder(60f).build();
+        LootPool ancient_trident = LootPool.builder()
+                .rolls(UniformLootNumberProvider.create(1, 1))
+                .conditionally(ancient_trident__lootchance)
+                .with(ItemEntry.builder(ModItems.ANCIENT_TRIDENT).build())
+                .build();
+
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, supplier, setter) -> {
             if (BASTION_TREASURE_CHEST_LOOT_TABLE_ID.equals(id)) {
-                supplier.pool(firstItemPool); // Add the first item's loot pool
-                supplier.pool(secondItemPool); // Add the second item's loot pool
+                supplier.pool(archaic_eye); // Add the first item's loot pool
+                supplier.pool(pale_cinnabar); // Add the second item's loot pool
+                supplier.pool(ancient_trident); // Add the second item's loot pool
             }
         });
     }

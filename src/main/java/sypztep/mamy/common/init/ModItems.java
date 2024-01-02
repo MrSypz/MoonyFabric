@@ -61,6 +61,7 @@ public class ModItems {
     public static Item PALE_CINNABAR;
     public static Item BROKEN_LUST_HANDLE;
     public static Item HOGYOKU;
+    public static Item ANCIENT_TRIDENT;
     public static Item ELDER_GUARDIAN_EYE;
     public static Item DEATHGOD_UPGRADE_SMITHING_TEMPLATE;
 
@@ -68,6 +69,7 @@ public class ModItems {
 
 
     public static void init(){
+
         //TRIDENT
         ELDER_TRIDENT = registerTridentItem("elder_trident", new ElderTridentItem(new FabricItemSettings().maxDamage(250)),true);
         PITCHFORK = registerTridentItem("pitchfork", new PitchforkItem(new FabricItemSettings().maxDamage(150)),true);
@@ -93,6 +95,7 @@ public class ModItems {
         PALE_CINNABAR = registeritem("pale_cinnabar", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
         BROKEN_LUST_HANDLE = registeritem("broken_lust_handle", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
         ELDER_GUARDIAN_EYE = registeritem("elder_guardian_eye",new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON)));
+        ANCIENT_TRIDENT = registeritem("ancient_trident",new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON).fireproof()));
 
 
         //HOLLOW MASK
