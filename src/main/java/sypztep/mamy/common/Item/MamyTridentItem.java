@@ -1,5 +1,7 @@
 package sypztep.mamy.common.Item;
 
+import moriyashiine.enchancement.common.component.entity.LeechComponent;
+import moriyashiine.enchancement.common.component.entity.WarpComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,6 +20,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import sypztep.mamy.common.compat.MamyCompat;
 import sypztep.mamy.common.entity.projectile.MamyTridentEntity;
 import sypztep.mamy.common.init.ModEntityTypes;
 import sypztep.mamy.common.init.ModItems;
@@ -111,6 +114,10 @@ public class MamyTridentItem extends TridentItem {
         mamyTridentEntity.setTridentStack(stack);
         mamyTridentEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 2.5F, 1.0F);
         mamyTridentEntity.updatePosition(user.getX(), user.getEyeY() - 0.1, user.getZ());
+        if (MamyCompat.isEnhancementLoaded) {
+            LeechComponent.maybeSet(user, stack, mamyTridentEntity);
+            WarpComponent.maybeSet(user, stack, mamyTridentEntity);
+        }
         return mamyTridentEntity;
     }
 
