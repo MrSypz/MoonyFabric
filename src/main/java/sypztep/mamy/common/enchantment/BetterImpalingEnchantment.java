@@ -24,7 +24,6 @@ public final class BetterImpalingEnchantment {
 
         return 0;
     }
-
     private static boolean isFireImmune(Entity target) {
         if (target.isFireImmune()) return true;
         if (!(target instanceof LivingEntity)) return false;

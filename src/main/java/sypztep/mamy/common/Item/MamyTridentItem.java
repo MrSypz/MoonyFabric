@@ -100,6 +100,10 @@ public class MamyTridentItem extends TridentItem {
             return type = ModEntityTypes.HOMA_SOUL;
         else if (itemStack.isOf(ModItems.ELDER_TRIDENT))
             return type = ModEntityTypes.ELDER_TRIDENT;
+        else if (itemStack.isOf(ModItems.HELLFORK))
+            return type = ModEntityTypes.HELLFORK;
+        else if (itemStack.isOf(ModItems.SOULFORK))
+            return type = ModEntityTypes.SOULFORK;
         return type = ModEntityTypes.PITCHFORK;
     }
 

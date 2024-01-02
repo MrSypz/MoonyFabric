@@ -15,9 +15,11 @@ public class ModItemGroup {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(content -> {
             content.add(ModItems.DEATH_SCYTHE);
             content.addAfter(Items.TRIDENT, ModItems.PITCHFORK);
-            content.addAfter(ModItems.PITCHFORK, ModItems.HOMA);
+            content.addAfter(ModItems.PITCHFORK, ModItems.HELLFORK);
+            content.addAfter(ModItems.HELLFORK, ModItems.SOULFORK);
+            content.addAfter(ModItems.SOULFORK, ModItems.ELDER_TRIDENT);
+            content.addAfter(ModItems.ELDER_TRIDENT, ModItems.HOMA);
             content.addAfter(ModItems.HOMA, ModItems.HOMASOUL);
-            content.addAfter(ModItems.HOMASOUL, ModItems.ELDER_TRIDENT);
             content.addAfter(ModItems.DEATH_SCYTHE, ModItems.BLOODLUST);
 
         });

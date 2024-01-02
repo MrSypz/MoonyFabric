@@ -18,6 +18,7 @@ public class ModDamageTypes {
     public static final RegistryKey<DamageType> ELECTRO = createType("electro");
     public static final RegistryKey<DamageType> MASKIMPACT = createType("maskimpact");
     public static final RegistryKey<DamageType> CINNABAR = createType("cinnabar");
+    public static final RegistryKey<DamageType> HELLFORK_HEAT_TYPE = createType("hellfork_heat");
     public static RegistryKey<DamageType> createType(String name) {
         return RegistryKey.of(RegistryKeys.DAMAGE_TYPE, MamyMod.id(name));
     }
@@ -33,6 +34,4 @@ public class ModDamageTypes {
     public static DamageSource create(World world, RegistryKey<DamageType> key) {
         return new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(key));
     }
-
-
 }

@@ -15,6 +15,8 @@ public class ModEntityTypes {
     public static EntityType<ElderTridentEntity> GUARDIAN_TRIDENT;
     public static EntityType<BloodLustEntity> BLOOD_LUST;
     public static EntityType<PitchforkEntity> PITCHFORK;
+    public static EntityType<HellforkEntity> HELLFORK;
+    public static EntityType<HellforkEntity> SOULFORK;
     public static EntityType<HomaEntity> HOMA;
     public static EntityType<HomaSoulEntity> HOMA_SOUL;
     public static EntityType<OrbitalEntity> ORBITAL;
@@ -26,6 +28,8 @@ public class ModEntityTypes {
         GUARDIAN_TRIDENT = registerEntity("guardian_trident", createEntityType(GuardianTridentEntity::new));
         HOMA = registerEntity("homa", createEntityType(HomaEntity::new));
         HOMA_SOUL = registerEntity("homasoul", createEntityType(HomaSoulEntity::new));
+        HELLFORK = registerEntity("hellfork", createEntityType(HellforkEntity::new));
+        SOULFORK = registerEntity("soulfork", createEntityType(HellforkEntity::new));
         ORBITAL = registerEntity("orbital", createNoHitbock(OrbitalEntity::new));
     }
 

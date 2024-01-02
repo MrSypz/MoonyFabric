@@ -2,8 +2,8 @@
     "type": "minecraft:crafting_shaped",
     "pattern": [
         "#M#",
-        " T ",
-        " n "
+        "BTB",
+        " B "
     ],
     "key": {
         "#": {
@@ -15,8 +15,8 @@
         "T": {
             "item": "minecraft:trident"
         },
-        "n": {
-            "item": "minecraft:netherite_ingot"
+        "B": {
+            "item": "minecraft:netherite_block"
         }
     },
     "result": {

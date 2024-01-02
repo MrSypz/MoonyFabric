@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import sypztep.mamy.common.Item.HellforkItem;
 import sypztep.mamy.common.Item.HomaItem;
 
 @Mixin(Entity.class)
@@ -23,13 +24,15 @@ public abstract class EntityMixin {
 
     @Inject(method = "doesRenderOnFire", at = @At(value = "RETURN"), cancellable = true)
     public void removePlayerFireRenderDuringHellforkRiptide(CallbackInfoReturnable<Boolean> cir) {
-        if (((Object) this) instanceof PlayerEntity && ((PlayerEntity) (Object) this).isUsingRiptide() && ((((PlayerEntity) (Object) this).getMainHandStack().getItem() instanceof HomaItem) || (((PlayerEntity) (Object) this).getOffHandStack().getItem() instanceof HomaItem))) {
+        if (((Object) this) instanceof PlayerEntity && ((PlayerEntity) (Object) this).isUsingRiptide() && ((((((PlayerEntity) (Object) this).getMainHandStack().getItem() instanceof HomaItem) || (((PlayerEntity) (Object) this).getOffHandStack().getItem() instanceof HomaItem))
+        || ((((PlayerEntity) (Object) this).getMainHandStack().getItem() instanceof HellforkItem) || (((PlayerEntity) (Object) this).getOffHandStack().getItem() instanceof HellforkItem))))) {
             cir.setReturnValue(false);
         }
     }
     @Inject(method = "isOnFire", at = @At(value = "RETURN"), cancellable = true)
     public void isOnFire(CallbackInfoReturnable<Boolean> cir) {
-        if (((Object) this) instanceof PlayerEntity && ((PlayerEntity) (Object) this).isUsingRiptide() && ((((PlayerEntity) (Object) this).getMainHandStack().getItem() instanceof HomaItem) || (((PlayerEntity) (Object) this).getOffHandStack().getItem() instanceof HomaItem))) {
+        if (((Object) this) instanceof PlayerEntity && ((PlayerEntity) (Object) this).isUsingRiptide() && ((((((PlayerEntity) (Object) this).getMainHandStack().getItem() instanceof HomaItem) || ((PlayerEntity) (Object) this).getOffHandStack().getItem() instanceof HomaItem))
+        || ((((PlayerEntity) (Object) this).getMainHandStack().getItem() instanceof HellforkItem) || (((PlayerEntity) (Object) this).getOffHandStack().getItem() instanceof HellforkItem)))) {
             cir.setReturnValue(true);
         }
     }

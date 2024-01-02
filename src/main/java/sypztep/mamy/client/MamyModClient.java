@@ -71,6 +71,8 @@ public class MamyModClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntityTypes.PITCHFORK,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/pitchfork.png"), EntityModelLayers.TRIDENT));
         EntityRendererRegistry.register(ModEntityTypes.ELDER_TRIDENT,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/elder_trident.png"), EntityModelLayers.TRIDENT));
         EntityRendererRegistry.register(ModEntityTypes.GUARDIAN_TRIDENT,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/guardian_trident.png"), EntityModelLayers.TRIDENT));
+        EntityRendererRegistry.register(ModEntityTypes.HELLFORK,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/hellfork.png"), EntityModelLayers.TRIDENT));
+        EntityRendererRegistry.register(ModEntityTypes.SOULFORK,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/soulfork.png"), EntityModelLayers.TRIDENT));
         EntityRendererRegistry.register(ModEntityTypes.HOMA, HomaEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.HOMA_SOUL, HomaSoulEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.ORBITAL, OrbitalEntityRenderer::new);
