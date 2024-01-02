@@ -1,4 +1,4 @@
-package sypztep.mamy.mixin.moditem.throwingstuff;
+package sypztep.mamy.mixin.moditem.mamytrident;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +20,7 @@ public abstract class EntityMixin {
     public abstract double getY();
     @Shadow
     public abstract double getZ();
+
     @Inject(method = "doesRenderOnFire", at = @At(value = "RETURN"), cancellable = true)
     public void removePlayerFireRenderDuringHellforkRiptide(CallbackInfoReturnable<Boolean> cir) {
         if (((Object) this) instanceof PlayerEntity && ((PlayerEntity) (Object) this).isUsingRiptide() && ((((PlayerEntity) (Object) this).getMainHandStack().getItem() instanceof HomaItem) || (((PlayerEntity) (Object) this).getOffHandStack().getItem() instanceof HomaItem))) {
@@ -32,5 +33,4 @@ public abstract class EntityMixin {
             cir.setReturnValue(true);
         }
     }
-
 }

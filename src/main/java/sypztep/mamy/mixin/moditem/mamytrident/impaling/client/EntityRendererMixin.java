@@ -1,4 +1,4 @@
-package sypztep.mamy.mixin.moditem.throwingstuff.impaling.client;
+package sypztep.mamy.mixin.moditem.mamytrident.impaling.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -1,4 +1,4 @@
-package sypztep.mamy.mixin.moditem.throwingstuff.impaling;
+package sypztep.mamy.mixin.moditem.mamytrident.impaling;
 
 import net.minecraft.enchantment.ImpalingEnchantment;
 import net.minecraft.entity.EntityGroup;

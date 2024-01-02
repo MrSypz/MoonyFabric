@@ -1,4 +1,4 @@
-package sypztep.mamy.mixin.moditem.throwingstuff.impaling.client;
+package sypztep.mamy.mixin.moditem.mamytrident.client;
 
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;

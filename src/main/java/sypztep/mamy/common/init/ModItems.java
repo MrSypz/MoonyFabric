@@ -52,12 +52,14 @@ public class ModItems {
     public static MamyTridentItem HOMA;
     public static MamyTridentItem HOMASOUL;
     public static MamyTridentItem ENGULFING;
+    public static MamyTridentItem ELDER_TRIDENT;
 
 
     public static Item ARCHAIC_EYE;
     public static Item PALE_CINNABAR;
     public static Item BROKEN_LUST_HANDLE;
     public static Item HOGYOKU;
+    public static Item ELDER_GUARDIAN_EYE;
     public static Item DEATHGOD_UPGRADE_SMITHING_TEMPLATE;
 
     public static SwordItem BLOODLUST;
@@ -65,6 +67,7 @@ public class ModItems {
 
     public static void init(){
         //TRIDENT
+        ELDER_TRIDENT = registerTridentItem("elder_trident", new ElderTridentItem(new FabricItemSettings().maxDamage(250)),true);
         PITCHFORK = registerTridentItem("pitchfork", new PitchforkItem(new FabricItemSettings().maxDamage(150)),true);
         HOMA = register3DTrident("homa", new HomaItem(new FabricItemSettings().maxDamage(325).fireproof()),true);
         HOMASOUL = register3DTrident("homasoul", new HomaItem(new FabricItemSettings().maxDamage(325).fireproof()),true);
@@ -81,9 +84,11 @@ public class ModItems {
         FURINA_HAT = registeritem("furina_hat", new MamyMaskCosmItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),EquipmentSlot.HEAD));
         WANDERER_HAT = registeritem("wanderer_hat", new MamyMaskCosmItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),EquipmentSlot.HEAD));
         //MATERIAL
-        ARCHAIC_EYE = registeritem("archaic_eye", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.RARE)));
-        PALE_CINNABAR = registeritem("pale_cinnabar", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.RARE)));
-        BROKEN_LUST_HANDLE = registeritem("broken_lust_handle", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.RARE)));
+        ARCHAIC_EYE = registeritem("archaic_eye", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
+        PALE_CINNABAR = registeritem("pale_cinnabar", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
+        BROKEN_LUST_HANDLE = registeritem("broken_lust_handle", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
+        ELDER_GUARDIAN_EYE = registeritem("elder_guardian_eye",new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON)));
+
 
         //HOLLOW MASK
         HALF_HOLLOW_MASK = registerMaskItem("half_hollow_mask", new HollowmaskItem(new FabricItemSettings().maxDamage(15))); // 10 Second

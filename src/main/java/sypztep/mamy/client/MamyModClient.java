@@ -69,6 +69,8 @@ public class MamyModClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(AddAirhikeParticlesPacket.ID,new AddAirhikeParticlesPacket.Receiver());
         EntityRendererRegistry.register(ModEntityTypes.BLOOD_LUST, BloodLustEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.PITCHFORK,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/pitchfork.png"), EntityModelLayers.TRIDENT));
+        EntityRendererRegistry.register(ModEntityTypes.ELDER_TRIDENT,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/elder_trident.png"), EntityModelLayers.TRIDENT));
+        EntityRendererRegistry.register(ModEntityTypes.GUARDIAN_TRIDENT,ctx -> new MamyTridentEntityRenderer(ctx,MamyMod.id("textures/entity/guardian_trident.png"), EntityModelLayers.TRIDENT));
         EntityRendererRegistry.register(ModEntityTypes.HOMA, HomaEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.HOMA_SOUL, HomaSoulEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.ORBITAL, OrbitalEntityRenderer::new);

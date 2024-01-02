@@ -11,6 +11,8 @@ import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.entity.projectile.*;
 
 public class ModEntityTypes {
+    public static EntityType<ElderTridentEntity> ELDER_TRIDENT;
+    public static EntityType<ElderTridentEntity> GUARDIAN_TRIDENT;
     public static EntityType<BloodLustEntity> BLOOD_LUST;
     public static EntityType<PitchforkEntity> PITCHFORK;
     public static EntityType<HomaEntity> HOMA;
@@ -20,6 +22,8 @@ public class ModEntityTypes {
     public static void init() {
         BLOOD_LUST = registerEntity("bloodlust", createEntityTypeSlash(BloodLustEntity::new));
         PITCHFORK = registerEntity("pitchfork", createEntityType(PitchforkEntity::new));
+        ELDER_TRIDENT = registerEntity("elder_trident", createEntityType(ElderTridentEntity::new));
+        GUARDIAN_TRIDENT = registerEntity("guardian_trident", createEntityType(GuardianTridentEntity::new));
         HOMA = registerEntity("homa", createEntityType(HomaEntity::new));
         HOMA_SOUL = registerEntity("homasoul", createEntityType(HomaSoulEntity::new));
         ORBITAL = registerEntity("orbital", createNoHitbock(OrbitalEntity::new));

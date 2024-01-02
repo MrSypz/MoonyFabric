@@ -17,6 +17,7 @@ public class ModItemGroup {
             content.addAfter(Items.TRIDENT, ModItems.PITCHFORK);
             content.addAfter(ModItems.PITCHFORK, ModItems.HOMA);
             content.addAfter(ModItems.HOMA, ModItems.HOMASOUL);
+            content.addAfter(ModItems.HOMASOUL, ModItems.ELDER_TRIDENT);
             content.addAfter(ModItems.DEATH_SCYTHE, ModItems.BLOODLUST);
 
         });
@@ -24,6 +25,7 @@ public class ModItemGroup {
             content.addAfter(Items.DISC_FRAGMENT_5,ModItems.ARCHAIC_EYE);
             content.addAfter(ModItems.ARCHAIC_EYE,ModItems.PALE_CINNABAR);
             content.addAfter(ModItems.PALE_CINNABAR,ModItems.BROKEN_LUST_HANDLE);
+            content.addAfter(ModItems.BROKEN_LUST_HANDLE,ModItems.ELDER_GUARDIAN_EYE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(content -> {
             content.addBefore(Items.APPLE,ModItems.HOGYOKU);

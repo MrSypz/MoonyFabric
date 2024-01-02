@@ -25,8 +25,8 @@ public class MamyTridentEntity extends TridentEntity {
         ((TridentEntityAccessor) this).mamy$setTridentStack(tridentStack);
     }
 
-    protected void setDealtDamage(boolean dealtDamage) {
-        ((TridentEntityAccessor) this).mamy$setDealtDamage(dealtDamage);
+    protected void setDealtDamage() {
+        ((TridentEntityAccessor) this).mamy$setDealtDamage(true);
     }
 
     protected boolean hasDealtDamage() {

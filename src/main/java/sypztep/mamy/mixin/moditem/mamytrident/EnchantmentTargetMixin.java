@@ -1,4 +1,4 @@
-package sypztep.mamy.mixin.moditem.throwingstuff;
+package sypztep.mamy.mixin.moditem.mamytrident;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
