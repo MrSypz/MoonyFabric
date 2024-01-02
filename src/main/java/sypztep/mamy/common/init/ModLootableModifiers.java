@@ -21,6 +21,7 @@ public class ModLootableModifiers {
     private static final Identifier DESERT_WELL_ARCHAEOLOGY_LOOT = new Identifier("minecraft", "archaeology/desert_well");
     private static final Identifier BASTION_TREASURE_CHEST_LOOT_TABLE_ID = new Identifier("minecraft", "chests/bastion_treasure");
     private static final Identifier OCEAN_RUIN_ARCHAEOLOGY_LOOT = new Identifier("minecraft","archaeology/ocean_ruin_warm");
+    private static final Identifier ELDERGUARDIAN_LOOT = new Identifier("minecraft","entities/elder_guardian");
     public static void LootTable() {
         //ARCHAEOLOGY
         LootTableEvents.REPLACE.register(((resourceManager, lootManager, id, original, source) -> {
@@ -67,18 +68,28 @@ public class ModLootableModifiers {
                 .conditionally(pale_cinnabar_lootchance)
                 .with(ItemEntry.builder(ModItems.PALE_CINNABAR).build())
                 .build();
-        LootCondition ancient_trident__lootchance = RandomChanceLootCondition.builder(60f).build();
+        LootCondition ancient_trident_lootchance = RandomChanceLootCondition.builder(60f).build();
         LootPool ancient_trident = LootPool.builder()
-                .rolls(UniformLootNumberProvider.create(1, 1))
-                .conditionally(ancient_trident__lootchance)
+                .rolls(UniformLootNumberProvider.create(0, 1))
+                .conditionally(ancient_trident_lootchance)
                 .with(ItemEntry.builder(ModItems.ANCIENT_TRIDENT).build())
+                .build();
+
+        LootCondition elderguardian_lootchance = RandomChanceLootCondition.builder(0.5f).build();
+        LootPool elder_guardian_eye = LootPool.builder()
+                .rolls(UniformLootNumberProvider.create(0, 1))
+                .conditionally(elderguardian_lootchance)
+                .with(ItemEntry.builder(ModItems.ELDER_GUARDIAN_EYE).build())
                 .build();
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, supplier, setter) -> {
             if (BASTION_TREASURE_CHEST_LOOT_TABLE_ID.equals(id)) {
-                supplier.pool(archaic_eye); // Add the first item's loot pool
-                supplier.pool(pale_cinnabar); // Add the second item's loot pool
-                supplier.pool(ancient_trident); // Add the second item's loot pool
+                supplier.pool(archaic_eye);
+                supplier.pool(pale_cinnabar);
+                supplier.pool(ancient_trident);
+            }
+            if (ELDERGUARDIAN_LOOT.equals(id)) {
+                supplier.pool(elder_guardian_eye);
             }
         });
     }

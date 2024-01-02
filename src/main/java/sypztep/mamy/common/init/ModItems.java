@@ -94,8 +94,8 @@ public class ModItems {
         ARCHAIC_EYE = registeritem("archaic_eye", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
         PALE_CINNABAR = registeritem("pale_cinnabar", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
         BROKEN_LUST_HANDLE = registeritem("broken_lust_handle", new Item(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.UNCOMMON)));
-        ELDER_GUARDIAN_EYE = registeritem("elder_guardian_eye",new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON)));
-        ANCIENT_TRIDENT = registeritem("ancient_trident",new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON).fireproof()));
+        ELDER_GUARDIAN_EYE = registeritem("elder_guardian_eye",new Item(new FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON)));
+        ANCIENT_TRIDENT = registeritem("ancient_trident",new Item(new FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON).fireproof()));
 
 
         //HOLLOW MASK
