@@ -37,10 +37,10 @@ public abstract class TridentEntityMixin {
         if (tridentStack.isOf(ModItems.HOMA) || tridentStack.isOf(ModItems.HOMASOUL))
             if (entity instanceof LivingEntity living) {
                 if (isFireImmune(entity))
-                    return baseDamage + 8 + (living.getMaxHealth() * 0.1f); // 8 + 8 + (target 10 % MaxHp )
-                return baseDamage + 5; // Modify this as needed
+                    return baseDamage + 8 + (living.getMaxHealth() * 0.1f) + BetterImpalingEnchantment.getAttackDamage(this.tridentStack, result.getEntity()); // 8 + 8 + (target 10 % MaxHp )
+                return baseDamage + 5 + BetterImpalingEnchantment.getAttackDamage(this.tridentStack, result.getEntity()); // Modify this as needed
             } else
-                return baseDamage;
+                return baseDamage + BetterImpalingEnchantment.getAttackDamage(this.tridentStack, result.getEntity());
         return baseDamage + BetterImpalingEnchantment.getAttackDamage(this.tridentStack, result.getEntity());
     }
     @Unique
