@@ -18,6 +18,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sypztep.mamy.common.component.entity.BackWeaponComponent;
+import sypztep.mamy.feature.MamyFeature;
+import sypztep.mamy.feature.data.PlayerCosmeticData;
 
 @Environment(EnvType.CLIENT)
 @Mixin({InGameHud.class})
@@ -36,44 +38,46 @@ public abstract class InGameHudMixin {
             method = {"renderHotbar"},
             at = {@At("TAIL")}
     )
-    private void arsenal$renderWeaponSlot(float tickDelta, DrawContext context, CallbackInfo ci) {
+    private void mamy$renderWeaponSlot(float tickDelta, DrawContext context, CallbackInfo ci) {
         PlayerEntity player = this.getCameraPlayer();
         if (player != null) {
             ItemStack stack = BackWeaponComponent.getBackWeapon(player);
-            if (!stack.isEmpty()) {
-                int i = this.scaledWidth / 2;
-                int n;
-                if (BackWeaponComponent.isHoldingBackWeapon(player)) {
-                    context.drawTexture(WIDGETS_TEXTURE, i - 12, this.scaledHeight - 23 - 70, 0, 22, 24, 24);
-                    RenderSystem.enableBlend();
-                    context.drawTexture(WIDGETS_TEXTURE, i - 12 + 4, this.scaledHeight - 23 - 70 + 4, 27, 26, 16, 16);
-                    RenderSystem.defaultBlendFunc();
-//                    this.method_25304(j);
-                    n = i - 90 + 80 + 2;
-                    int p = this.scaledHeight - 19 - 70;
-                    this.renderHotbarItem(context,n, p, tickDelta, player, stack, 1);
-                    RenderSystem.disableBlend();
-                } else {
-                    Arm arm = player.getMainArm().getOpposite();
-                    RenderSystem.enableBlend();
-                    RenderSystem.defaultBlendFunc();
-                    if (arm == Arm.RIGHT) {
-                        context.drawTexture(WIDGETS_TEXTURE, i - 91 - 29, this.scaledHeight - 23, 24, 22, 29, 24);
+            PlayerCosmeticData cosmeticData = MamyFeature.getCosmeticData(player);
+            if (cosmeticData != null) {
+                if (!stack.isEmpty()) {
+                    int i = this.scaledWidth / 2;
+                    int n;
+                    if (BackWeaponComponent.isHoldingBackWeapon(player)) {
+                        context.drawTexture(WIDGETS_TEXTURE, i - 12, this.scaledHeight - 23 - 70, 0, 22, 24, 24);
+                        RenderSystem.enableBlend();
+                        context.drawTexture(WIDGETS_TEXTURE, i - 12 + 4, this.scaledHeight - 23 - 70 + 4, 27, 26, 16, 16);
+                        RenderSystem.defaultBlendFunc();
+    //                    this.method_25304(j);
+                        n = i - 90 + 80 + 2;
+                        int p = this.scaledHeight - 19 - 70;
+                        this.renderHotbarItem(context, n, p, tickDelta, player, stack, 1);
+                        RenderSystem.disableBlend();
                     } else {
-                        context.drawTexture(WIDGETS_TEXTURE, i + 91, this.scaledHeight - 23, 53, 22, 29, 24);
-                    }
+                        Arm arm = player.getMainArm().getOpposite();
+                        RenderSystem.enableBlend();
+                        RenderSystem.defaultBlendFunc();
+                        if (arm == Arm.RIGHT) {
+                            context.drawTexture(WIDGETS_TEXTURE, i - 91 - 29, this.scaledHeight - 23, 24, 22, 29, 24);
+                        } else {
+                            context.drawTexture(WIDGETS_TEXTURE, i + 91, this.scaledHeight - 23, 53, 22, 29, 24);
+                        }
 
-                    n = this.scaledHeight - 16 - 3;
-                    if (arm == Arm.RIGHT) {
-                        this.renderHotbarItem(context,i - 91 - 26, n, tickDelta, player, stack, 0);
-                    } else {
-                        this.renderHotbarItem(context,i + 91 + 10, n, tickDelta, player, stack, 0);
-                    }
+                        n = this.scaledHeight - 16 - 3;
+                        if (arm == Arm.RIGHT) {
+                            this.renderHotbarItem(context, i - 91 - 26, n, tickDelta, player, stack, 0);
+                        } else {
+                            this.renderHotbarItem(context, i + 91 + 10, n, tickDelta, player, stack, 0);
+                        }
 
-                    RenderSystem.disableBlend();
+                        RenderSystem.disableBlend();
+                    }
                 }
             }
-
         }
     }
 

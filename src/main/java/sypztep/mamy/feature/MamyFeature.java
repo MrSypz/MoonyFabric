@@ -38,7 +38,7 @@ public class MamyFeature implements ClientModInitializer {
     // feature cosmetics
     private static final String COSMETICS_URL = "https://mrsypz.github.io/sypztep.github.io/uuidfeature.json";
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
-    private static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
+    public static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
 
     public static @Nullable PlayerCosmeticData getCosmeticData(PlayerEntity player) {
         return PLAYER_COSMETICS.get(player.getUuid());

@@ -6,8 +6,13 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.GenericContainerScreenHandler;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -29,6 +34,7 @@ public class MamyMod implements ModInitializer {
     public static final Identifier holdWeaponPacketId = id("hold_packet");
     public static final Identifier swapWeaponPacketId = id("swap_packet");
     public static final Identifier swapInventoryPacketId = id("swap_inventory_packet");
+    public static final Identifier utilPacketId = id("util_packet");
 
     @Override
     public void onInitialize() {
@@ -117,5 +123,16 @@ public class MamyMod implements ModInitializer {
                 }
             }
         });
+        ServerPlayNetworking.registerGlobalReceiver(utilPacketId, (server, player, handler, buf, responseSender) -> {
+            EnderChestInventory enderChest =  player.getEnderChestInventory();
+            if (enderChest != null) {
+                if (!player.getWorld().isClient()) {
+                    player.openHandledScreen(new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) -> {
+                        return GenericContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChest);
+                    }, Text.translatable("mamy.util").formatted(Formatting.GRAY)));
+                }
+            }
+        });
+
     }
 }

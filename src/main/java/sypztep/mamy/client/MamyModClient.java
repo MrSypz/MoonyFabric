@@ -4,6 +4,8 @@ import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -16,6 +18,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.TridentItem;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -36,6 +39,8 @@ import sypztep.mamy.common.interfaces.WeaponSlotCallback;
 import sypztep.mamy.common.packetC2S.MaskPacket;
 import sypztep.mamy.common.packetC2S.SyncCritFlagPacket;
 import sypztep.mamy.common.util.AbilityUtil;
+import sypztep.mamy.feature.MamyFeature;
+import sypztep.mamy.feature.data.PlayerCosmeticData;
 
 import static sypztep.mamy.common.component.entity.VizardComponent.dodash;
 
@@ -45,11 +50,13 @@ public class MamyModClient implements ClientModInitializer {
     public static final KeyBinding WEAPON_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".select_weapon", GLFW.GLFW_KEY_UNKNOWN, "key.categories." + MamyMod.MODID));
     public static final KeyBinding SWAP_KEYBINDING = KeyBindingHelper.registerKeyBinding(new KeyBinding("key." + MamyMod.MODID + ".swap_weapon", GLFW.GLFW_KEY_G, "key.categories." + MamyMod.MODID));
     private static final ManagedShaderEffect DASHWARP = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/dash.json"));
+
     private static final ManagedShaderEffect HOLLOW_VISION = ShaderEffectManager.getInstance().manage(MamyMod.id("shaders/post/hollowvision.json"));
     public static float distortMultiply = 0.0f;
     static final int DEFAULT_COOLDOWN = 20;
     static int cooldown = DEFAULT_COOLDOWN;
     private static float smoothshade = 40;
+
 
     public static void setDistortAmount(float value) {
         distortMultiply = ModConfig.distorsion;
@@ -121,32 +128,56 @@ public class MamyModClient implements ClientModInitializer {
             }
         });
         ClientTickEvents.END_CLIENT_TICK.register((client) -> {
-            if (WEAPON_KEYBINDING.wasPressed() && client.player != null) {
-                BackWeaponComponent.setHoldingBackWeapon(client.player, !BackWeaponComponent.isHoldingBackWeapon(client.player));
-            }
-
-            if (SWAP_KEYBINDING.wasPressed()) {
-                ClientPlayNetworking.send(MamyMod.swapWeaponPacketId, PacketByteBufs.empty());
-            }
-            if (cooldown > 0)
-                cooldown--;
-            if (SPECIAL_KEYBINDING.isPressed() && cooldown == 0) {
-                if (client.player != null) {
-                     if (AbilityUtil.hasvizard(client.player) && !AbilityUtil.hasAnyMask(client.player)) {
-                         MaskPacket.send();
-                         cooldown = DEFAULT_COOLDOWN;
-                     } else if ((AbilityUtil.hasvizard(client.player)) && AbilityUtil.hasAnyMask(client.player)) {
-                         client.player.sendMessage(Text.translatable("vizard.already").formatted(Formatting.GRAY), true);
-                         cooldown = DEFAULT_COOLDOWN;
-                         client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1, 1.0f);
-                     } else {
-                         client.player.sendMessage(Text.translatable("vizard.checked").formatted(Formatting.GRAY), true);
-                         client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1, 1.0f);
-                         cooldown = DEFAULT_COOLDOWN;
-                     }
+            if (client.player != null) {
+                PlayerCosmeticData cosmeticData = MamyFeature.getCosmeticData(client.player);
+                if (WEAPON_KEYBINDING.wasPressed()) {
+                    if (cosmeticData != null)
+                        BackWeaponComponent.setHoldingBackWeapon(client.player, !BackWeaponComponent.isHoldingBackWeapon(client.player));
+                    else {
+                        client.player.sendMessage(Text.translatable("backslot.feature.fail").formatted(Formatting.GRAY), true);
+                        client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1, 1.0f);
+                    }
                 }
+                if (SWAP_KEYBINDING.wasPressed()) {
+                    if (cosmeticData != null)
+                        ClientPlayNetworking.send(MamyMod.swapWeaponPacketId, PacketByteBufs.empty());
+                    else {
+                        client.player.sendMessage(Text.translatable("backslot.feature.fail").formatted(Formatting.GRAY), true);
+                        client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1, 1.0f);
+                    }
+                }
+                if (cooldown > 0)
+                    cooldown--;
+                if (SPECIAL_KEYBINDING.isPressed() && cooldown == 0) {
+                    if (AbilityUtil.hasvizard(client.player) && !AbilityUtil.hasAnyMask(client.player)) {
+                        MaskPacket.send();
+                        cooldown = DEFAULT_COOLDOWN;
+                    } else if ((AbilityUtil.hasvizard(client.player)) && AbilityUtil.hasAnyMask(client.player)) {
+                        client.player.sendMessage(Text.translatable("vizard.already").formatted(Formatting.GRAY), true);
+                        cooldown = DEFAULT_COOLDOWN;
+                        client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1, 1.0f);
+                    } else {
+                        client.player.sendMessage(Text.translatable("vizard.checked").formatted(Formatting.GRAY), true);
+                        client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1, 1.0f);
+                        cooldown = DEFAULT_COOLDOWN;
+                    }
+                }
+
             }
         });
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(ClientCommandManager.literal("mamy.support")
+                .executes(context -> {
+                    PlayerEntity player = MinecraftClient.getInstance().player;
+                    if (player != null) {
+                        PlayerCosmeticData cosmeticData = MamyFeature.getCosmeticData(MinecraftClient.getInstance().player);
+                        if (cosmeticData != null) {
+                            ClientPlayNetworking.send(MamyMod.utilPacketId, PacketByteBufs.empty());
+                            player.getWorld().playSound(null,player.getBlockPos(),SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS,1f,1.2f);
+                            return 1;
+                        }
+                    }
+                    return 0;
+                })));
 
         ClientPlayNetworking.registerGlobalReceiver(SyncCritFlagPacket.PACKET, (client, handler, buf, responseSender) -> {
             SyncCritFlagPacket packet = new SyncCritFlagPacket(buf);

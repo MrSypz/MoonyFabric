@@ -66,6 +66,7 @@
   "item.mamy.archaic_eye" : "Archaic Eye",
   "item.mamy.pale_cinnabar" : "Broken Pale Cinnabar",
   "item.mamy.broken_lust_handle" : "Brokenlust Handle",
+  "item.mamy.ancient_trident" : "Ancient Trident",
 
   "item.mamy.furina_hat" : "Furina Hat",
   "item.mamy.wanderer_hat" : "Wanderer Hat",
@@ -73,6 +74,8 @@
   "key.categories.mamy": "Moony",
   "key.mamy.special": "Sonido",
   "key.mamy.special2": "Equip Mask",
+  "key.mamy.select_weapon": "Select weapon",
+  "key.mamy.swap_weapon": "Swap weapon",
 
   "hogyoku.limit_reached": "Hogyoku has reached the limit.",
   "hogyoku.success": "Vizored level increase",
@@ -134,5 +137,6 @@
   "attribute.generic.crit_damage": "Crit Damage",
 
   "mamy:tooltip.owned_by": "(to %s)",
-  "mamy:trident_recall_fail": "Failed to recall your tridents"
+  "mamy:trident_recall_fail": "Failed to recall your tridents",
+  "mamy.util": "Utility"
 }
