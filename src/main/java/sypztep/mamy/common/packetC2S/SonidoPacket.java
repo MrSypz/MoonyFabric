@@ -10,6 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import sypztep.mamy.client.packetS2C.AddSonidoParticlePacket;
 import sypztep.mamy.common.MamyMod;
 import sypztep.mamy.common.component.entity.VizardComponent;
@@ -18,17 +19,23 @@ import sypztep.mamy.common.init.ModEntityComponents;
 public class SonidoPacket {
     public static final Identifier ID = MamyMod.id("sonido");
 
-    public static void send() {
+    public static void send(Vec3d velocity) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeFloat((float) velocity.getX());
+        buf.writeFloat((float) velocity.getY());
+        buf.writeFloat((float) velocity.getZ());
         ClientPlayNetworking.send(ID, buf);
     }
 
     public static class Receiver implements ServerPlayNetworking.PlayChannelHandler {
         @Override
         public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+            float velocityX = buf.readFloat();
+            float velocityy = buf.readFloat();
+            float velocityZ = buf.readFloat();
             server.execute(() -> ModEntityComponents.VIZARD.maybeGet(player).ifPresent(vizardComponent -> {
                 if (VizardComponent.hasMask) {
-                    VizardComponent.handle(player, vizardComponent);
+                    VizardComponent.handle(player, vizardComponent,velocityX,velocityy,velocityZ);
                     PlayerLookup.tracking(player).forEach(foundPlayer -> AddSonidoParticlePacket.send(foundPlayer, player.getId()));
                 }
             }));

@@ -141,10 +141,6 @@ public class MamyModClient implements ClientModInitializer {
                 if (SWAP_KEYBINDING.wasPressed()) {
                     if (cosmeticData != null)
                         ClientPlayNetworking.send(MamyMod.swapWeaponPacketId, PacketByteBufs.empty());
-                    else {
-                        client.player.sendMessage(Text.translatable("backslot.feature.fail").formatted(Formatting.GRAY), true);
-                        client.player.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1, 1.0f);
-                    }
                 }
                 if (cooldown > 0)
                     cooldown--;

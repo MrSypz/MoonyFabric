@@ -6,7 +6,6 @@ import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,7 +19,7 @@ public class ArmorFeatureRendererMixin {
     public void mamy$disablearmorrender(MatrixStack matrices, VertexConsumerProvider vertexConsumers,
                                         LivingEntity livingEntity, EquipmentSlot equipmentSlot, int i,
                                         BipedEntityModel<LivingEntity> bipedEntityModel, CallbackInfo ci) {
-        if(livingEntity.isInvisible() && !(livingEntity.hasStatusEffect(StatusEffects.INVISIBILITY))) {
+        if(livingEntity.isInvisible() && !(EnchantmentUtil.hasMaskEquipped((PlayerEntity) livingEntity))) {
             if ((EnchantmentUtil.hasMaskEquipped((PlayerEntity) livingEntity) && livingEntity.isInvisible()))
                 ci.cancel();
         }

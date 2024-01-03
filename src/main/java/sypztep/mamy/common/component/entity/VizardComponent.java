@@ -117,9 +117,12 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
             if (pressingActivationKey && !wasPressing) {
                 if (ticksLefthasPress > 0) {
                     ticksLefthasPress = 0;
-                    handle(obj, this);
-                    addSonidoParticles(obj);
-                    SonidoPacket.send();
+                    Vec3d target = raytraceForDash(obj);
+                    if (target != null) {
+                        handle(obj, this, target.getX(), target.getY(), target.getZ());
+                        addSonidoParticles(obj);
+                        SonidoPacket.send(target);
+                    }
                     dodash = true;
                 } else
                     ticksLefthasPress = 7;
@@ -175,14 +178,11 @@ public class VizardComponent implements AutoSyncedComponent, CommonTickingCompon
             vizardComponent.jumpsLeft--;
         });
     }
-    public static void handle(PlayerEntity user, VizardComponent vizardComponent) {//Server Packet
-        Vec3d target = raytraceForDash(user);
-        if (target != null) {
+    public static void handle(PlayerEntity user, VizardComponent vizardComponent,double x,double y,double z) {//Server Packet
             user.playSound(ModSoundEvents.ENTITY_GENERIC_SONIDO, 1.0f, 1.0f);
-            user.teleport(target.x, target.y, target.z);
+            user.teleport(x, y, z);
             user.addExhaustion(0.1f);
             vizardComponent.sonidoCooldown = DEFAULT_SONIDO_COOLDOWN;
-        }
     }
     public static void addSonidoParticles(LivingEntity entity) { //Client Packet
         entity.setInvisible(true);
